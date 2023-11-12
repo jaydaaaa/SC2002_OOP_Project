@@ -3,15 +3,10 @@ public class User {
 	private String userID;
 	private String faculty;
 
-	/**
-	 * 
-	 * @param userID
-	 * @param faculty
-	 */
-	public void User(String userID, String faculty) {
-		// TODO - implement User.User
-		throw new UnsupportedOperationException();
-	}
+    public User(String userID, String faculty) {
+        this.userID = userID;
+        this.faculty = faculty;
+    }
 
 	public String getFaculty() {
 		return this.faculty;

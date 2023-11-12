@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class LoginAuthentication {
 
     private Map<String, String> passwordMap;

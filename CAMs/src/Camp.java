@@ -12,31 +12,29 @@ public class Camp {
     private String staffIC;
     private int campCommSlots;
     private boolean visibility;
-    private List<Student> attendees;
+    protected List<Student> attendees;
     private List<CampCM> committeeMembers;
     private List<Enquiry> enquiries;
     private List<Suggestion> suggestions;
 
     public Camp(String campName, String dates, String registrationDeadline, String userGroup,
-                String location, String description, int totalSlots, String staffIC,
-                int campCommSlots, boolean visibility, List<Student> attendees,
-                List<CampCM> committeeMembers, List<Enquiry> enquiries,
-                List<Suggestion> suggestions) {
-        this.campName = campName;
-        this.dates = dates;
-        this.registrationDeadline = registrationDeadline;
-        this.userGroup = userGroup;
-        this.location = location;
-        this.description = description;
-        this.totalSlots = totalSlots;
-        this.staffIC = staffIC;
-        this.campCommSlots = campCommSlots;
-        this.visibility = visibility;
-        this.attendees = new ArrayList<>(attendees);
-        this.committeeMembers = new ArrayList<>(committeeMembers);
-        this.enquiries = new ArrayList<>(enquiries);
-        this.suggestions = new ArrayList<>(suggestions);
-    }
+            String location, String description, int totalSlots, String staffIC,
+            int campCommSlots, boolean visibility) {
+    this.campName = campName;
+    this.dates = dates;
+    this.registrationDeadline = registrationDeadline;
+    this.userGroup = userGroup;
+    this.location = location;
+    this.description = description;
+    this.totalSlots = totalSlots;
+    this.staffIC = staffIC;
+    this.campCommSlots = campCommSlots;
+    this.visibility = visibility;
+    this.attendees = new ArrayList<>();
+    this.committeeMembers = new ArrayList<>();
+    this.enquiries = new ArrayList<>();
+    this.suggestions = new ArrayList<>();
+	}
 
     // Getter methods
     public String getCampName() {
@@ -74,7 +72,7 @@ public class Camp {
         return campCommSlots;
     }
 
-    public boolean isVisibility() {
+    public boolean getVisibility() {
         return visibility;
     }
 
@@ -119,7 +117,7 @@ public class Camp {
         this.description = description;
     }
 
-    public void setTotalSots(int totalSlots) {
+    public void setTotalSlots(int totalSlots) {
         this.totalSlots = totalSlots;
     }
 
@@ -131,7 +129,7 @@ public class Camp {
         this.campCommSlots = campCommSlots;
     }
 
-    public void setvisibility(boolean visibility) {
+    public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 
@@ -150,4 +148,5 @@ public class Camp {
     public void setSuggestions(List<Suggestion> suggestions) {
         this.suggestions = suggestions;
     }
+
 }

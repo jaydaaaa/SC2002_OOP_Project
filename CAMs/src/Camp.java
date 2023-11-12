@@ -13,14 +13,14 @@ public class Camp {
     private int campCommSlots;
     private boolean visibility;
     private List<Student> attendees;
-    private List<CampCommMem> committeeMembers;
+    private List<CampCM> committeeMembers;
     private List<Enquiry> enquiries;
     private List<Suggestion> suggestions;
 
     public Camp(String campName, String dates, String registrationDeadline, String userGroup,
                 String location, String description, int totalSlots, String staffIC,
                 int campCommSlots, boolean visibility, List<Student> attendees,
-                List<CampCommMem> committeeMembers, List<Enquiry> enquiries,
+                List<CampCM> committeeMembers, List<Enquiry> enquiries,
                 List<Suggestion> suggestions) {
         this.campName = campName;
         this.dates = dates;
@@ -82,7 +82,7 @@ public class Camp {
         return attendees;
     }
 
-    public List<CampCommMem> getCommitteeMembers() {
+    public List<CampCM> getCommitteeMembers() {
         return committeeMembers;
     }
 
@@ -139,7 +139,7 @@ public class Camp {
         this.attendees = new ArrayList<>(attendees);
     }
 
-    public void setCommitteeMembers(List<CampCommMem> committeeMembers) {
+    public void setCommitteeMembers(List<CampCM> committeeMembers) {
         this.committeeMembers = committeeMembers;
     }
 

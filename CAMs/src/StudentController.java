@@ -19,7 +19,6 @@ public class StudentController {
 	        System.out.println(student.getUserID() + " is already enrolled in " + camp.getCampName());
 	    }
 	}
-	}
 
 	public void withdrawFromCamp(Student student, Camp camp) {
 	    if (student.getMyCamps().contains(camp)) {
@@ -29,6 +28,4 @@ public class StudentController {
 	        System.out.println(student.getUserID() + " is not enrolled in " + camp.getCampName());
 	    }
 	}
-	}
-
 }

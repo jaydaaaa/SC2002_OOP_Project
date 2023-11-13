@@ -1,4 +1,3 @@
-package entity;
 import java.io.*;
 import java.util.*;
 
@@ -33,5 +32,14 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static List<User> readStudents() {
+        FileManager studentFileManager = new FileManager(FilePaths.STUDENT_LIST);
+        return studentFileManager.readFiles();
+    }
+
+    public static List<User> readStaff() {
+        FileManager staffFileManager = new FileManager(FilePaths.STAFF_LIST);
+        return staffFileManager.readFiles();
     }
 }

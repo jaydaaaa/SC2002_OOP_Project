@@ -13,6 +13,9 @@ public class Enquiry {
         this.replyBy = replyBy;
         this.status = status;
     }
+    public void setEnquiryText(String enquiryText) {
+        this.enquiryText = enquiryText;
+    }
 
     public String getEnquiryText() {
         return enquiryText;
@@ -26,6 +29,10 @@ public class Enquiry {
         return replyText;
     }
 
+    public void setReplyText(String replyText) {
+        this.replyText = replyText;
+    }
+
     public String getReplyBy() {
         return replyBy;
     }
@@ -33,5 +40,7 @@ public class Enquiry {
     public boolean getStatus() {
         return status;
     }
-
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

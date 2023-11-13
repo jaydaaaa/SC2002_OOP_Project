@@ -1,28 +1,16 @@
 public class StudentController {
 
-	/**
-	 * 
-	 * @param String
-	 */
-	public void addEnquiry(int String) {
-		// TODO - implement StudentController.addEnquiry
-		throw new UnsupportedOperationException();
+	private EnquiryController enquiryController = new EnquiryController();
+
+	public void addEnquiry(Student student, String enquiryText) {
+		enquiryController.addEnquiry(student, enquiryText);
+	}
+	
+	public void deleteEnquiry(Student student, Enquiry enquiry) {
+	        enquiryController.deleteEnquiry(student, enquiry);
 	}
 
-	/**
-	 * 
-	 * @param student
-	 * @param enquiry
-	 */
-	public void deleteEnquiry(String student, String enquiry) {
-		// TODO - implement StudentController.deleteEnquiry
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param Student
-	 */
+	
 	public void enrollForCamp(Student student, Camp camp) {
 	    if (!student.getMyCamps().contains(camp)) {
 	        student.getMyCamps().add(camp);

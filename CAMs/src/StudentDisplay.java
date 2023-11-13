@@ -1,3 +1,4 @@
+import java.util.List;
 public class StudentDisplay implements EnquiryDisplay, CampDisplay {
 
 	protected List<Enquiry> myEnquiries;

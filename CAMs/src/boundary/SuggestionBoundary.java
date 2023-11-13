@@ -1,5 +1,5 @@
 package boundary;
-public interface SuggestionDisplay {
+public interface SuggestionBoundary {
 
 	String displaySuggestions();
 

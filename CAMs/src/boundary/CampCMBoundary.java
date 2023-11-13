@@ -1,5 +1,5 @@
 package boundary;
-public class CampCMDisplay extends StudentDisplay implements SuggestionDisplay {
+public class CampCMBoundary extends StudentBoundary implements SuggestionBoundary {
 
 	private Dictionary<student, string> enquiryList;
 

@@ -1,5 +1,5 @@
 package boundary;
-public class StaffDisplay implements CampDisplay, SuggestionDisplay, EnquiryDisplay {
+public class StaffBoundary implements CampBoundary, SuggestionBoundary, EnquiryBoundary {
 
 	/**
 	 * 

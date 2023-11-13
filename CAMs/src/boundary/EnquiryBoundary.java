@@ -1,5 +1,5 @@
 package boundary;
-public interface EnquiryDisplay {
+public interface EnquiryBoundary {
 
 	void displayEnquiries();
 

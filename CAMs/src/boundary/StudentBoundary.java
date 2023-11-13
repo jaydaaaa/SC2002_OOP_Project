@@ -2,7 +2,7 @@ package boundary;
 import java.util.List;
 
 import entity.Enquiry;
-public class StudentDisplay implements EnquiryDisplay, CampDisplay {
+public class StudentBoundary implements EnquiryBoundary, CampBoundary {
 
 	protected List<Enquiry> myEnquiries;
 	protected List<Camp> registeredCamp;

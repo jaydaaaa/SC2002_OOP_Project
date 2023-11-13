@@ -1,5 +1,5 @@
 package boundary;
-public interface CampDisplay {
+public interface CampBoundary {
 
 	void displayAllCamps();
 

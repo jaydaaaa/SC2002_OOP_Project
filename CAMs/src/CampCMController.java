@@ -17,13 +17,14 @@ public class CampCMController {
 		//edits the suggestion based on the index give in input
 		//not sure how else to select which suggestion to edit if there are multiple
 		if (index >= 0 && index < suggestions.size()) {
-            // Check if the index is within bounds of the list
-            Suggestion suggestion = suggestions.get(index);
-            suggestion.setSuggestionText(newSuggestionText);
-            return "Suggestion at index " + index + " edited successfully.";
-        } else {
-            return "Invalid index. Please provide a valid index.";
-        }
+	           	// Check if the index is within bounds of the list
+	           	Suggestion suggestion = suggestions.get(index);
+	            	suggestion.setSuggestionText(newSuggestionText);
+	            	return "Suggestion at index " + index + " edited successfully.";
+        	} 
+		else {
+            		return "Invalid index. Please provide a valid index.";
+        	}
 	}
 
 	public String deleteSuggestion(int index) {
@@ -35,18 +36,18 @@ public class CampCMController {
             return "Suggestion at index " + index + " removed successfully.";
         } else {
             return "Invalid index. Please provide a valid index.";
-        }
+        	}
 	}
 
 	public void addSuggestion(String suggestionText, String suggestedBy, boolean status) {
-        // Add a new suggestion
-        Suggestion newSuggestion = new Suggestion(suggestionText, suggestedBy, status);
-        List<Suggestion> suggestions = campCM.getMySuggestions();
-        suggestions.add(newSuggestion);
-        campCM.setMySuggestions(suggestions);
-        int points = getPoints();
-        System.out.println("Points added, current points: " + points);
-    }
+	        // Add a new suggestion
+	        Suggestion newSuggestion = new Suggestion(suggestionText, suggestedBy, status);
+	        List<Suggestion> suggestions = campCM.getMySuggestions();
+	        suggestions.add(newSuggestion);
+	        campCM.setMySuggestions(suggestions);
+	        int points = getPoints();
+	        System.out.println("Points added, current points: " + points);
+   	 }
 
 	public void replyEnquiry(int index, String reply) {
 		List<Enquiry> enquiries = camp.getEnquiries();

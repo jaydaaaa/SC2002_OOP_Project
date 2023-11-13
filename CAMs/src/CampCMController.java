@@ -64,8 +64,81 @@ public class CampCMController {
 	}
 
 	public String generateList(int choice) {
-		// TODO - implement CampCommMemController.generateList
-				throw new UnsupportedOperationException();	
+		String csvFile = "report.csv";
+		switch(choice) {
+		case 1: //print only students
+			try (FileWriter writer = new FileWriter(csvFile)) {
+	            writer.append("Camp: ").append(camp.getCampName()).append('\n');
+	            writer.append("Date: ").append(camp.getDates()).append('\n');
+	            writer.append("Registration Deadline: ").append(camp.getRegistrationDeadline()).append('\n');
+	            writer.append("User Group: ").append(camp.getUserGroup()).append('\n');
+	            writer.append("Location: ").append(camp.getLocation()).append('\n');
+	            writer.append("Description: ").append(camp.getDescription()).append('\n');
+	            writer.append("Total Slots: ").append("" + camp.getTotalSlots()).append('\n');
+	            writer.append("StaffIC: ").append(camp.getStaffIC()).append('\n');
+	            writer.append("CampCommSlots: ").append("" + camp.getCampCommSlots()).append('\n');
+	            writer.append("Visibility: ").append(String.valueOf(camp.getVisibility())).append('\n');
+
+	            // Printing the list of students
+	            writer.append("List of students: ").append('\n');
+	            for (Student student : camp.getAttendees()) {
+	                writer.append(student.getUserID()).append('\n');
+	            }
+	            writer.append("\n");
+	            System.out.println("The csv has been created");
+	        } catch(IOException e) {
+	            e.printStackTrace();
+	        }
+		case 2: //print only camp committee members
+			try (FileWriter writer = new FileWriter(csvFile)) {
+	            writer.append("Camp: ").append(camp.getCampName()).append('\n');
+	            writer.append("Date: ").append(camp.getDates()).append('\n');
+	            writer.append("Registration Deadline: ").append(camp.getRegistrationDeadline()).append('\n');
+	            writer.append("User Group: ").append(camp.getUserGroup()).append('\n');
+	            writer.append("Location: ").append(camp.getLocation()).append('\n');
+	            writer.append("Description: ").append(camp.getDescription()).append('\n');
+	            writer.append("Total Slots: ").append("" + camp.getTotalSlots()).append('\n');
+	            writer.append("StaffIC: ").append(camp.getStaffIC()).append('\n');
+	            writer.append("CampCommSlots: ").append("" + camp.getCampCommSlots()).append('\n');
+	            writer.append("Visibility: ").append(String.valueOf(camp.getVisibility())).append('\n');
+	            writer.append("List of committee Members: ").append('\n');
+	            for (CampCM committeeMembers : camp.getCommitteeMembers()) {
+	                writer.append(committeeMembers.getUserID()).append("\n");
+	            }
+	            writer.append("\n");
+	            System.out.println("The csv has been created");
+	        } catch(IOException e) {
+	            e.printStackTrace();
+		}
+		case 3: //print all
+	        try (FileWriter writer = new FileWriter(csvFile)) {
+	            writer.append("Camp: ").append(camp.getCampName()).append('\n');
+	            writer.append("Date: ").append(camp.getDates()).append('\n');
+	            writer.append("Registration Deadline: ").append(camp.getRegistrationDeadline()).append('\n');
+	            writer.append("User Group: ").append(camp.getUserGroup()).append('\n');
+	            writer.append("Location: ").append(camp.getLocation()).append('\n');
+	            writer.append("Description: ").append(camp.getDescription()).append('\n');
+	            writer.append("Total Slots: ").append("" + camp.getTotalSlots()).append('\n');
+	            writer.append("StaffIC: ").append(camp.getStaffIC()).append('\n');
+	            writer.append("CampCommSlots: ").append("" + camp.getCampCommSlots()).append('\n');
+	            writer.append("Visibility: ").append(String.valueOf(camp.getVisibility())).append('\n');
+	
+	            // Printing the list of students
+	            writer.append("List of students: ").append('\n');
+	            for (Student student : camp.getAttendees()) {
+	                writer.append(student.getUserID()).append('\n');
+	            }
+	            writer.append("\n");
+	            writer.append("List of committee Members: ").append('\n');
+	            for (CampCM committeeMembers : camp.getCommitteeMembers()) {
+	                writer.append(committeeMembers.getUserID()).append("\n");
+	            }
+	            writer.append("\n");
+	            System.out.println("The csv has been created");
+	        } catch(IOException e) {
+	            e.printStackTrace();
+	        }
+		}
 	}
 
 }

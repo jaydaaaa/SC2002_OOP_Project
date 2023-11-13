@@ -23,14 +23,24 @@ public class StudentController {
 	 * 
 	 * @param Student
 	 */
-	public void enrollForCamp(int Student) {
-		// TODO - implement StudentController.enrollForCamp
-		throw new UnsupportedOperationException();
+	public void enrollForCamp(Student student, Camp camp) {
+	    if (!student.getMyCamps().contains(camp)) {
+	        student.getMyCamps().add(camp);
+	        System.out.println(student.getUserID() + " has successfully enrolled for " + camp.getCampName());
+	    } else {
+	        System.out.println(student.getUserID() + " is already enrolled in " + camp.getCampName());
+	    }
+	}
 	}
 
-	public void withdrawFromCamp() {
-		// TODO - implement StudentController.withdrawFromCamp
-		throw new UnsupportedOperationException();
+	public void withdrawFromCamp(Student student, Camp camp) {
+	    if (student.getMyCamps().contains(camp)) {
+	        student.getMyCamps().remove(camp);
+	        System.out.println(student.getUserID() + " has successfully withdrawn from " + camp.getCampName());
+	    } else {
+	        System.out.println(student.getUserID() + " is not enrolled in " + camp.getCampName());
+	    }
+	}
 	}
 
 }

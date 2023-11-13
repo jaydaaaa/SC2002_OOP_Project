@@ -56,9 +56,16 @@ public class StaffController {
      *
      * @param
      */
+    // Report for list of students and committee members, including camp details
     public void generateReport(List<Camp> createdCamps) {
         // TODO - implement StaffController.generateReport
         String csvFile = "report.csv";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("(1) Print only List of students");
+        System.out.println("(2) Print only List of committee members");
+        System.out.println("(3) Print both students and committee members");
+        int choice = sc.nextInt();
+
         try (FileWriter writer = new FileWriter(csvFile)) {
             for (Camp camp: createdCamps) {
                 writer.append("Camp: ").append(camp.getCampName()).append('\n');
@@ -70,20 +77,23 @@ public class StaffController {
                 writer.append("Total Slots: ").append("" + camp.getTotalSlots()).append('\n');
                 writer.append("StaffIC: ").append(camp.getStaffIC()).append('\n');
                 writer.append("CampCommSlots: ").append("" + camp.getCampCommSlots()).append('\n');
-                writer.append("Visibility: ").append(String.valueOf(camp.isVisibility())).append('\n');
+                writer.append("Visibility: ").append(String.valueOf(camp.getVisibility())).append('\n');
 
                 // Printing the list of students
-                writer.append("List of students: ").append('\n');
-                for (Student student : camp.getAttendees()) {
-                    writer.append(student.getUserID()).append('\n');
+                if (choice == 1 || choice == 3) {
+                    writer.append("List of students: ").append('\n');
+                    for (Student student : camp.getAttendees()) {
+                        writer.append(student.getUserID()).append('\n');
+                    }
+                    writer.append("\n");
                 }
-                writer.append("\n");
-                writer.append("List of committee Members: ").append('\n');
-                for (CampCommMem committeeMembers : camp.getCommitteeMembers()) {
-                    writer.append(committeeMembers.getUserID()).append("\n");
+                if (choice == 2 || choice == 3) {
+                    writer.append("List of committee Members: ").append('\n');
+                    for (CampCommMem committeeMembers : camp.getCommitteeMembers()) {
+                        writer.append(committeeMembers.getUserID()).append("\n");
+                    }
+                    writer.append("\n");
                 }
-                writer.append("\n");
-
             }
             System.out.println("The csv has been created");
         } catch(IOException e) {
@@ -123,10 +133,24 @@ public class StaffController {
                 staffIC, campCommSlots, visibility, attendees, committeeMembers, enquiries, suggestions);
         createdCamps.add(newCamp);
     }
+    // Not included in UML Class diagram*************************************************
+    // Generate report for a particular Camp
+    public void generatePerformanceReport(Camp camp) {
+        String csvFile = "PerformanceReport.csv";
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            writer.append("Camp: ").append(camp.getCampName()).append('\n');
+            writer.append("Name, Points\n");
+            for (CampCommMem committeeMember : camp.getCommitteeMembers()) {
+                writer.append(committeeMember.getUserID())
+                        .append(',')
+                        .append(String.valueOf(committeeMember.getMyPoints()))
+                        .append('\n');
 
-
-
-
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void deleteCamp(Camp camp) {
         // TODO - implement StaffController.deleteCamp
         createdCamps.remove(camp);

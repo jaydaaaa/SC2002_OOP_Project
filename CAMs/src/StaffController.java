@@ -54,7 +54,7 @@ public class StaffController {
 
     /**
      *
-     * @param 
+     * @param
      */
     public void generateReport(List<Camp> createdCamps) {
         // TODO - implement StaffController.generateReport
@@ -73,14 +73,19 @@ public class StaffController {
                 writer.append("Visibility: ").append(String.valueOf(camp.isVisibility())).append('\n');
 
                 // Printing the list of students
+                writer.append("List of students: ").append('\n');
                 for (Student student : camp.getAttendees()) {
-                    writer.append(student.getUserID());
+                    writer.append(student.getUserID()).append('\n');
                 }
+                writer.append("\n");
+                writer.append("List of committee Members: ").append('\n');
                 for (CampCommMem committeeMembers : camp.getCommitteeMembers()) {
-                    writer.append(committeeMembers.getUserID());
+                    writer.append(committeeMembers.getUserID()).append("\n");
                 }
+                writer.append("\n");
 
             }
+            System.out.println("The csv has been created");
         } catch(IOException e) {
             e.printStackTrace();
         }

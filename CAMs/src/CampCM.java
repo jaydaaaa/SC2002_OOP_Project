@@ -16,4 +16,10 @@ public class CampCM extends Student {
 	public List<Suggestion> getMySuggestions(){
 		return this.mySuggestions;
 	}
+	public void setPoints(int myPoints) {
+		this.myPoints = myPoints;
+	}
+	public void setMySuggestions(List<Suggestion> mySuggestions) {
+		this.mySuggestions = mySuggestions;
+	}
 }

@@ -63,7 +63,7 @@ public class CampCMController {
 		return currentPoints;
 	}
 
-	public String generateList(int choice) {
+	public void generateList(int choice) {
 		String csvFile = "report.csv";
 		switch(choice) {
 		case 1: //print only students
@@ -89,6 +89,7 @@ public class CampCMController {
 	        } catch(IOException e) {
 	            e.printStackTrace();
 	        }
+			break;
 		case 2: //print only camp committee members
 			try (FileWriter writer = new FileWriter(csvFile)) {
 	            writer.append("Camp: ").append(camp.getCampName()).append('\n');
@@ -109,8 +110,9 @@ public class CampCMController {
 	            System.out.println("The csv has been created");
 	        } catch(IOException e) {
 	            e.printStackTrace();
-		}
-		case 3: //print all
+	        }
+			break;
+		default: //print all
 	        try (FileWriter writer = new FileWriter(csvFile)) {
 	            writer.append("Camp: ").append(camp.getCampName()).append('\n');
 	            writer.append("Date: ").append(camp.getDates()).append('\n');
@@ -138,6 +140,7 @@ public class CampCMController {
 	        } catch(IOException e) {
 	            e.printStackTrace();
 	        }
+	        break;
 		}
 	}
 

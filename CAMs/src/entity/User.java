@@ -1,18 +1,39 @@
 package entity;
+
 public class User {
-	private String userID;
-	private String faculty;
-	
-	public User(String userID, String faculty) {
-        	this.userID = userID;
-        	this.faculty = faculty;
-    	}
-	public String getFaculty() {
-		return this.faculty;
-	}
+    private String userID;
+    private String password;
+    private String faculty;
 
-	public String getUserID() {
-		return this.userID;
-	}
+    public User(String userID, String password, String faculty) {
+        this.userID = userID;
+        this.password = password;
+        this.faculty = faculty;
+    }
 
+    public User() {};
+
+    public String getUserId() {
+        return this.userID;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getFaculty() {
+        return this.faculty;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
 }

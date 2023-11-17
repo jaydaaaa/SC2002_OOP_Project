@@ -1,5 +1,44 @@
 package boundary;
+import entity.CentralManager;
+import java.util.Objects;
 
-public class UserBoundary {
-    
+// input getting and data display in boundary eg print to console
+
+public class UserBoundary extends BaseBoundary{
+    public UserBoundary(CentralManager centralManager) {
+        super(centralManager);
+    }
+
+    public void login(){
+        // invalid user is just not registered user in the system
+        String userID = this.getLine("Input UserID: ");
+        String password = this.getLine("Input Password: ");
+        String userType = this.getUserController().login(userID, password);
+        while (Objects.equals(userType, "InvalidUser")) {
+            System.out.println("UserID or Password was invalid. Please try again.");
+            userID = this.getLine("Input UserID");
+            password = this.getLine("Input Password");
+            userType = this.getUserController().login(userID, password);
+        }
+
+        if (Objects.equals(userType, "Student")){
+            System.out.println("Directing to student screen...");
+            this.getStudentController().setCurrentUser(userID);
+            this.getStudentBoundary().studentOperations();
+        }
+        else if (Objects.equals(userType, "Staff")) {
+            System.out.println("Directing to staff screen...");
+            this.getStaffController().setCurrentUser(userID);
+            this.getStaffBoundary().supervisorOperations();
+        }
+        else if (Objects.equals(userType, "CampCM")) {
+            System.out.println("Directing to camp committee member screen...");
+            this.getCampCMController().setCurrentUser(userID);
+            this.getCampCMBoundary().coordinatorOperations();
+        }
+    }
+
+    // boundary doesnt do data manipulation
+    // check for valid user and pw in the controller
+    // initialise password to password
 }

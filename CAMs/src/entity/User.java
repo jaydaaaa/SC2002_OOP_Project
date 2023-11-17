@@ -1,9 +1,12 @@
 package entity;
 
 public class User {
+    //private String Name;
+    //private String email;
     private String userID;
     private String password;
     private String faculty;
+    private String type;
 
     public User(String userID, String password, String faculty) {
         this.userID = userID;
@@ -23,6 +26,10 @@ public class User {
 
     public String getFaculty() {
         return this.faculty;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public void setUserID(String userID) {

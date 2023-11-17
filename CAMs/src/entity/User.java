@@ -5,9 +5,10 @@ public class User {
     private String password;
     private String faculty;
 
-    public User(String userID, String password, String faculty) {
+    // The default password is "password"
+    public User(String userID, String faculty) {
         this.userID = userID;
-        this.password = password;
+        this.password = "password";
         this.faculty = faculty;
     }
 

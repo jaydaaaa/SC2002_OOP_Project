@@ -5,11 +5,13 @@ import java.util.Objects;
 
 public class Student extends User {
 
-    protected ArrayList<Enquiry> myEnquiries;
-    protected ArrayList<Camp> myCamps;
+    private ArrayList<Enquiry> myEnquiries;
+    private ArrayList<Camp> myCamps;
 
     public Student(String name, String userID, String email, String password, String faculty, String type) {
         super(name,userID,email, password, faculty, type);
+        myEnquiries = new ArrayList<>();
+        myCamps = new ArrayList<>();
     }
 	
     public ArrayList<Enquiry> getMyEnquiries() {

@@ -98,7 +98,7 @@ public class CentralManager {
         this.MasterUsers = Reader.readUsers(fpath);
     }
 
-    public void ingestProjects() {
+    public void ingestCamps() {
         String fpath = this.currentWorkingDirectory + "data/Camps.txt";
         this.MasterCamps = Reader.readCamps(fpath);
     }
@@ -114,7 +114,7 @@ public class CentralManager {
         Writer.writeUsers(fpath, this.MasterUsers);
     }
 
-    public void writeProjects() {
+    public void writeCamps() {
         String fpath = this.currentWorkingDirectory + "data/Projects.txt";
         Writer.writeCamps(fpath, this.MasterCamps);
     }

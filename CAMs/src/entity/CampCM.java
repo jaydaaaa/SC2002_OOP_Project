@@ -1,4 +1,5 @@
 package entity;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CampCM extends Student {
@@ -6,10 +7,10 @@ public class CampCM extends Student {
 	private int myPoints;
 	private List<Suggestion> mySuggestions;
 	
-	public CampCM(String userID, String faculty, List<Enquiry> myEnquiries, List<Camp> myCamps, int myPoints, List<Suggestion> mySuggestions) {
-	super(userID, faculty, myEnquiries, myCamps);
-	this.myPoints = myPoints;
-	this.mySuggestions = mySuggestions;
+	public CampCM(String name, String userID, String email, String password, String faculty, String type) {
+		super(name,userID,email, password, faculty, type);
+		mySuggestions = new ArrayList<>();
+		this.myPoints = 0;
 	}
 	public int getMyPoints() {
 		return this.myPoints;

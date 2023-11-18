@@ -70,7 +70,7 @@ public class Reader {
                 if (lst.length == 6) {
                     value = lst[5];
                 }
-                Request request = new Request(projectID, type, requesteeID, status, LocalDate.parse(date), value);
+                Enquiry enquiry = new Request(projectID, type, requesteeID, status, LocalDate.parse(date), value);
                 requests.add(request);
                 // read next line
                 line = reader.readLine();
@@ -83,9 +83,9 @@ public class Reader {
         return requests;
     }
 
-    public static ArrayList<Camp> readProjects(String fpath) {
+    public static ArrayList<Camp> readCamps(String fpath) {
         System.out.println("Ingesting projects...");
-        ArrayList<Camp> Camp = new ArrayList<>();
+        ArrayList<Camp> camps = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fpath));
             String line = reader.readLine();
@@ -93,10 +93,17 @@ public class Reader {
             while (line != null) {
                 String[] lst = line.split("_");
                 String campName = lst [0];
-                String dates = lst[5];
-                String registrationDeadline = lst[]
-                Project project = new Project(projectID, supervisorID, studentID, projectTitle, projectStatus, createdBy);
-                projects.add(project);
+                String dates = lst[1];
+                String registrationDeadline = lst[2];
+                String userGroup = lst[3];
+                String location = lst[4];
+                String description = lst[5];
+                Integer totalSlots = Integer.valueOf(lst[6]);
+                String staffIC = lst[7];
+                Integer campCommSlots = Integer.valueOf(lst[8]);
+                Boolean visibility = Boolean.parseBoolean(lst[9]);
+                Camp camp = new Camp(campName, dates, registrationDeadline, userGroup, location, description, totalSlots, staffIC, campCommSlots, visibility);
+                camps.add(camp);
 
                 // read next line
                 line = reader.readLine();
@@ -106,6 +113,6 @@ public class Reader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return projects;
+        return camps;
     }
 }

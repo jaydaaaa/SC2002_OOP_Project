@@ -48,7 +48,7 @@ public class Writer {
     }
 
     public static void writeCamps(String fpath, ArrayList<Camp> masterCamps) {
-        System.out.println("Saving changes to projects file...");
+        System.out.println("Saving changes to camps file...");
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Camp camp: masterCamps) {

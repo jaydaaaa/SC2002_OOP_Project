@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.omg.CORBA.Request;
+
 public class Reader {
     BufferedReader reader;
     public Reader() {
@@ -24,16 +26,18 @@ public class Reader {
 
             while (line != null) {
                 String[] lst = line.split("_");
+                String name = lst[0];
                 String email = lst[1];
-                String userID = email.split("@")[0];
-                String password = lst[2];
-                String userType = lst[3];
+                String userID = email.split("@")[1];
+                String faculty = lst[2];
+                String password = lst[3];
+                String userType = lst[4];
                 if (Objects.equals(userType, "Student")) {
-                    Student student = new Student(name, userID, email, password, "Student");
+                    Student student = new Student(name, userID, email, faculty ,password, "Student");
                     users.add(student);
                 }
-                else if (Objects.equals(userType, "Supervisor")){
-                    Staff staff = new Staff(name, userID, email, password, "Staff");
+                else if (Objects.equals(userType, "Staff")){
+                    Staff staff = new Staff(name, userID, email, faculty ,password, "Staff");
                     users.add(staff);
                 }
 

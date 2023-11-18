@@ -1,22 +1,24 @@
 package entity;
-import java.util.List;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Student extends User {
 
-    protected List<Enquiry> myEnquiries;
-    protected List<Camp> myCamps;
+    protected ArrayList<Enquiry> myEnquiries;
+    protected ArrayList<Camp> myCamps;
 
-    public Student(String userID, String faculty, List<Enquiry> myEnquiries, List<Camp> myCamps) {
+    public Student(String name, String userID, String email, String password, String type) {
         super(userID, faculty);
         this.myEnquiries = myEnquiries;
         this.myCamps = myCamps;
     }
 	
-    public List<Enquiry> getMyEnquiries() {
+    public ArrayList<Enquiry> getMyEnquiries() {
         return myEnquiries;
     }
 
-    public List<Camp> getMyCamps() {
+    public ArrayList<Camp> getMyCamps() {
         return myCamps;
     }
 }

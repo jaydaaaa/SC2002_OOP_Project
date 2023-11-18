@@ -1,8 +1,8 @@
 package entity;
 
 public class User {
-    //private String Name;
-    //private String email;
+    private String name;
+    private String email;
     private String userID;
     private String password;
     private String faculty;
@@ -16,6 +16,14 @@ public class User {
     }
 
     public User() {};
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
 
     public String getUserId() {
         return this.userID;

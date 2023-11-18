@@ -52,7 +52,7 @@ public class Reader {
         return users;
     }
 
-    public static ArrayList<Request> readRequests(String fpath) {
+    public static ArrayList<Enquiry> readRequests(String fpath) {
         System.out.println("Ingesting requests...");
         ArrayList<Request> requests = new ArrayList<>();
         try {
@@ -83,21 +83,18 @@ public class Reader {
         return requests;
     }
 
-    public static ArrayList<Project> readProjects(String fpath) {
+    public static ArrayList<Camp> readProjects(String fpath) {
         System.out.println("Ingesting projects...");
-        ArrayList<Project> projects = new ArrayList<>();
+        ArrayList<Camp> Camp = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fpath));
             String line = reader.readLine();
 
             while (line != null) {
                 String[] lst = line.split("_");
-                int projectID = Integer.parseInt(lst[0]);
-                String supervisorID = lst[1];
-                String studentID = lst[2];
-                String projectTitle = lst[3];
-                int projectStatus = Integer.parseInt(lst[4]);
-                String createdBy = lst[5];
+                String campName = lst [0];
+                String dates = lst[5];
+                String registrationDeadline = lst[]
                 Project project = new Project(projectID, supervisorID, studentID, projectTitle, projectStatus, createdBy);
                 projects.add(project);
 

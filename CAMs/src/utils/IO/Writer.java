@@ -17,10 +17,10 @@ public class Writer {
             ArrayList<String> coordinators = new ArrayList<>();
             for (User user: masterUsers) {
                 if (!coordinators.contains(user.getUserId())) {
-                    String toWrite = user.getName() + '_' + user.getEmail() + '_' + user.getPassword() + '_' + user.getType() + '\n';
+                    String toWrite = user.getName() + '_' + user.getEmail() +'_' + user.getFaculty() + '_' + user.getPassword() + '_' + user.getType() + '\n';
                     writer.write(toWrite);
                     if (Objects.equals(user.getType(), "Coordinator")) {
-                        coordinators.add(user.getId());
+                        coordinators.add(user.getUserId());
                     }
                 }
 
@@ -32,7 +32,7 @@ public class Writer {
         }
     }
 
-    public static void writeRequests(String fpath, ArrayList<Request> masterRequests) {
+    public static void writeEnquiry(String fpath, ArrayList<Request> masterRequests) {
         System.out.println("Saving changes to requests file...");
         try {
             FileWriter writer = new FileWriter(fpath);
@@ -47,12 +47,12 @@ public class Writer {
         }
     }
 
-    public static void writeProjects(String fpath, ArrayList<Project> masterProjects) {
+    public static void writeCamps(String fpath, ArrayList<Camp> masterProjects) {
         System.out.println("Saving changes to projects file...");
         try {
             FileWriter writer = new FileWriter(fpath);
-            for (Project project: masterProjects) {
-                String toWrite = project.getProjectID() + "_" + project.getSupervisorID() + "_" + project.getStudentID() + "_" + project.getProjectTitle() + "_" +  project.getProjectStatus() + "_" + project.getCreatedBy() + '\n';
+            for (Camp camp: masterProjects) {
+                String toWrite = Camp.getCampName() + "_" + Camp.getDates() + "_" + Camp.getRegistrationDeadline() + "_" + Camp.getUserGroup() + "_" +  Camp.getLocation() + "_" + Camp.getDescription() + "_" + Camp.getTotalSlots() + "_" +  Camp.getStaffIC() + "_" + Camp.getCampCommSlots() + "_" + Camp.getVisibility() + "_" + Camp.getAttendees() + "_" +  Camp.getCommitteeMembers() + "_" + Camp.getEnquiries() + "_" +  Camp.getSuggestions() + "_" + Camp.getBlacklist()'\n';
                 writer.write(toWrite);
             }
             writer.close();

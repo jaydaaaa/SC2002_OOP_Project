@@ -52,7 +52,7 @@ public class Writer {
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Camp camp: masterProjects) {
-                String toWrite = Camp.getCampName() + "_" + Camp.getDates() + "_" + Camp.getRegistrationDeadline() + "_" + Camp.getUserGroup() + "_" +  Camp.getLocation() + "_" + Camp.getDescription() + "_" + Camp.getTotalSlots() + "_" +  Camp.getStaffIC() + "_" + Camp.getCampCommSlots() + "_" + Camp.getVisibility() + "_" + Camp.getAttendees() + "_" +  Camp.getCommitteeMembers() + "_" + Camp.getEnquiries() + "_" +  Camp.getSuggestions() + "_" + Camp.getBlacklist()'\n';
+                String toWrite = camp.getCampName() + "_" + camp.getDates() + "_" + camp.getRegistrationDeadline() + "_" + camp.getUserGroup() + "_" +  camp.getLocation() + "_" + camp.getDescription() + "_" + camp.getTotalSlots() + "_" +  camp.getStaffIC() + "_" + camp.getCampCommSlots() + "_" + camp.getVisibility() + "_" + camp.getAttendees() + "_" +  camp.getCommitteeMembers() + "_" + camp.getEnquiries() + "_" +  camp.getSuggestions() + "_" + camp.getBlacklist() + '\n';
                 writer.write(toWrite);
             }
             writer.close();

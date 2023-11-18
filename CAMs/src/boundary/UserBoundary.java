@@ -30,12 +30,12 @@ public class UserBoundary extends BaseBoundary{
         else if (Objects.equals(userType, "Staff")) {
             System.out.println("Directing to staff screen...");
             this.getStaffController().setCurrentUser(userID);
-            this.getStaffBoundary().supervisorOperations();
+            this.getStaffBoundary().staffOperations();
         }
         else if (Objects.equals(userType, "CampCM")) {
             System.out.println("Directing to camp committee member screen...");
             this.getCampCMController().setCurrentUser(userID);
-            this.getCampCMBoundary().coordinatorOperations();
+            this.getCampCMBoundary().campCMOperations();
         }
     }
 

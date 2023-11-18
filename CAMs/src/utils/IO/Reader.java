@@ -40,6 +40,10 @@ public class Reader {
                     Staff staff = new Staff(name, userID, email, faculty ,password, "Staff");
                     users.add(staff);
                 }
+                else if (Objects.equals(userType, "CampCM")){
+                    CampCM campCM = new CampCM(name, userID, email, faculty ,password, "campCM");
+                    users.add(campCM);
+                }
 
                 // read next line
                 line = reader.readLine();

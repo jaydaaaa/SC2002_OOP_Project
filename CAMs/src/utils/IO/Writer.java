@@ -1,6 +1,6 @@
 package utils.IO;
 
-import entity.Project;
+import entity.Camp;
 import entity.Request;
 import entity.User;
 
@@ -47,11 +47,11 @@ public class Writer {
         }
     }
 
-    public static void writeCamps(String fpath, ArrayList<Camp> masterProjects) {
+    public static void writeCamps(String fpath, ArrayList<Camp> masterCamps) {
         System.out.println("Saving changes to projects file...");
         try {
             FileWriter writer = new FileWriter(fpath);
-            for (Camp camp: masterProjects) {
+            for (Camp camp: masterCamps) {
                 String toWrite = camp.getCampName() + "_" + camp.getDates() + "_" + camp.getRegistrationDeadline() + "_" + camp.getUserGroup() + "_" +  camp.getLocation() + "_" + camp.getDescription() + "_" + camp.getTotalSlots() + "_" +  camp.getStaffIC() + "_" + camp.getCampCommSlots() + "_" + camp.getVisibility() + "_" + camp.getAttendees() + "_" +  camp.getCommitteeMembers() + "_" + camp.getEnquiries() + "_" +  camp.getSuggestions() + "_" + camp.getBlacklist() + '\n';
                 writer.write(toWrite);
             }

@@ -15,6 +15,10 @@ public class CampBoundary extends BaseBoundary {
     }
 
 	public void viewCamps(String faculty) {
+		// need to check visibility of camp
+		// need to check camps that are not full
+		// need to check blacklist of student 
+		// need to check faculty
         ArrayList<Camp> camps = this.getCampController().getCamps(faculty); 
 //         if (Objects.equals(type, "available")) {
 //             System.out.println("Available Projects:");

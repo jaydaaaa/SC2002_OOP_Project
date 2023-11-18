@@ -141,7 +141,7 @@ public class CentralManager {
     }
 
     // Get Master Arrays
-    public ArrayList<Camp> getMasterProjects() {
+    public ArrayList<Camp> getMasterCamps() {
         return this.MasterCamps;
     }
 

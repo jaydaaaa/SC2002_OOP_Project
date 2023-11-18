@@ -8,10 +8,8 @@ public class Student extends User {
     protected ArrayList<Enquiry> myEnquiries;
     protected ArrayList<Camp> myCamps;
 
-    public Student(String name, String userID, String email, String password, String type) {
-        super(userID, faculty);
-        this.myEnquiries = myEnquiries;
-        this.myCamps = myCamps;
+    public Student(String name, String userID, String email, String password, String faculty, String type) {
+        super(name,userID,email, password, faculty, type);
     }
 	
     public ArrayList<Enquiry> getMyEnquiries() {

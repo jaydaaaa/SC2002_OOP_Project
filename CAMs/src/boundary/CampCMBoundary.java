@@ -36,7 +36,7 @@ public class CampCMBoundary extends StudentBoundary{
                 case 7 -> this.viewEnquiries();
 				case 8 -> this.withdrawCamp();
                 case 9 -> this.submitSuggestions();
-                case 10 -> this.viewEnquiries();
+                case 10 -> this.viewCampEnquiries();
                 case 11 -> this.replyEnquiries();
                 case 12 -> this.viewMySuggestions();
                 case 13 -> this.editMySuggestions();
@@ -63,4 +63,33 @@ public class CampCMBoundary extends StudentBoundary{
                 """
         );
     }
+
+	public void submitSuggestions() {
+        
+    }
+
+	public void viewCampEnquiries() {
+        //view all equiries to camp this student is campCM for
+    }
+
+	public void replyEnquiries() {
+        
+    }
+
+	public void viewMySuggestions() {
+        
+    }
+
+	public void editMySuggestions() {
+        
+    }
+
+	public void deleteMySuggestions() {
+        
+    }
+
+	public void generateAttendeeList() {
+        
+    }
+
 }

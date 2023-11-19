@@ -33,7 +33,7 @@ public class StudentBoundary extends UserBoundary{
         while (choice != 9) {
 			System.out.print(
                 """
-                        ========================= Welcome to Supervisor App =========================
+                        ========================= Welcome to Student App =========================
                 """
             );
             this.displayMenuChoices();

@@ -20,22 +20,7 @@ public class CampBoundary extends BaseBoundary {
 		// need to check blacklist of student 
 		// need to check faculty
         ArrayList<Camp> camps = this.getCampController().getCamps(faculty); 
-//         if (Objects.equals(type, "available")) {
-//             System.out.println("Available Projects:");
-//             this.printProjectFormat();
-//             for (Integer projectID: projects) {
-//                 Project project = this.getProjectController().getProjectByID(projectID);
-//                 if (project.getProjectStatus() == 1) {
-//                     this.viewProjectLine(projectID);
-//                 }
-//             }
-//         } else if (Objects.equals(type, "all")) {
-//             System.out.println("All Projects:");
-//             this.printProjectFormat();
-//             for (Integer projectID: projects) {
-//                 this.viewProjectLine(projectID);
-//             }
-//         }
+//      
     }
 
 }

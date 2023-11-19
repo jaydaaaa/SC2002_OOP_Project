@@ -1,16 +1,19 @@
 package controller;
+
+import entity.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
-import entity.CampCM;
-import entity.Student;
+public class CampController extends BaseController{
+	ArrayList<Camp> masterCamps;
+     public CampController(CentralManager centralManager) {
+		super(centralManager);
+		this.masterCamps = this.centralManager.getMasterCamps();
+    }
 
-public class CampController {
-
-	private List<Camp> camps; //might have to be in Camp.java or FilePaths.java
-
-	
 	public void removeAttendee(Student student, Camp camp) {
 		if (camp.attendees.contains(student)){
 			camp.attendees.remove(student);

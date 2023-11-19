@@ -1,8 +1,18 @@
+package controller;
+
+import entity.CentralManager;
+import entity.Camp;
 import entity.Enquiry;
 import entity.Student;
 
-package controller;
-public class EnquiryController {
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class EnquiryController extends BaseController{
+
+     public EnquiryController(CentralManager centralManager) {
+        super(centralManager);
+    }
 
     public void editEnquiry(Student student, Enquiry enquiry, String newEnquiryText) {
         if(student.getMyEnquiries().contains(enquiry)) {

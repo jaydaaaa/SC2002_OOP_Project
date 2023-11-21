@@ -66,12 +66,12 @@ public class CentralManager {
 
         // Initialize Controllers
         this.campController = new CampController(this);
-        this.enquiryController = new RequestController(this);
+        this.enquiryController = new EnquiryController(this);
         this.suggestionController = new SuggestionController(this);
         this.userController = new UserController(this);
         this.studentController = new StudentController(this);
-        this.staffController = new SupervisorController(this);
-        this.campCMController = new CoordinatorController(this);
+        this.staffController = new StaffController(this);
+        this.campCMController = new CampCMController(this);
 
 
         // Initialize Boundaries

@@ -24,7 +24,7 @@ public class CampController extends BaseController{
 			System.out.println(student.getUserID()+" is not registered in "+camp.getCampName());
 		}
 	}
-
+	
 	public void addCampCM(Student student, Camp camp) {
 		//need to check if student is already part of CAMP_COMM_MEM_LIST
 	    CampCM campCM = new CampCM(student.getUserID(),student.getFaculty(),student.myEnquiries,student.myCamps,0,new ArrayList<>());

@@ -2,7 +2,6 @@ package utils;
 
 import controller.*;
 import entity.CentralManager;
-import entity.Suggestion;
 
 public class Base {
     CentralManager centralManager;

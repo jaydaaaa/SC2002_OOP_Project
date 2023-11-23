@@ -14,7 +14,7 @@ public class CampController extends BaseController{
         super(centralManager);
         this.masterCamps = this.centralManager.getMasterCamps();
     }
-
+    // Added method to get Camps based on faculty for student
     public ArrayList<Camp> getCamps(String faculty) {
         ArrayList<Camp> facultyCamps = new ArrayList<>();
         for (Camp camp : this.masterCamps) {
@@ -24,6 +24,8 @@ public class CampController extends BaseController{
         }
         return facultyCamps;
     }
+	
+    // Added method to get all camps for staff
     public ArrayList<Camp> getAllCamps() {
         return masterCamps;
     }

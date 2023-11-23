@@ -19,6 +19,9 @@ public class Enquiry {
     public String getEnquiryText() {
         return enquiryText;
     }
+    
+    public String getCampName() { return campName; }
+    
 
     public String getEnquiryBy() {
         return enquiryBy;
@@ -37,6 +40,10 @@ public class Enquiry {
     }
     public void setEnquiryText(String enquiryText) {
         this.enquiryText = enquiryText;
+    }
+    
+    public void setCampName(String campName) {
+        this.campName = campName;
     }
     public void setEnquiryBy(String enquiryBy) {
         this.enquiryBy = enquiryBy;

@@ -11,6 +11,8 @@ import java.util.Objects;
 
 import org.omg.CORBA.Request;
 
+import controller.BaseController;
+
 public class Reader {
     BufferedReader reader;
     public Reader() {
@@ -56,26 +58,22 @@ public class Reader {
         return users;
     }
 
-    public static ArrayList<Enquiry> readRequests(String fpath) {
+    public static ArrayList<Enquiry> readEnquiries(String fpath) {
         System.out.println("Ingesting requests...");
-        ArrayList<Request> requests = new ArrayList<>();
+        ArrayList<Enquiry> enquiries = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fpath));
             String line = reader.readLine();
 
             while (line != null) {
                 String[] lst = line.split("_");
-                String type = lst[0];
-                String status = lst[1];
-                String date = lst[2];
-                Integer projectID = Integer.valueOf(lst[3]);
-                String requesteeID = lst[4];
-                String value = "";
-                if (lst.length == 6) {
-                    value = lst[5];
-                }
-                Enquiry enquiry = new Request(projectID, type, requesteeID, status, LocalDate.parse(date), value);
-                requests.add(request);
+                String enquiryText = lst[0];
+                String enquiryBy = lst[1];
+                String replyText = lst[2];
+                String replyBy = lst[3];
+                Boolean status = Boolean.parseBoolean(lst[4]);
+                Enquiry enquiry = new Enquiry(enquiryText, enquiryBy, replyText, replyBy, status);
+                enquiries.add(enquiry);
                 // read next line
                 line = reader.readLine();
             }
@@ -84,7 +82,7 @@ public class Reader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return requests;
+        return enquiries;
     }
 
     public static ArrayList<Camp> readCamps(String fpath) {
@@ -119,4 +117,28 @@ public class Reader {
         }
         return camps;
     }
+public static ArrayList<Suggestion> readSuggestions(String fpath) {
+    System.out.println("Ingesting suggestions...");
+    ArrayList<Suggestion> suggestions = new ArrayList<>();
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader(fpath));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] lst = line.split("_");
+            String suggestionText = lst [0];
+            String suggestedBy = lst[1];
+            Boolean status = Boolean.parseBoolean(lst[2]);
+            Suggestion suggestion = new Suggestion(suggestionText, suggestedBy, status);
+            suggestions.add(suggestion);
+            // read next line
+            line = reader.readLine();
+        }
+
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return suggestions;
+}
 }

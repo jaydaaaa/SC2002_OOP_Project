@@ -1,4 +1,11 @@
 package controller;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import entity.CampCM;
+import entity.Student;
+import entity.Camp;
 
 import entity.*;
 
@@ -42,8 +49,8 @@ public class CampController extends BaseController{
     }
 
 	public void removeAttendee(Student student, Camp camp) {
-		if (camp.attendees.contains(student)){
-			camp.attendees.remove(student);
+		if (camp.getAttendees().contains(student)){
+			camp.getAttendees().remove(student);
 			System.out.println(student.getUserID()+" was successfully removed from "+camp.getCampName());
 			camp.setTotalSlots(camp.getTotalSlots()-1);
 		}
@@ -54,8 +61,8 @@ public class CampController extends BaseController{
 	
 	public void addCampCM(Student student, Camp camp) {
 		//need to check if student is already part of CAMP_COMM_MEM_LIST
-	    CampCM campCM = new CampCM(student.getUserID(),student.getFaculty(),student.myEnquiries,student.myCamps,0,new ArrayList<>());
-		camp.committeeMembers.add(campCM);
+	    CampCM campCM = new CampCM(student.getUserID(),student.getFaculty(),student.getMyEnquiries(),student.getMyCamps(),0,new ArrayList<>());
+		camp.getCommitteeMembers().add(campCM);
 		//update CAMP_COMM_MEM_LIST
 	}
 
@@ -72,7 +79,7 @@ public class CampController extends BaseController{
 	}
 
 	public void deleteCamp(Camp camp) {
-		camps.remove(camp);
+		masterCamps.remove(camp);
 		//might need to remove camp from other instances
 	}
 
@@ -184,7 +191,7 @@ public class CampController extends BaseController{
 	    System.out.println("Enter visibility of camp (true/false):");
 	    boolean visibility = sc.nextBoolean();
 	    Camp newCamp = new Camp(campName, dates, registrationDeadline, userGroup, location, description, totalSlots, staffIC, campCommSlots, visibility);
-	    camps.add(newCamp);
+	    masterCamps.add(newCamp);
 	}
 
 }

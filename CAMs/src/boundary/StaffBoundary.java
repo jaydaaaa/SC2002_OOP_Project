@@ -72,16 +72,31 @@ public class StaffBoundary extends UserBoundary {
         System.out.println("Your password has been successfully reset.");
     }
 
-    public void createCamp(){
+   public void createCamp(){
         // Create Camp
+        this.getStaffController().createCamp();
+        System.out.println("Camp successfully created");
     }
 
     public void viewAllCamps(){
         // View All Camps
+        System.out.println("Printing all camps: ");
+        this.getCampBoundary().printCampFormat();
+        ArrayList<Camp> camps = this.getCampController().getAllCamps();
+        for (Camp camp: camps) {
+            this.getCampBoundary().viewCampLine(camp);
+        }
     }
 
-	public void viewMyCamps(){
-        // View My Camps
+    public void viewMyCamps(){
+        // View my camps
+        System.out.println("Printing my camps: ");
+        this.getCampBoundary().printCampFormat();
+        String StaffId = this.getStaffController().getCurrentStaff().getUserId();
+        ArrayList<Camp> camps = this.getCampController().getCampsByStaffId(StaffId);
+        for (Camp camp: camps) {
+            this.getCampBoundary().viewCampLine(camp);
+        }
     }
 
 	public void editMyCamps(){

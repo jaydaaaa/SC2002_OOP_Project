@@ -24,6 +24,9 @@ public class CampController extends BaseController{
         }
         return facultyCamps;
     }
+    public ArrayList<Camp> getAllCamps() {
+        return masterCamps;
+    }
 
 	public void removeAttendee(Student student, Camp camp) {
 		if (camp.attendees.contains(student)){

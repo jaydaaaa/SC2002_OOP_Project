@@ -103,8 +103,11 @@ public class StaffBoundary extends UserBoundary {
         //
     }
 
-	public void deleteCamp(){
-        //  Delete Camp 
+    public void deleteCamp(){
+        //  Delete Camp
+        String CampName = this.getLine("What is the name of the camp that you would like to delete: ");
+        this.getCampController().deleteCamp(this.getStaffController().deleteCamp(CampName));
+        System.out.println("Deleting camp");
     }
 
 	public void viewEnquiries(){

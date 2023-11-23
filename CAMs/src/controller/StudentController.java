@@ -19,6 +19,46 @@ public class StudentController extends UserController{
         this.getCurrentStudent().setPassword(newPassword);
     }
 
+	public String getFaculty() {
+		return this.getCurrentStudent().getFaculty();
+	}
+
+	public ArrayList<Camp> getMyCamps() {
+		return this.getCurrentStudent().getMyCamps();
+	}
+
+	public void registerForCamp(String campName) {
+		// Find the camp
+		for (Camp camp : this.centralManager.getMasterCamps()) {
+			if (camp.getCampName().equals(campName)) {
+				// Add the student to the camp's attendees
+				camp.getAttendees().add(this.getCurrentStudent());
+				// Add the camp to the student's camps
+				this.getCurrentStudent().getMyCamps().add(camp);
+				break;
+			}
+		}
+	}
+
+	public void withdrawFromCamp(String campName) {
+		// Find the camp
+		for (Camp camp : this.centralManager.getMasterCamps()) {
+			if (camp.getCampName().equals(campName)) {
+				// Remove the student from the camp's attendees
+				camp.getAttendees().remove(this.getCurrentStudent());
+				// Remove the camp from the student's camps
+				this.getCurrentStudent().getMyCamps().remove(camp);
+				break;
+			}
+		}
+	}
+
+	public ArrayList<Enquiry> getMyEnquiries() {
+		return this.getCurrentStudent().getMyEnquiries();
+	}
+
+	
+
 	// private EnquiryController enquiryController = new EnquiryController();
 
 	// public void addEnquiry(Student student, String enquiryText) {

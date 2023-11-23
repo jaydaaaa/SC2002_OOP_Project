@@ -43,4 +43,19 @@ public class EnquiryController extends BaseController{
             System.out.println("Enquiry not found for the given student");
         }
     }
+
+    public void submitEnquiry(Student student, String enquiryText, String campName) {
+        // Create a new enquiry
+        Enquiry newEnquiry = new Enquiry(enquiryText, student.getUserId(), "", "", false);
+        // Add the enquiry to the student's list of enquiries
+        student.getMyEnquiries().add(newEnquiry);
+        // Find the camp and add the enquiry to the camp's list of enquiries
+        for (Camp camp : this.centralManager.getMasterCamps()) {
+            if (camp.getCampName().equals(campName)) {
+                camp.getEnquiries().add(newEnquiry);
+                break;
+            }
+        }
+    }
+    
 }

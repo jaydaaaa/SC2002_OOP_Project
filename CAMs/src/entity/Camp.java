@@ -7,7 +7,7 @@ public class Camp {
     private String dates;
     private String registrationDeadline;
     private String userGroup;
-    private String location;
+    private String location;s
     private String description;
     private int totalSlots;
     private String staffIC;
@@ -18,6 +18,7 @@ public class Camp {
     private List<Enquiry> enquiries;
     private List<Suggestion> suggestions;
     private List<Student> blackList; // for students that have withdrawn from this camp instance
+    private ArrayList<Enquiry> enquiries;
 
     public Camp(String campName, String dates, String registrationDeadline, String userGroup,
                 String location, String description, int totalSlots, String staffIC,
@@ -87,8 +88,12 @@ public class Camp {
         return committeeMembers;
     }
 
-    public List<Enquiry> getEnquiries() {
-        return enquiries;
+    public ArrayList<Enquiry> getEnquiries() {
+        return this.enquiries;
+    }
+    
+    public void setEnquiries(ArrayList<Enquiry> enquiries) {
+        this.enquiries = enquiries;
     }
 
     public List<Suggestion> getSuggestions() {

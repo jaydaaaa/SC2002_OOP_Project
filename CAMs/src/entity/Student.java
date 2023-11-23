@@ -15,10 +15,14 @@ public class Student extends User {
     }
 	
     public ArrayList<Enquiry> getMyEnquiries() {
-        return myEnquiries;
+        return this.myEnquiries;
+    }
+
+    public void setMyEnquiries(ArrayList<Enquiry> myEnquiries) {
+        this.myEnquiries = myEnquiries;
     }
 
     public ArrayList<Camp> getMyCamps() {
-        return myCamps;
+        return this.myCamps;
     }
 }

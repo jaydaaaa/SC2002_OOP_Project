@@ -1,4 +1,5 @@
 package boundary;
+import entity.Camp;
 import entity.CentralManager;
 import entity.Enquiry;
 import entity.Student;
@@ -69,32 +70,55 @@ public class StudentBoundary extends UserBoundary{
 
     public void viewCamps() {
         // View available camps
-		String faculty = /*Missing controller */.getFaculty();
-        this.getCampBoundary().viewCamps("faculty");
+        String faculty = this.getStudentController().getFaculty();
+        this.getCampBoundary().viewCamps(faculty);
     }
 
     public void viewMyCamps(){
 		//View own camps
+        ArrayList<Camp> myCamps = this.getStudentController().getMyCamps();
+        for (Camp camp : myCamps) {
+            System.out.println(camp.getCampName());
+        }
 	}
 
 	public void registerCamp() {
 		//register for a camp
+        String campName = this.getLine("Enter the name of the camp you want to register for:");
+        this.getStudentController().registerForCamp(campName);
 	}
 
 	public void withdrawCamp(){
 		//withdraw from camp
+        String campName = this.getLine("Enter the name of the camp you want to withdraw from:");
+        this.getStudentController().withdrawFromCamp(campName);
 	}
 
 	public void submitEnquiry(){
 		// Submit an enquiry for a camp
+        String enquiryText = this.getLine("Enter your enquiry:");
+        String campName = this.getLine("Enter the name of the camp you have the enquiry for:");
+        this.getEnquiryController().submitEnquiry(this.getStudentController().getCurrentStudent(), enquiryText, campName);
 	}
 
 	public void deleteEnquiry(){
 		//Delete an enquiry for a camp
+        String enquiryText = this.getLine("Enter the enquiry you want to delete:");
+        Student currentStudent = this.getStudentController().getCurrentStudent();
+        for (Enquiry enquiry : currentStudent.getMyEnquiries()) {
+            if (enquiry.getEnquiryText().equals(enquiryText)) {
+                this.getEnquiryController().deleteEnquiry(currentStudent, enquiry);
+                break;
+            }
+        }
 	}
 
 	public void viewEnquiries(){
 		//View enquiries and replies
+        ArrayList<Enquiry> myEnquiries = this.getStudentController().getMyEnquiries();
+        for (Enquiry enquiry : myEnquiries) {
+            System.out.println(enquiry.getEnquiryText());
+        }
 	}
 
 }

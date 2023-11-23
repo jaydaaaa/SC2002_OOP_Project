@@ -116,7 +116,7 @@ public class CentralManager {
         this.MasterCampCMs = Reader.readCampCMs(fpath);
     }
 
-    public void ingestEnqiries() {
+    public void ingestEnquiries() {
         String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";
         this.MasterEnquiries = Reader.readEnquiries(fpath);
     }

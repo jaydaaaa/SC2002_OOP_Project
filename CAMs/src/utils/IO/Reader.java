@@ -117,4 +117,26 @@ public class Reader {
         }
         return camps;
     }
+public static ArrayList<Suggestion> readSuggestions(String fpath) {
+    System.out.println("Ingesting suggestions...");
+    ArrayList<Suggestion> suggestions = new ArrayList<>();
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader(fpath));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] lst = line.split("_");
+            // Create a new Suggestion object
+            Suggestion suggestion = new Suggestion(lst[0], lst[1], Boolean.parseBoolean(lst[2]));
+            suggestions.add(suggestion);
+            // read next line
+            line = reader.readLine();
+        }
+
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return suggestions;
+}
 }

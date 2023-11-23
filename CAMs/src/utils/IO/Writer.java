@@ -1,8 +1,6 @@
 package utils.IO;
 
-import entity.Camp;
-import entity.Request;
-import entity.User;
+import entity.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,11 +14,11 @@ public class Writer {
             FileWriter writer = new FileWriter(fpath);
             ArrayList<String> coordinators = new ArrayList<>();
             for (User user: masterUsers) {
-                if (!coordinators.contains(user.getUserId())) {
+                if (!coordinators.contains(user.getUserID())) {
                     String toWrite = user.getName() + '_' + user.getEmail() +'_' + user.getFaculty() + '_' + user.getPassword() + '_' + user.getType() + '\n';
                     writer.write(toWrite);
                     if (Objects.equals(user.getType(), "Coordinator")) {
-                        coordinators.add(user.getUserId());
+                        coordinators.add(user.getUserID());
                     }
                 }
 
@@ -32,12 +30,27 @@ public class Writer {
         }
     }
 
-    public static void writeEnquiry(String fpath, ArrayList<Request> masterRequests) {
+    public static void writeEnquiry(String fpath, ArrayList<Enquiry> masterRequests) {
         System.out.println("Saving changes to requests file...");
         try {
             FileWriter writer = new FileWriter(fpath);
-            for (Request request: masterRequests) {
-                String toWrite = request.getType() + '_' + request.getStatus() + '_' + request.getDate() + '_' + request.getProjectID() + '_' +  request.getRequesteeID() + '_' + request.getUpdatedValue() + '\n';
+            for (Enquiry enquiry: masterRequests) {
+                String toWrite = enquiry.getEnquiryText() + '_' + enquiry.getEnquiryBy() + '_' + enquiry.getReplyText() + '_' + enquiry.getReplyBy() + '_' +  enquiry.getStatus() + '\n';
+                writer.write(toWrite);
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeSuggestions(String fpath, ArrayList<Suggestion> masterSuggestions) {
+        System.out.println("Saving changes to suggestions file...");
+        try {
+            FileWriter writer = new FileWriter(fpath);
+            for (Suggestion suggestion: masterSuggestions) {
+                String toWrite = suggestion.getSuggestionText() + '_' + suggestion.getSuggestedBy() + '_' + suggestion.getStatus() + '\n';
                 writer.write(toWrite);
             }
             writer.close();

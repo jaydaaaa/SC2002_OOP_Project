@@ -151,9 +151,10 @@ public class Camp {
     public void setEnquiries(List<Enquiry> enquiries) {
         this.enquiries = enquiries;
     }
-
-    public void setSuggestions(List<Suggestion> suggestions) {
-        this.suggestions = suggestions;
+    
+    // Changed to add suggestions
+    public void addSuggestions(Suggestion suggestion) {
+        this.suggestions.add(suggestion);
     }
 
      public void setBlacklist(List<Student> blackList) {

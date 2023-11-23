@@ -10,5 +10,18 @@ public class EnquiryBoundary extends BaseBoundary {
         super(centralManager);
     }
 
+    // View enquiries by Camp
+    public void viewEnquiriesByCamp() {
+        System.out.println("Displaying all requests: ");
+        String StaffId = this.getStaffController().getCurrentStaff().getUserId();
+        ArrayList<Camp> camps = this.getCampController().getCampsByStaffId(StaffId);
+        for (Camp camp: camps) {
+            this.printEnquiryFormat(camp);
+            ArrayList<Enquiry> enquiries = this.getEnquiryController().getEnquiryByCamp(camp);
+            this.printEnquiries(enquiries);
+        }
+
+    }
+
 	
 }

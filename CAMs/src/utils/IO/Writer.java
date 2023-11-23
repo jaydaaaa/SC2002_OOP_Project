@@ -35,7 +35,7 @@ public class Writer {
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Enquiry enquiry: masterRequests) {
-                String toWrite = enquiry.getType() + '_' + enquiry.getStatus() + '_' + enquiry.getDate() + '_' + enquiry.getProjectID() + '_' +  enquiry.getRequesteeID() + '_' + enquiry.getUpdatedValue() + '\n';
+                String toWrite = enquiry.getEnquiryText() + '_' + enquiry.getEnquiryBy() + '_' + enquiry.getReplyText() + '_' + enquiry.getReplyBy() + '_' +  enquiry.getStatus() + '\n';
                 writer.write(toWrite);
             }
             writer.close();

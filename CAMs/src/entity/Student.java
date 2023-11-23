@@ -18,6 +18,9 @@ public class Student extends User {
         return this.myEnquiries;
     }
 
+    public String getUserID() {
+        return super.getUserID();
+    }
     public void setMyEnquiries(ArrayList<Enquiry> myEnquiries) {
         this.myEnquiries = myEnquiries;
     }

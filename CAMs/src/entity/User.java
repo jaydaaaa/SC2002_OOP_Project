@@ -28,7 +28,7 @@ public class User {
         return this.email;
     }
 
-    public String getUserId() {
+    public String getUserID() {
         return this.userID;
     }
 

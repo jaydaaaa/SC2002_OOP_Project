@@ -1,14 +1,15 @@
 package entity;
 public class Enquiry {
-
+    private String campName;
     private String enquiryText;
     private String enquiryBy;
     private String replyText;
     private String replyBy;
     private boolean status;
 
-    public Enquiry(String enquiryText, String enquiryBy, String replyText, String replyBy, boolean status) {
+    public Enquiry(String enquiryText, String campName,String enquiryBy,String replyText, String replyBy, boolean status) {
         this.enquiryText = enquiryText;
+        this.campName = campName;
         this.enquiryBy = enquiryBy;
         this.replyText = replyText;
         this.replyBy = replyBy;
@@ -35,19 +36,19 @@ public class Enquiry {
         return status;
     }
     public void setEnquiryText(String enquiryText) {
-    	this.enquiryText = enquiryText;
+        this.enquiryText = enquiryText;
     }
     public void setEnquiryBy(String enquiryBy) {
-    	this.enquiryBy = enquiryBy;
+        this.enquiryBy = enquiryBy;
     }
     public void setReplyText(String replyText) {
-    	this.replyText = replyText;
+        this.replyText = replyText;
     }
     public void setReplyBy(String replyBy) {
-    	this.replyBy = replyBy;
+        this.replyBy = replyBy;
     }
     public void setStatus(boolean status) {
-    	this.status = status;
+        this.status = status;
     }
 }
 

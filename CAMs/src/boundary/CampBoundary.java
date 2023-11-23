@@ -28,7 +28,4 @@ public class CampBoundary extends BaseBoundary {
     public void viewCampLine(Camp camp) {
         System.out.println(camp.getCampName());
     }
-//      
-    }
-
 }

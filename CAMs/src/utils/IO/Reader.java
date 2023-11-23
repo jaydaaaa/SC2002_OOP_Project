@@ -126,8 +126,10 @@ public static ArrayList<Suggestion> readSuggestions(String fpath) {
 
         while (line != null) {
             String[] lst = line.split("_");
-            // Create a new Suggestion object
-            Suggestion suggestion = new Suggestion(lst[0], lst[1], Boolean.parseBoolean(lst[2]));
+            String suggestionText = lst [0];
+            String suggestedBy = lst[1];
+            Boolean status = Boolean.parseBoolean(lst[2]);
+            Suggestion suggestion = new Suggestion(suggestionText, suggestedBy, status);
             suggestions.add(suggestion);
             // read next line
             line = reader.readLine();

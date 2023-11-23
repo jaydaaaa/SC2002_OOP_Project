@@ -143,7 +143,7 @@ public class Camp {
         this.campCommSlots = campCommSlots;
     }
 
-    public void setvisibility(boolean visibility) {
+    public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 

@@ -165,7 +165,7 @@ public class CentralManager {
         return this.MasterCamps;
     }
 
-    public ArrayList<CampCM> getMasterRequests() {
+    public ArrayList<CampCM> getMasterCampCMs() {
         return this.MasterCampCMs;
     }
 

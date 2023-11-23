@@ -24,8 +24,8 @@ public class SuggestionController extends BaseController{
 
     }
 
-    public void approveSuggestion(){
-
+    public void approveSuggestion(Suggestion suggestion){
+        suggestion.setStatus(true);
     }
 
     public ArrayList<Suggestion> getAllSuggestions() {

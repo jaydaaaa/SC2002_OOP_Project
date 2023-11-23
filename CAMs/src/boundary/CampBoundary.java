@@ -14,12 +14,20 @@ public class CampBoundary extends BaseBoundary {
         super(centralManager);
     }
 
-	public void viewCamps(String faculty) {
+    public void viewCamps(String faculty) {
 		// need to check visibility of camp
 		// need to check camps that are not full
 		// need to check blacklist of student 
 		// need to check faculty
         ArrayList<Camp> camps = this.getCampController().getCamps(faculty); 
+
+    public void printCampFormat() {
+        System.out.println("[Camp Name]");
+    }
+
+    public void viewCampLine(Camp camp) {
+        System.out.println(camp.getCampName());
+    }
 //      
     }
 

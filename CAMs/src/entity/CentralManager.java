@@ -15,7 +15,9 @@ public class CentralManager {
     // Master Arrays
     private ArrayList<User> MasterUsers;
     private ArrayList<Camp> MasterCamps;
-    private ArrayList<CampCM> MasterCampCMs;
+    private ArrayList<CampCM> MasterCampCMs; //might not need this 
+    private ArrayList<Suggestion> MasterSuggestions;
+    private ArrayList<Enquiry> MasterEnquiries;
 
      // Boundary & Controllers
     private UserBoundary userBoundary;
@@ -54,11 +56,15 @@ public class CentralManager {
         this.MasterUsers = new ArrayList<User>();
         this.MasterCamps = new ArrayList<Camp>();
         this.MasterCampCM = new ArrayList<CampCM>();
+        this.MasterSuggestions = new ArrayList<Suggestion>();
+        this.MasterEnquiries = new ArrayList<Enquiry>();
 
         // Ingest Files
         this.ingestCamps();
         this.ingestUsers();
         this.ingestCampCMs();
+        this.ingestSuggestions();
+        this.ingestEnquiries();
 
         // Scanner
         this.sc = new Scanner(System.in);
@@ -89,6 +95,8 @@ public class CentralManager {
             this.writeUsers();
             this.writeCamps();
             this.writeCampCMs();
+            this.writeEnquiries();
+            this.writeSuggestions();
         }));
     }
 
@@ -103,9 +111,19 @@ public class CentralManager {
         this.MasterCamps = Reader.readCamps(fpath);
     }
 
-    public void ingestRequests() {
+    public void ingestCampCMs() {
         String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
         this.MasterCampCMs = Reader.readCampCMs(fpath);
+    }
+
+    public void ingestEnqiries() {
+        String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";
+        this.MasterEnquiries = Reader.readEnquiries(fpath);
+    }
+
+    public void ingestSuggestions() {
+        String fpath = this.currentWorkingDirectory + "data/Suggestions.txt";
+        this.MasterSuggestions = Reader.readSuggestions(fpath);
     }
 
     // Write files
@@ -115,30 +133,32 @@ public class CentralManager {
     }
 
     public void writeCamps() {
-        String fpath = this.currentWorkingDirectory + "data/Projects.txt";
+        String fpath = this.currentWorkingDirectory + "data/Camps.txt";
         Writer.writeCamps(fpath, this.MasterCamps);
     }
 
-    public void writeRequests() {
-        String fpath = this.currentWorkingDirectory + "data/Requests.txt";
+    public void writeCampCMs() {
+        String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
         Writer.writeCampCMs(fpath, this.MasterCampCMs);
     }
 
+    public void writeEnquiries() {
+        String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";
+        Writer.writeCamps(fpath, this.MasterCamps);
+    }
 
+    public void writeSuggestions() {
+        String fpath = this.currentWorkingDirectory + "data/Suggestions.txt";
+        Writer.writeSuggestions(fpath, this.MasterSuggestions);
+    }
     // Boundaries
     public UserBoundary getUserBoundary(){return this.userBoundary;}
     public StudentBoundary getStudentBoundary(){return this.studentBoundary;}
-    public CampBoundary getCampBoundary(){
-        return this.campBoundary;
-    }
+    public CampBoundary getCampBoundary(){return this.campBoundary;}
     public EnquiryBoundary getEnquiryBoundary() { return this.enquiryBoundary;}
     public SuggestionBoundary getSuggestionBoundary() { return this.suggestionBoundary;}
-    public CampCMBoundary getCampCMBoundary() {
-        return this.campCMBoundary;
-    }
-    public StaffBoundary getStaffBoundary() {
-        return this.staffBoundary;
-    }
+    public CampCMBoundary getCampCMBoundary() {return this.campCMBoundary;}
+    public StaffBoundary getStaffBoundary() {return this.staffBoundary;}
 
     // Get Master Arrays
     public ArrayList<Camp> getMasterCamps() {
@@ -151,6 +171,14 @@ public class CentralManager {
 
     public ArrayList<User> getMasterUsers() {
         return this.MasterUsers;
+    }
+
+    public ArrayList<Enquiry> getMasterEnquiries() {
+        return this.MasterEnquiries;
+    }
+
+    public ArrayList<Suggestion> getMasterSuggestions() {
+        return this.MasterSuggestions;
     }
 
     // Get input

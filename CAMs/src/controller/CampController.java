@@ -48,6 +48,16 @@ public class CampController extends BaseController{
         return camps;
     }
 
+    // Find object Camp from the masterCamp list taking in string as parameter
+    public Camp findCamp(String campName) {
+        for (Camp camp : this.masterCamps) {
+            if(Objects.equals(camp.getCampName(),campName)) {
+                return camp;
+            }
+        }
+        return null;
+    }
+
 	public void removeAttendee(Student student, Camp camp) {
 		if (camp.getAttendees().contains(student)){
 			camp.getAttendees().remove(student);

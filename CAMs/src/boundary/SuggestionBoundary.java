@@ -10,5 +10,7 @@ public class SuggestionBoundary extends BaseBoundary {
         super(centralManager);
     }
 
-	
+	public void printSuggestionFormat() {
+        System.out.println("Camp | Suggestor | Status | Suggestion");
+    }
 }

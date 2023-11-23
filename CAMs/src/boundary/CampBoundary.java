@@ -19,8 +19,7 @@ public class CampBoundary extends BaseBoundary {
 		// need to check camps that are not full
 		// need to check blacklist of student 
 		// need to check faculty
-        ArrayList<Camp> camps = this.getCampController().getCamps(faculty); 
-//      
+        ArrayList<Camp> camps = this.getCampController().getCamps(faculty);     
     }
 
 }

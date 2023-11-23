@@ -20,6 +20,13 @@ public class StaffController extends UserController{
         return (Staff) this.currentUser;
     }
 
+    // Create Camp method
+    public void CreateCamp() {
+        String StaffId = this.getCurrentStaff().getUserId();
+        Camp newCamp = this.getCampController().addCamp(StaffId);
+        this.getCurrentStaff().addCamps(newCamp);
+    }
+
     
     // protected List<Camp> createdCamps; //(can check using staffIC)
 

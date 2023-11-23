@@ -30,6 +30,17 @@ public class CampController extends BaseController{
         return masterCamps;
     }
 
+    // Added method to get camps according to staffId
+    public ArrayList<Camp> getCampsByStaffId(String StaffId) {
+        ArrayList<Camp> camps = new ArrayList<>();
+        for (Camp camp : this.masterCamps) {
+            if (Objects.equals(camp.getStaffIC(), StaffId)) {
+                camps.add(camp);
+            }
+        }
+        return camps;
+    }
+
 	public void removeAttendee(Student student, Camp camp) {
 		if (camp.attendees.contains(student)){
 			camp.attendees.remove(student);

@@ -2,6 +2,7 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Camp {
     private String campName;
     private String dates;
@@ -18,11 +19,8 @@ public class Camp {
     private List<Enquiry> enquiries;
     private List<Suggestion> suggestions;
     private List<Student> blackList; // for students that have withdrawn from this camp instance
-    private ArrayList<Enquiry> enquiries;
 
-    public Camp(String campName, String dates, String registrationDeadline, String userGroup,
-                String location, String description, int totalSlots, String staffIC,
-                int campCommSlots, boolean visibility) {
+    public Camp(String campName, String dates, String registrationDeadline, String userGroup, String location, String description, int totalSlots, String staffIC, int campCommSlots, boolean visibility) {
         this.campName = campName;
         this.dates = dates;
         this.registrationDeadline = registrationDeadline;
@@ -33,11 +31,11 @@ public class Camp {
         this.staffIC = staffIC;
         this.campCommSlots = campCommSlots;
         this.visibility = visibility;
-        this.attendees = new ArrayList<>(attendees);
-        this.committeeMembers = new ArrayList<>(committeeMembers);
-        this.enquiries = new ArrayList<>(enquiries);
-        this.suggestions = new ArrayList<>(suggestions);
-        this.blackList = new ArrayList<>(blackList);
+        this.attendees = new ArrayList<>();
+        this.committeeMembers = new ArrayList<>();
+        this.enquiries = new ArrayList<>();
+        this.suggestions = new ArrayList<>();
+        this.blackList = new ArrayList<>();
     }
 
     // Getter methods
@@ -78,6 +76,10 @@ public class Camp {
 
     public boolean getVisibility() {
         return visibility;
+    }
+
+     public String getFaculty() {
+    return this.faculty;
     }
 
     public List<Student> getAttendees() {
@@ -162,6 +164,9 @@ public class Camp {
         this.suggestions.add(suggestion);
     }
 
+     public void setFaculty(String faculty) {
+         this.faculty = faculty;
+     }
      public void setBlacklist(List<Student> blackList) {
         this.blackList = blackList;
     }

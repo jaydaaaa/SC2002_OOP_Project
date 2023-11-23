@@ -8,10 +8,21 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CampController extends BaseController{
-	ArrayList<Camp> masterCamps;
-     public CampController(CentralManager centralManager) {
-		super(centralManager);
-		this.masterCamps = this.centralManager.getMasterCamps();
+    ArrayList<Camp> masterCamps;
+
+    public CampController(CentralManager centralManager) {
+        super(centralManager);
+        this.masterCamps = this.centralManager.getMasterCamps();
+    }
+
+    public ArrayList<Camp> getCamps(String faculty) {
+        ArrayList<Camp> facultyCamps = new ArrayList<>();
+        for (Camp camp : this.masterCamps) {
+            if (camp.getFaculty().equals(faculty)) {
+                facultyCamps.add(camp);
+            }
+        }
+        return facultyCamps;
     }
 
 	public void removeAttendee(Student student, Camp camp) {

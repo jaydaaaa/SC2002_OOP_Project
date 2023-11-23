@@ -58,7 +58,7 @@ public class Reader {
         return users;
     }
 
-    public static ArrayList<Enquiry> readRequests(String fpath) {
+    public static ArrayList<Enquiry> readEnquiries(String fpath) {
         System.out.println("Ingesting requests...");
         ArrayList<Enquiry> enquiries = new ArrayList<>();
         try {

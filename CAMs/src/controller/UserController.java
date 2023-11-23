@@ -24,7 +24,7 @@ public class UserController extends BaseController {
 
     public User getUserByID(String userID) {
         for (User _user: this.users) {
-            if (Objects.equals(_user.getUserId(), userID)){
+            if (Objects.equals(_user.getUserID(), userID)){
                 return _user;
             }
         }
@@ -33,7 +33,7 @@ public class UserController extends BaseController {
 
     public String login(String userID, String pwd){
         for(User user: this.users){
-            if (Objects.equals(userID, user.getUserId()) && Objects.equals(pwd, user.getPassword())){
+            if (Objects.equals(userID, user.getUserID()) && Objects.equals(pwd, user.getPassword())){
                 return user.getType();
             }
 

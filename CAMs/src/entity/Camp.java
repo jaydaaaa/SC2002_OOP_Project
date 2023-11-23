@@ -7,8 +7,8 @@ public class Camp {
     private String campName;
     private String dates;
     private String registrationDeadline;
-    private String userGroup;
-    private String location;s
+    private String faculty;
+    private String location;
     private String description;
     private int totalSlots;
     private String staffIC;
@@ -20,11 +20,11 @@ public class Camp {
     private List<Suggestion> suggestions;
     private List<Student> blackList; // for students that have withdrawn from this camp instance
 
-    public Camp(String campName, String dates, String registrationDeadline, String userGroup, String location, String description, int totalSlots, String staffIC, int campCommSlots, boolean visibility) {
+    public Camp(String campName, String dates, String registrationDeadline, String faculty, String location, String description, int totalSlots, String staffIC, int campCommSlots, boolean visibility) {
         this.campName = campName;
         this.dates = dates;
         this.registrationDeadline = registrationDeadline;
-        this.userGroup = userGroup;
+        this.faculty = faculty;
         this.location = location;
         this.description = description;
         this.totalSlots = totalSlots;
@@ -51,7 +51,7 @@ public class Camp {
     }
 
     public String getUserGroup() {
-        return userGroup;
+        return faculty;
     }
 
     public String getLocation() {
@@ -90,7 +90,7 @@ public class Camp {
         return committeeMembers;
     }
 
-    public ArrayList<Enquiry> getEnquiries() {
+    public List<Enquiry> getEnquiries() {
         return this.enquiries;
     }
     
@@ -120,7 +120,7 @@ public class Camp {
     }
 
     public void setUserGroup(String userGroup) {
-        this.userGroup = userGroup;
+        this.faculty = userGroup;
     }
 
     public void setLocation(String location) {
@@ -131,7 +131,7 @@ public class Camp {
         this.description = description;
     }
 
-    public void setTotalSots(int totalSlots) {
+    public void setTotalSlots(int totalSlots) {
         this.totalSlots = totalSlots;
     }
 
@@ -143,7 +143,7 @@ public class Camp {
         this.campCommSlots = campCommSlots;
     }
 
-    public void setvisibility(boolean visibility) {
+    public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 

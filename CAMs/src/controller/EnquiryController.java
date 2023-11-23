@@ -65,5 +65,15 @@ public class EnquiryController extends BaseController{
             }
         }
     }
+     // Get list of enquiry based on camp
+    public ArrayList<Enquiry> getEnquiryByCamp(Camp camp) {
+        ArrayList<Enquiry> enquiries = new ArrayList<Enquiry>();
+        for (Enquiry enquiry: this.masterEnquiries) {
+            if (Objects.equals(enquiry.getCampName(),camp.getCampName())) {
+                enquiries.add(enquiry);
+            }
+        }
+        return enquiries;
+    }
     
 }

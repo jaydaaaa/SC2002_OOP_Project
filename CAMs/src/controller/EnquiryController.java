@@ -34,11 +34,11 @@ public class EnquiryController extends BaseController{
         }
     }
 
-    public void addEnquiry(Student student, String enquiryText) {
-        Enquiry newEnquiry = new Enquiry(enquiryText, student.getUserID(), "", "", false);
-        // Add the new enquiry to the student's list of enquiries
-        student.getMyEnquiries().add(newEnquiry);
-    }
+    // public void addEnquiry(Student student, String enquiryText , Camp camp) {
+    //     Enquiry newEnquiry = new Enquiry(enquiryText,camp.getCampName(),student.getUserID(), "", "", false);
+    //     // Add the new enquiry to the student's list of enquiries
+    //     student.getMyEnquiries().add(newEnquiry);
+    // }
 
     public void replyEnquiry(Student student, Enquiry enquiry, String replyText) {
         // Check if the student's enquiries contain the given enquiry
@@ -52,15 +52,15 @@ public class EnquiryController extends BaseController{
         }
     }
 
-    public void submitEnquiry(Student student, String enquiryText, String campName) {
+    public void submitEnquiry(Student student, String enquiryText, Camp camp) {
         // Create a new enquiry
-        Enquiry newEnquiry = new Enquiry(enquiryText, student.getUserID(), "", "", false);
+        Enquiry newEnquiry = new Enquiry(enquiryText,camp.getCampName(),student.getUserID(), "", "", false);
         // Add the enquiry to the student's list of enquiries
         student.getMyEnquiries().add(newEnquiry);
         // Find the camp and add the enquiry to the camp's list of enquiries
-        for (Camp camp : this.centralManager.getMasterCamps()) {
-            if (camp.getCampName().equals(campName)) {
-                camp.getEnquiries().add(newEnquiry);
+        for (Camp _camp : this.centralManager.getMasterCamps()) {
+            if (_camp.equals(camp)) {
+                _camp.getEnquiries().add(newEnquiry);
                 break;
             }
         }
@@ -68,7 +68,7 @@ public class EnquiryController extends BaseController{
      // Get list of enquiry based on camp
     public ArrayList<Enquiry> getEnquiryByCamp(Camp camp) {
         ArrayList<Enquiry> enquiries = new ArrayList<Enquiry>();
-        for (Enquiry enquiry: this.masterEnquiries) {
+        for (Enquiry enquiry: this.centralManager.getMasterEnquiries()) {
             if (Objects.equals(enquiry.getCampName(),camp.getCampName())) {
                 enquiries.add(enquiry);
             }

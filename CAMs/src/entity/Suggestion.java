@@ -33,4 +33,8 @@ public class Suggestion {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public void setSuggestionText(String newSuggestionText){
+        this.suggestionText=newSuggestionText;
+    }
 }

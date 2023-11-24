@@ -6,6 +6,7 @@ import entity.Student;
 
 import java.util.ArrayList;
 
+import controller.CampController;
 import controller.UserController;
 
 public class StudentBoundary extends UserBoundary{
@@ -97,8 +98,9 @@ public class StudentBoundary extends UserBoundary{
 	public void submitEnquiry(){
 		// Submit an enquiry for a camp
         String campName = this.getLine("Enter the name of the camp you have the enquiry for:");
+        Camp camp= this.getCampController().findCamp(campName);
         String enquiryText = this.getLine("Enter your enquiry:");
-        this.getEnquiryController().submitEnquiry(this.getStudentController().getCurrentStudent(), enquiryText, campName);
+        this.getEnquiryController().submitEnquiry(this.getStudentController().getCurrentStudent(), enquiryText, camp);
 	}
 
 	public void deleteEnquiry(){

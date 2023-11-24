@@ -54,7 +54,7 @@ public class EnquiryController extends BaseController{
 
     public void submitEnquiry(Student student, String enquiryText, Camp camp) {
         // Create a new enquiry
-        Enquiry newEnquiry = new Enquiry(enquiryText,camp.getCampName(),student.getUserID(), "", "", false);
+        Enquiry newEnquiry = new Enquiry(enquiryText, camp.getCampName(), student.getUserID(), "", "", false);
         // Add the enquiry to the student's list of enquiries
         student.getMyEnquiries().add(newEnquiry);
         // Find the camp and add the enquiry to the camp's list of enquiries

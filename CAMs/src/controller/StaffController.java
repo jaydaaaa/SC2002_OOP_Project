@@ -21,9 +21,9 @@ public class StaffController extends UserController{
     }
 
     // Create Camp method
-    public void CreateCamp() {
-        String StaffId = this.getCurrentStaff().getUserId();
-        Camp newCamp = this.getCampController().addCamp(StaffId);
+    public void createCamp() {
+        String staffId = this.getCurrentStaff().getUserID();
+        Camp newCamp = this.getCampController().addCamp(staffId);
         this.getCurrentStaff().addCamps(newCamp);
     }
 

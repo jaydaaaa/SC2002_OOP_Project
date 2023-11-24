@@ -96,8 +96,8 @@ public class StudentBoundary extends UserBoundary{
 
 	public void submitEnquiry(){
 		// Submit an enquiry for a camp
-        String enquiryText = this.getLine("Enter your enquiry:");
         String campName = this.getLine("Enter the name of the camp you have the enquiry for:");
+        String enquiryText = this.getLine("Enter your enquiry:");
         this.getEnquiryController().submitEnquiry(this.getStudentController().getCurrentStudent(), enquiryText, campName);
 	}
 

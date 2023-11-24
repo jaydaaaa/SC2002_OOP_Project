@@ -48,6 +48,8 @@ public class StudentController extends UserController{
 				camp.getAttendees().remove(this.getCurrentStudent());
 				// Remove the camp from the student's camps
 				this.getCurrentStudent().getMyCamps().remove(camp);
+				// Add student to camp's blacklist
+				camp.addToBlacklist(this.getCurrentStudent());
 				break;
 			}
 		}
@@ -56,8 +58,6 @@ public class StudentController extends UserController{
 	public ArrayList<Enquiry> getMyEnquiries() {
 		return this.getCurrentStudent().getMyEnquiries();
 	}
-
-	
 
 	// private EnquiryController enquiryController = new EnquiryController();
 
@@ -70,21 +70,5 @@ public class StudentController extends UserController{
 	// }
 
 	
-	// public void enrollForCamp(Student student, Camp camp) {
-	//     if (!student.getMyCamps().contains(camp)) {
-	//         student.getMyCamps().add(camp);
-	//         System.out.println(student.getUserID() + " has successfully enrolled for " + camp.getCampName());
-	//     } else {
-	//         System.out.println(student.getUserID() + " is already enrolled in " + camp.getCampName());
-	//     }
-	// }
 
-	// public void withdrawFromCamp(Student student, Camp camp) {
-	//     if (student.getMyCamps().contains(camp)) {
-	//         student.getMyCamps().remove(camp);
-	//         System.out.println(student.getUserID() + " has successfully withdrawn from " + camp.getCampName());
-	//     } else {
-	//         System.out.println(student.getUserID() + " is not enrolled in " + camp.getCampName());
-	//     }
-	// }
 }

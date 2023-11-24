@@ -166,8 +166,9 @@ public class Camp {
 
      public void setFaculty(String faculty) {
          this.faculty = faculty;
-     }
-     public void setBlacklist(List<Student> blackList) {
-        this.blackList = blackList;
+    }
+
+    public void addToBlacklist(Student student) {
+        this.blackList.add(student);
     }
 }

@@ -92,7 +92,7 @@ public class StaffBoundary extends UserBoundary {
         // View my camps
         System.out.println("Printing my camps: ");
         this.getCampBoundary().printCampFormat();
-        String StaffId = this.getStaffController().getCurrentStaff().getUserId();
+        String StaffId = this.getStaffController().getCurrentStaff().getUserID();
         ArrayList<Camp> camps = this.getCampController().getCampsByStaffId(StaffId);
         for (Camp camp: camps) {
             this.getCampBoundary().viewCampLine(camp);

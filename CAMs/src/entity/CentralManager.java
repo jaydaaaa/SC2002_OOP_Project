@@ -55,14 +55,14 @@ public class CentralManager {
         // Master Arrays
         this.MasterUsers = new ArrayList<User>();
         this.MasterCamps = new ArrayList<Camp>();
-        this.MasterCampCM = new ArrayList<CampCM>();
+        // this.MasterCampCM = new ArrayList<CampCM>();
         this.MasterSuggestions = new ArrayList<Suggestion>();
         this.MasterEnquiries = new ArrayList<Enquiry>();
 
         // Ingest Files
         this.ingestCamps();
         this.ingestUsers();
-        this.ingestCampCMs();
+        // this.ingestCampCMs();
         this.ingestSuggestions();
         this.ingestEnquiries();
 
@@ -94,7 +94,7 @@ public class CentralManager {
             System.out.println("Running shutdown routine...");
             this.writeUsers();
             this.writeCamps();
-            this.writeCampCMs();
+            // this.writeCampCMs();
             this.writeEnquiries();
             this.writeSuggestions();
         }));
@@ -111,10 +111,10 @@ public class CentralManager {
         this.MasterCamps = Reader.readCamps(fpath);
     }
 
-    public void ingestCampCMs() {
-        String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
-        this.MasterCampCMs = Reader.readCampCMs(fpath);
-    }
+    // public void ingestCampCMs() {
+    //     String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
+    //     this.MasterCampCMs = Reader.readCampCMs(fpath);
+    // }
 
     public void ingestEnquiries() {
         String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";
@@ -137,10 +137,10 @@ public class CentralManager {
         Writer.writeCamps(fpath, this.MasterCamps);
     }
 
-    public void writeCampCMs() {
-        String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
-        Writer.writeCampCMs(fpath, this.MasterCampCMs);
-    }
+    // public void writeCampCMs() {
+    //     String fpath = this.currentWorkingDirectory + "data/CampCMs.txt";
+    //     Writer.writeCampCMs(fpath, this.MasterCampCMs);
+    // }
 
     public void writeEnquiries() {
         String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";

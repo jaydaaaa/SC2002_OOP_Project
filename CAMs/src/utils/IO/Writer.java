@@ -35,7 +35,7 @@ public class Writer {
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Enquiry enquiry: masterRequests) {
-                String toWrite = enquiry.getEnquiryText() + '_' + enquiry.getEnquiryBy() + '_' + enquiry.getReplyText() + '_' + enquiry.getReplyBy() + '_' +  enquiry.getStatus() + '\n';
+                String toWrite = enquiry.getCampName() + '_' + enquiry.getEnquiryText() + '_' + enquiry.getEnquiryBy() + '_' + enquiry.getReplyText() + '_' + enquiry.getReplyBy() + '_' +  enquiry.getStatus() + '\n';
                 writer.write(toWrite);
             }
             writer.close();
@@ -50,7 +50,7 @@ public class Writer {
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Suggestion suggestion: masterSuggestions) {
-                String toWrite = suggestion.getSuggestionText() + '_' + suggestion.getSuggestedBy() + '_' + suggestion.getStatus() + '\n';
+                String toWrite = suggestion.getCampName() + '_' + suggestion.getSuggestionText() + '_' + suggestion.getSuggestedBy() + '_' + suggestion.getStatus() + '\n';
                 writer.write(toWrite);
             }
             writer.close();

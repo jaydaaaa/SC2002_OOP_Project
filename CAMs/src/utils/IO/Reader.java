@@ -67,12 +67,13 @@ public class Reader {
 
             while (line != null) {
                 String[] lst = line.split("_");
-                String enquiryText = lst[0];
-                String enquiryBy = lst[1];
-                String replyText = lst[2];
-                String replyBy = lst[3];
-                Boolean status = Boolean.parseBoolean(lst[4]);
-                Enquiry enquiry = new Enquiry(enquiryText, enquiryBy, replyText, replyBy, status);
+                String campName = lst[0];
+                String enquiryText = lst[1];
+                String enquiryBy = lst[2];
+                String replyText = lst[3];
+                String replyBy = lst[4];
+                Boolean status = Boolean.parseBoolean(lst[5]);
+                Enquiry enquiry = new Enquiry(campName, enquiryText, enquiryBy, replyText, replyBy, status);
                 enquiries.add(enquiry);
                 // read next line
                 line = reader.readLine();
@@ -126,10 +127,11 @@ public static ArrayList<Suggestion> readSuggestions(String fpath) {
 
         while (line != null) {
             String[] lst = line.split("_");
-            String suggestionText = lst [0];
-            String suggestedBy = lst[1];
-            Boolean status = Boolean.parseBoolean(lst[2]);
-            Suggestion suggestion = new Suggestion(suggestionText, suggestedBy, status);
+            String campName = lst[0];
+            String suggestionText = lst [1];
+            String suggestedBy = lst[2];
+            Boolean status = Boolean.parseBoolean(lst[3]);
+            Suggestion suggestion = new Suggestion(campName, suggestionText, suggestedBy, status);
             suggestions.add(suggestion);
             // read next line
             line = reader.readLine();

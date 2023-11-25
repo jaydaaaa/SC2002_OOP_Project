@@ -55,13 +55,17 @@ public class CampBoundary extends BaseBoundary {
     }
 
     public void printCampFormat() {
-        System.out.println("[CampIndex]. [Camp Name] | [Start to End Dates] | [Faculty] | [Slots Avail]");
+        System.out.println("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail]");
     }
 
     public void printCampLine(int idx, Camp camp) {
         System.out.print(idx);
         System.out.print(". ");
         System.out.print(camp.getCampName());
+        System.out.print(" | ");//new
+        System.out.print(camp.getDescription());//new
+        System.out.print(" | ");//new
+        System.out.print(camp.getLocation());//new
         System.out.print(" | ");
         ArrayList<Integer> dates = camp.getDates();
         System.out.print(dates.get(0));
@@ -74,9 +78,33 @@ public class CampBoundary extends BaseBoundary {
         System.out.println();
     }
 
-    public void editCamp() {
+    public void editCamp(Camp camp) { //EDITTED
         // Options list of what edit
             // for each option, run edit fn
                 // eg. have a prompt for edit campName --> calls campController.editCamp() :| all other variables will be retained so you will have to get those vars and save it locally first before passing it back into the edit fn in camp controller
+        while(true){
+            int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Cancel Edit\n");
+            switch(choice){
+                case 1:
+                    String newDescription = getLine("Enter new description:");
+                    getCampController().editCamp(camp, camp.getLocation(), newDescription);
+                    System.out.println("Description updated.");
+                    break;
+                case 2:
+                    String newLocation = getLine("Enter new location:");
+                    getCampController().editCamp(camp, newLocation, camp.getDescription());
+                    System.out.println("Location updated.");
+                    break;
+                case 3:
+                    getCampController().toggleVisibility(camp);
+                    break;
+                case 4:
+                    System.out.println("Leaving edit screen...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3 or 4.");
+            }
+        }
+
     }
 }

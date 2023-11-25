@@ -1,10 +1,6 @@
 package controller;
 import java.util.ArrayList;
 
-import entity.CampCM;
-import entity.Student;
-import entity.Camp;
-
 import entity.*;
 
 import java.util.Objects;
@@ -117,9 +113,11 @@ public class CampController extends BaseController{
         this.getCentralManager().getMasterCamps().remove(camp);
     }
 
-    public void editCamp() {
+    public void editCamp(Camp camp, String newLocation, String newDescription) { //EDITTED
         // TODO
         // params of this method will correspond to all editable attribs of this camp (meaning all attribs except for the campID bcos that is system generated and blackList)
+        camp.setDescription(newDescription);
+        camp.setLocation(newLocation);
     }
 
     public void createCamp(String campName, ArrayList<Integer> dates, int registrationDeadline, String userGroup,

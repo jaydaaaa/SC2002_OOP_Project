@@ -1,5 +1,8 @@
 package boundary;
 import entity.CentralManager;
+import entity.Enquiry;
+import entity.Student;
+import entity.Staff;
 import entity.Camp;
 
 import java.util.ArrayList;
@@ -98,8 +101,13 @@ public class StaffBoundary extends UserBoundary {
         }
     }
 
-	public void editMyCamps(){
-        //
+	public void editMyCamps(){ //EDITTED
+        viewMyCamps();
+        Staff currentStaff = this.getStaffController().getCurrentStaff();
+        ArrayList<Camp> myCamps = this.getCampController().getCampsByStaffID(currentStaff.getUserID());
+        int index = getInt("Enter index of camp that you want to edit.");
+        Camp campToEdit = myCamps.get(index -1);
+        this.getCampBoundary().editCamp(campToEdit);
     }
 
     public void deleteCamp(){

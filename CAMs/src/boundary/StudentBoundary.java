@@ -32,7 +32,7 @@ public class StudentBoundary extends UserBoundary{
 
     public void studentOperations() {
         int choice = 0;
-        while (choice != 9) {
+        while (choice != 10) {
             System.out.print(
                 """
                 ========================= Welcome to Student App =========================

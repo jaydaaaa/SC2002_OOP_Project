@@ -9,13 +9,13 @@ public class User {
     private String type;
 
     // The default password is "password"
-    public User(String name,String userID,String email,String password, String faculty, String type) {
+    public User(String name,String userID,String email,String password, String faculty, String userType) {
         this.name = name;
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.faculty = faculty;
-        this.type = type;
+        this.type = userType;
     }
 
     public User() {};

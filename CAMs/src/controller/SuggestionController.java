@@ -3,7 +3,6 @@ package controller;
 import entity.*;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SuggestionController extends BaseController{
     ArrayList<Suggestion> masterSuggestions;
@@ -16,13 +15,13 @@ public class SuggestionController extends BaseController{
         String campName = camp.getCampName();
         String CampCMName = campCM.getName();
         // Create a new Suggestion
-        Suggestion newSuggestion = new Suggestion(campName, suggestionText, CampCMName, false);
-        
+        Suggestion newSuggestion = new Suggestion(campName, suggestionText, CampCMName, false, "");
+
         // Add the new Suggestion to the masterSuggestions list
         this.masterSuggestions.add(newSuggestion);
-        
+
         // Add the new Suggestion to the camp's list of suggestions
-        camp.getSuggestions().add(newSuggestion);
+        camp.addSuggestion(newSuggestion.getSuggestionID());
     }
 
     public void editSuggestion(Suggestion suggestion, String newSuggestionText){
@@ -32,7 +31,7 @@ public class SuggestionController extends BaseController{
     public void deleteSuggestion(Suggestion suggestion){
          // Remove the Suggestion from the masterSuggestions list
         this.masterSuggestions.remove(suggestion);
-    
+
         // Remove the Suggestion from the camp's list of suggestions
         for (Camp camp : this.centralManager.getMasterCamps()) {
         camp.getSuggestions().remove(suggestion);
@@ -70,7 +69,7 @@ public class SuggestionController extends BaseController{
                 suggestionsList.add(suggestion);
             }
         }
-        
+
         return suggestionsList;
     }
 }

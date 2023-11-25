@@ -20,14 +20,26 @@ public class StaffController extends UserController{
         return (Staff) this.currentUser;
     }
 
-    // Create Camp method
-    public void createCamp() {
-        String staffId = this.getCurrentStaff().getUserID();
-        Camp newCamp = this.getCampController().addCamp(staffId);
-        this.getCurrentStaff().addCamps(newCamp);
+    public Staff getStaffByID(String staffID) {
+        for (User user: this.getCentralManager().getMasterUsers()) {
+            if (user.getUserID().equals(staffID)) {
+                return (Staff) user;
+            }
+        }
+        return null;
     }
 
-    
+    public boolean checkCampOwnership(String campName) {
+        Staff currentStaff = this.getCurrentStaff();
+        for (Camp camp: currentStaff.getCamps()) {
+            if (Objects.equals(camp.getCampName(), campName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     // protected List<Camp> createdCamps; //(can check using staffIC)
 
     // /**

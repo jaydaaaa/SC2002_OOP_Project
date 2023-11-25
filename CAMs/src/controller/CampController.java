@@ -1,7 +1,5 @@
 package controller;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import entity.CampCM;
 import entity.Student;
@@ -9,48 +7,65 @@ import entity.Camp;
 
 import entity.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class CampController extends BaseController{
-    ArrayList<Camp> masterCamps;
 
     public CampController(CentralManager centralManager) {
         super(centralManager);
-        this.masterCamps = this.centralManager.getMasterCamps();
     }
     // Added method to get Camps based on faculty for student
-    public ArrayList<Camp> getCamps(String faculty) {
+    public ArrayList<Camp> getAvailCamps(String studentID) {
+        System.out.println("debug studentID:" + studentID);
+        Student student = this.getStudentController().getStudentByID(studentID);
         ArrayList<Camp> facultyCamps = new ArrayList<>();
-        for (Camp camp : this.masterCamps) {
-            if (camp.getFaculty().equals(faculty)) {
+        for (Camp camp : this.getAllCamps()) {
+            if ((camp.getFaculty().equals(student.getFaculty()) || camp.getFaculty().equals("ALL")) && camp.getVisibility() && !camp.getBlacklist().contains(studentID) && !camp.getAttendees().contains(student)) {
                 facultyCamps.add(camp);
             }
         }
         return facultyCamps;
     }
-	
+
     // Added method to get all camps for staff
     public ArrayList<Camp> getAllCamps() {
-        return masterCamps;
+        return this.getCentralManager().getMasterCamps();
     }
 
     // Added method to get camps according to staffId
-    public ArrayList<Camp> getCampsByStaffId(String StaffId) {
+    public ArrayList<Camp> getCampsByStaffID(String staffID) {
         ArrayList<Camp> camps = new ArrayList<>();
-        for (Camp camp : this.masterCamps) {
-            if (Objects.equals(camp.getStaffIC(), StaffId)) {
+        for (Camp camp : this.getAllCamps()) {
+            if (Objects.equals(camp.getStaffIC(), staffID)) {
                 camps.add(camp);
             }
         }
         return camps;
     }
 
+    public Camp getCampByID(String campID) {
+        for (Camp camp: this.getAllCamps()) {
+            if (camp.getCampID().equals(campID)) {
+                return camp;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Camp> getAttendedCamps(String studentID) {
+        ArrayList<Camp> attendedCamps = new ArrayList<>();
+        for (Camp camp: this.getAllCamps()) {
+            ArrayList<String> attendees = camp.getAttendees();
+            if (attendees.contains(studentID)) {
+                attendedCamps.add(camp);
+            }
+        }
+        return attendedCamps;
+    }
+
     // Find object Camp from the masterCamp list taking in string as parameter
     public Camp findCamp(String campName) {
-        for (Camp camp : this.masterCamps) {
+        for (Camp camp : this.getAllCamps()) {
             if(Objects.equals(camp.getCampName(),campName)) {
                 return camp;
             }
@@ -58,150 +73,62 @@ public class CampController extends BaseController{
         return null;
     }
 
-	public void removeAttendee(Student student, Camp camp) {
-		if (camp.getAttendees().contains(student)){
-			camp.getAttendees().remove(student);
-			System.out.println(student.getUserID()+" was successfully removed from "+camp.getCampName());
-			camp.setTotalSlots(camp.getTotalSlots()-1);
-		}
-		else{
-			System.out.println(student.getUserID()+" is not registered in "+camp.getCampName());
-		}
-	}
-	
-	public void addCampCM(Student student, Camp camp) {
-		//need to check if student is already part of CAMP_COMM_MEM_LIST
-	    CampCM campCM = new CampCM(student.getUserID(),student.getFaculty(),student.getMyEnquiries(),student.getMyCamps(),0,new ArrayList<>());
-		camp.getCommitteeMembers().add(campCM);
-		//update CAMP_COMM_MEM_LIST
-	}
+    public int removeAttendee(Student student, String campID) {
+        Camp camp = this.getCampByID(campID);
+        if (camp.getAttendees().contains(student.getUserID())){
+            if (!camp.getCommitteeMembers().contains(student.getUserID())) { // allows for withdrawal if not CampCom
+                camp.getAttendees().remove(student.getUserID());
+                // Add student to camp's blacklist
+                camp.addToBlacklist(student.getUserID());
+                return 1;
+            } else {
+                return 0;
+            }
+        } else{
+            return -1;
+        }
+    }
 
-	public void toggleVisibility(Camp camp) {
+    public int addCampCM(Student student, Camp camp) {
+        // TODO: check if student is already part of CAMP_COMM_MEM_LIST
+        // TODO: check if CC member limit reached
+        // TODO: Set campComm flag in Student to campID
 
-		if(camp.getVisibility()){
-			camp.setVisibility(false);
-			System.out.println(camp.getCampName()+" visibility set to off");
-		}
-		else{
-			camp.setVisibility(true);
-			System.out.println(camp.getCampName()+" visibility set to on");
-		}
-	}
+        CampCM campCM = new CampCM(student.getName(), student.getUserID(), student.getEmail(), student.getPassword(),
+                student.getFaculty(), student.getType(), 0);
 
-	public void deleteCamp(Camp camp) {
-		masterCamps.remove(camp);
-		//might need to remove camp from other instances
-	}
+        //update CAMP_COMM_MEM_LIST
+        camp.getCommitteeMembers().add(campCM.getUserID());
+        return 1;
+    }
 
-	public void editCamp(Camp camp) {
-		System.out.println("Enter choice of the following information would you like to edit (1-10)");
-		System.out.println("1. Camp name: "+camp.getCampName());
-		System.out.println("2. Dates: "+camp.getDates());
-		System.out.println("3. Registration Deadline: "+camp.getRegistrationDeadline());
-		System.out.println("4. User Group: "+camp.getUserGroup());
-		System.out.println("5. Location: "+camp.getLocation());
-		System.out.println("6. Description: "+camp.getDescription());
-		System.out.println("7. Total Slots: "+camp.getTotalSlots());
-		System.out.println("8. Staff IC: "+camp.getStaffIC());
-		System.out.println("9. Camp Committee Slots: "+camp.getCampCommSlots());
-		System.out.println("10. Cancel");
+    public void toggleVisibility(Camp camp) {
+        if(camp.getVisibility()){
+            camp.setVisibility(false);
+            System.out.println(camp.getCampName()+" visibility set to off");
+        } else{
+            camp.setVisibility(true);
+            System.out.println(camp.getCampName()+" visibility set to on");
+        }
+    }
 
-		Scanner sc = new Scanner(System.in);
-		int choice = sc.nextInt();
-		switch (choice) {
-			case 1:
-				System.out.println("Enter new camp name:");
-				String campName = sc.nextLine();
-				camp.setCampName(campName);
-				break;
-			case 2:
-				System.out.println("Enter new dates:");
-				String dates = sc.nextLine();
-				camp.setDates(dates);
-				break;
-			case 3:
-				System.out.println("Enter new registration deadline:");
-				String registrationDeadline = sc.nextLine();
-				camp.setRegistrationDeadline(registrationDeadline);
-				break;
-			case 4:
-				System.out.println("Enter new user group:");
-				String userGroup = sc.nextLine();
-				camp.setUserGroup(userGroup);
-				break;
-			case 5:
-				System.out.println("Enter new location:");
-				String location = sc.nextLine();
-				camp.setLocation(location);
-				break;
-			case 6:
-				System.out.println("Enter new description:");
-				String description = sc.nextLine();
-				camp.setDescription(description);
-				break;
-			case 7:
-				System.out.println("Enter new total slots:");
-				int totalSlots = sc.nextInt();
-				camp.setTotalSlots(totalSlots);
-				break;
-			case 8:
-				System.out.println("Enter new staff IC:");
-				String staffIC = sc.nextLine();
-				camp.setStaffIC(staffIC);
-				break;
-			case 9:
-				System.out.println("Enter new camp committee slots:");
-				int campCommSlots = sc.nextInt();
-				camp.setCampCommSlots(campCommSlots);
-				break;
-			case 10:
-				System.out.println("Cancel. No changes were made.");
-				break;
-			default:
-				System.out.println("Invalid choice. No changes were made.");
-				break;
-		}
-	}
-	
+    public void deleteCamp(String campID) {
+        Camp camp = this.getCampController().getCampByID(campID);
+        this.getCentralManager().getMasterCamps().remove(camp);
+    }
 
-	// public String getCampName() {
-	// 	return camp.getCampName();
-	// }
+    public void editCamp() {
+        // TODO
+        // params of this method will correspond to all editable attribs of this camp (meaning all attribs except for the campID bcos that is system generated and blackList)
+    }
 
-	// public List<Student> getAttendees() {
-	// 	// TODO - implement CampController.getAttendees
-	// 	throw new UnsupportedOperationException();
-	// }
+    public void createCamp(String campName, ArrayList<Integer> dates, int registrationDeadline, String userGroup,
+                           String location, String description, Integer totalSlots, String staffIC, Integer campCommSlots,
+                           boolean visibility) {
+        Camp newCamp = new Camp(campName, dates, registrationDeadline, userGroup, location, description, totalSlots,
+                staffIC, campCommSlots, visibility, "");
+        this.getCentralManager().getMasterCamps().add(newCamp);
 
-	// public List<CampCM> getCampCommMem() {
-	// 	// TODO - implement CampController.getCampCommMem
-	// 	throw new UnsupportedOperationException();
-	// }
-
-	public void addCamp() {
-	    Scanner sc = new Scanner(System.in);
-	    System.out.println("Enter name of camp:");
-	    String campName = sc.nextLine();
-	    System.out.println("Enter dates of camp:");
-	    String dates = sc.nextLine();
-	    System.out.println("Enter Registration Deadline of camp:");
-	    String registrationDeadline = sc.nextLine();
-	    System.out.println("Enter user group of camp:");
-	    String userGroup = sc.nextLine();
-	    System.out.println("Enter location of camp:");
-	    String location = sc.nextLine();
-	    System.out.println("Enter description of camp:");
-	    String description = sc.nextLine();
-	    System.out.println("Enter total slots of camp:");
-	    int totalSlots = sc.nextInt();
-	    System.out.println("Enter staff IC of camp:");
-	    String staffIC = sc.nextLine();
-	    System.out.println("Enter camp committee slots:");
-	    int campCommSlots = sc.nextInt();
-	    System.out.println("Enter visibility of camp (true/false):");
-	    boolean visibility = sc.nextBoolean();
-	    Camp newCamp = new Camp(campName, dates, registrationDeadline, userGroup, location, description, totalSlots, staffIC, campCommSlots, visibility);
-	    masterCamps.add(newCamp);
-	}
+    }
 
 }

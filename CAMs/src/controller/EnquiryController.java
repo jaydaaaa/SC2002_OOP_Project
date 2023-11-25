@@ -6,7 +6,6 @@ import entity.Enquiry;
 import entity.Student;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class EnquiryController extends BaseController{
 
@@ -14,66 +13,77 @@ public class EnquiryController extends BaseController{
         super(centralManager);
     }
 
-    public void editEnquiry(Student student, Enquiry enquiry, String newEnquiryText) {
-        // Check if the student's enquiries contain the given enquiry
-        if(student.getMyEnquiries().contains(enquiry)) {
-            // If it does, set the enquiry text of the enquiry to the provided new enquiry text
-            enquiry.setEnquiryText(newEnquiryText);
-        } else { // If the student's enquiries do not contain the given enquiry
-            // Print a message indicating that the enquiry was not found for the given student
-            System.out.println("Enquiry not found for the given student");
+    public int editEnquiry(String studentID, String enquiryID, String newEnquiryText) {
+        Enquiry enquiry = this.findEnquiryByID(enquiryID);
+        if (!enquiry.getStatus()) {
+            if (enquiry.getEnquiryBy().equals(studentID)) {
+                enquiry.setEnquiryText(newEnquiryText);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1; // means enquiry has been answered, cannot edit anymore
         }
     }
 
-    public void deleteEnquiry(Student student, Enquiry enquiry) {
-        if(student.getMyEnquiries().contains(enquiry)) {
-            // If it does, remove the enquiry from the student's list of enquiries 
-            student.getMyEnquiries().remove(enquiry);
-        } else { 
-            System.out.println("Enquiry not found for the given student"); 
+    public int deleteEnquiry(String studentID, String enquiryID) {
+        Enquiry enquiry = this.findEnquiryByID(enquiryID);
+        if (!enquiry.getStatus()) {
+            if (enquiry.getEnquiryBy().equals(studentID)) {
+                this.getCentralManager().getMasterEnquiries().remove(enquiry);
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1; // means delete has been answered, cannot edit anymore
         }
     }
-
-    // public void addEnquiry(Student student, String enquiryText , Camp camp) {
-    //     Enquiry newEnquiry = new Enquiry(enquiryText,camp.getCampName(),student.getUserID(), "", "", false);
-    //     // Add the new enquiry to the student's list of enquiries
-    //     student.getMyEnquiries().add(newEnquiry);
-    // }
 
     public void replyEnquiry(Student student, Enquiry enquiry, String replyText) {
         // Check if the student's enquiries contain the given enquiry
-        if(student.getMyEnquiries().contains(enquiry)) { 
-            // If it does, set the reply text of the enquiry to the provided reply text
-            enquiry.setReplyText(replyText); 
-            // Set the status of the enquiry to true, indicating it has been replied
-            enquiry.setStatus(true);
-        } else { 
-            System.out.println("Enquiry not found for the given student"); 
-        }
+        // TODO
     }
 
-    public void submitEnquiry(Student student, String enquiryText, Camp camp) {
+    public Enquiry findEnquiryByID(String enquiryID) {
+         for (Enquiry enquiry: this.getCentralManager().getMasterEnquiries()) {
+             if (enquiry.getEnquiryID().equals(enquiryID)) {
+                 return enquiry;
+             }
+         }
+        return null;
+    }
+
+    public ArrayList<Enquiry> findEnquiriesBySender(String userID) {
+         ArrayList<Enquiry> enquiries = new ArrayList<>();
+         for (Enquiry enquiry: this.getCentralManager().getMasterEnquiries()) {
+             if (enquiry.getEnquiryBy().equals(userID)) {
+                 enquiries.add(enquiry);
+             }
+         }
+         return enquiries;
+     }
+
+    public void submitEnquiry(Student student, String enquiryText, String campID) {
         // Create a new enquiry
-        Enquiry newEnquiry = new Enquiry(enquiryText, camp.getCampName(), student.getUserID(), "", "", false);
-        // Add the enquiry to the student's list of enquiries
-        student.getMyEnquiries().add(newEnquiry);
+        Enquiry newEnquiry = new Enquiry(enquiryText, campID, student.getUserID(), "", "",
+                false, "");
         // Find the camp and add the enquiry to the camp's list of enquiries
-        for (Camp _camp : this.centralManager.getMasterCamps()) {
-            if (_camp.equals(camp)) {
-                _camp.getEnquiries().add(newEnquiry);
-                break;
-            }
-        }
+        Camp camp = this.getCampController().getCampByID(campID);
+        camp.addEnquiry(newEnquiry.getEnquiryID());
+        // Add to masterEnquiries
+        this.getCentralManager().getMasterEnquiries().add(newEnquiry);
     }
      // Get list of enquiry based on camp
-    public ArrayList<Enquiry> getEnquiryByCamp(Camp camp) {
-        ArrayList<Enquiry> enquiries = new ArrayList<Enquiry>();
+    public ArrayList<Enquiry> getEnquiryByCamp(String campID) {
+        ArrayList<Enquiry> enquiries = new ArrayList<>();
         for (Enquiry enquiry: this.centralManager.getMasterEnquiries()) {
-            if (Objects.equals(enquiry.getCampName(),camp.getCampName())) {
+            if (enquiry.getCampID().equals(campID)) {
                 enquiries.add(enquiry);
             }
         }
         return enquiries;
     }
-    
+
 }

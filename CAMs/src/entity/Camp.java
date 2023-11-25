@@ -1,12 +1,13 @@
 package entity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Camp {
     private String campName;
-    private String dates;
-    private String registrationDeadline;
+    private ArrayList<Integer> dates;
+    private Integer registrationDeadline;
     private String faculty;
     private String location;
     private String description;
@@ -14,13 +15,19 @@ public class Camp {
     private String staffIC;
     private int campCommSlots;
     private boolean visibility;
-    private List<Student> attendees;
-    private List<CampCM> committeeMembers;
-    private List<Enquiry> enquiries;
-    private List<Suggestion> suggestions;
-    private List<Student> blackList; // for students that have withdrawn from this camp instance
+    private ArrayList<String> attendees;
+    private ArrayList<String> committeeMembers;
+    private ArrayList<String> enquiries;
+    private ArrayList<String> suggestions;
+    private ArrayList<String> blackList; // for students that have withdrawn from this camp instance
+    private String campID;
 
-    public Camp(String campName, String dates, String registrationDeadline, String faculty, String location, String description, int totalSlots, String staffIC, int campCommSlots, boolean visibility) {
+    public Camp(String campName, ArrayList<Integer> dates, Integer registrationDeadline, String faculty, String location, String description, int totalSlots, String staffIC, int campCommSlots, boolean visibility, String campID) {
+        if (campID.equals("")) {
+            this.campID =  UUID.randomUUID().toString();
+        } else {
+            this.campID = campID;
+        }
         this.campName = campName;
         this.dates = dates;
         this.registrationDeadline = registrationDeadline;
@@ -39,14 +46,19 @@ public class Camp {
     }
 
     // Getter methods
+
+    public String getCampID() {
+        return this.campID;
+    }
+
     public String getCampName() {
         return campName;
     }
-    public String getDates() {
+    public ArrayList<Integer> getDates() {
         return dates;
     }
 
-    public String getRegistrationDeadline() {
+    public Integer getRegistrationDeadline() {
         return registrationDeadline;
     }
 
@@ -63,47 +75,46 @@ public class Camp {
     }
 
     public int getTotalSlots() {
-        return totalSlots;
+        return this.totalSlots;
     }
 
     public String getStaffIC() {
-        return staffIC;
+        return this.staffIC;
     }
 
     public int getCampCommSlots() {
-        return campCommSlots;
+        return this.campCommSlots;
     }
 
     public boolean getVisibility() {
-        return visibility;
+        return this.visibility;
     }
 
      public String getFaculty() {
     return this.faculty;
     }
 
-    public List<Student> getAttendees() {
-        return attendees;
+    public ArrayList<String> getAttendees() {
+        return this.attendees;
     }
 
-    public List<CampCM> getCommitteeMembers() {
-        return committeeMembers;
+    public ArrayList<String> getCommitteeMembers() {
+        return this.committeeMembers;
     }
 
-    public List<Enquiry> getEnquiries() {
+    public ArrayList<String> getEnquiries() {
         return this.enquiries;
     }
-    
-    public void setEnquiries(ArrayList<Enquiry> enquiries) {
-        this.enquiries = enquiries;
+
+    public List<String> getSuggestions() {
+        return this.suggestions;
     }
 
-    public List<Suggestion> getSuggestions() {
-        return suggestions;
+    public List<String> getBlacklist() {
+        return this.blackList;
     }
-
-    public List<Student> getBlacklist() {
-        return blackList;
+    public int getNumberAttendees() {
+        return this.attendees.size();
     }
 
     // Setter functions
@@ -111,11 +122,11 @@ public class Camp {
         this.campName = campName;
     }
 
-    public void setDates(String dates) {
+    public void setDates(ArrayList<Integer> dates) {
         this.dates = dates;
     }
 
-    public void setRegistrationDeadline(String registrationDeadline) {
+    public void setRegistrationDeadline(Integer registrationDeadline) {
         this.registrationDeadline = registrationDeadline;
     }
 
@@ -147,28 +158,48 @@ public class Camp {
         this.visibility = visibility;
     }
 
-    public void setAttendees(List<Student> attendees) {
-        this.attendees = new ArrayList<>(attendees);
+    public void setAttendees(ArrayList<String> attendees) {
+        this.attendees = attendees;
     }
 
-    public void setCommitteeMembers(List<CampCM> committeeMembers) {
+    public void setBlackList(ArrayList<String> blackList) {
+        this.blackList = blackList;
+    }
+
+    public void setCommitteeMembers(ArrayList<String> committeeMembers) {
         this.committeeMembers = committeeMembers;
     }
 
-    public void setEnquiries(List<Enquiry> enquiries) {
+    public void setEnquiries(ArrayList<String> enquiries) {
         this.enquiries = enquiries;
     }
-    
-    // Changed to add suggestions
-    public void addSuggestions(Suggestion suggestion) {
-        this.suggestions.add(suggestion);
+
+    public void setSuggestions(ArrayList<String> suggestions) {
+        this.suggestions = suggestions;
     }
 
-     public void setFaculty(String faculty) {
-         this.faculty = faculty;
+    // Adder methods
+    public void addAttendee(String studentID) {
+        this.attendees.add(studentID);
     }
 
-    public void addToBlacklist(Student student) {
-        this.blackList.add(student);
+    public void addCommitteeMember(String studentID) {
+        this.committeeMembers.add(studentID);
+    }
+
+    public void addEnquiry(String enquiryID) {
+        this.enquiries.add(enquiryID);
+    }
+
+    public void addSuggestion(String suggestionID) {
+        this.suggestions.add(suggestionID);
+    }
+
+    public void setFaculty(String facultyID) {
+         this.faculty = facultyID;
+    }
+
+    public void addToBlacklist(String studentID) {
+        this.blackList.add(studentID);
     }
 }

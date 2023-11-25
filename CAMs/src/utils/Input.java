@@ -1,6 +1,7 @@
 package utils;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -26,16 +27,15 @@ public class Input {
 
     }
 
+    public Scanner getScanner() {
+        return this.sc;
+    }
 
     /**
      * Method to display a message and ask for integer input
      * @param msgToPrint Message to be displayed
      * @return ask for user input
      */
-
-    public Scanner getScanner() {
-        return this.sc;
-    }
     public Integer getInt(String msgToPrint) {
         do {
             System.out.println(msgToPrint);
@@ -43,8 +43,7 @@ public class Input {
                 System.out.print("Please enter a valid integer.");
                 sc.next();
             }
-            int newInt = sc.nextInt();
-            sc.nextLine();
+            int newInt = Integer.parseInt(sc.nextLine());
             return newInt;
         } while (true);
     }
@@ -76,4 +75,17 @@ public class Input {
         System.out.print(msgToPrint);
         return this.sc.nextLine();
     }
+
+    public Integer getDate(String msgToPrint) {
+        System.out.print(msgToPrint);
+        System.out.print("\n");
+        System.out.println("Please enter year in YYYY format");
+        Integer year = Integer.valueOf(this.sc.nextLine());
+        System.out.println("Please enter month in mm format");
+        Integer month = Integer.valueOf(this.sc.nextLine());
+        System.out.println("Please enter day in dd format");
+        Integer day = Integer.valueOf(this.sc.nextLine());
+        return year * 10000 + month * 100 + day;
+    }
+
 }

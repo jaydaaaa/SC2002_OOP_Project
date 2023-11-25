@@ -5,23 +5,23 @@ import java.util.List;
 public class CampCM extends Student {
 
 	private int myPoints;
-	private List<Suggestion> mySuggestions;
-	
-	public CampCM(String name, String userID, String email, String password, String faculty, String type) {
-		super(name,userID,email, password, faculty, type);
+	private ArrayList<Suggestion> mySuggestions;
+
+	public CampCM(String name, String userID, String email, String password, String faculty, String userType, int points) {
+		super(name,userID,email, password, faculty, userType);
 		mySuggestions = new ArrayList<>();
-		this.myPoints = 0;
+		this.myPoints = points;
 	}
-	public int getMyPoints() {
+	public int getPoints() {
 		return this.myPoints;
 	}
-	public List<Suggestion> getMySuggestions(){
+	public ArrayList<Suggestion> getMySuggestions(){
 		return this.mySuggestions;
 	}
 	public void setPoints(int myPoints) {
 		this.myPoints = myPoints;
 	}
-	public void setMySuggestions(List<Suggestion> mySuggestions) {
+	public void setMySuggestions(ArrayList<Suggestion> mySuggestions) {
 		this.mySuggestions = mySuggestions;
 	}
 }

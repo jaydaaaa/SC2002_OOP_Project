@@ -1,6 +1,10 @@
 package controller;
 import entity.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StudentController extends UserController{
 	public StudentController(CentralManager centralManager){
@@ -11,10 +15,6 @@ public class StudentController extends UserController{
         return (Student) this.currentUser;
     }
 
-	public Student getStudentByID(String studentID) {
-        return (Student) this.getUserByID(studentID);
-    }
-
 	public void setPassword(String newPassword){
         this.getCurrentStudent().setPassword(newPassword);
     }
@@ -23,52 +23,72 @@ public class StudentController extends UserController{
 		return this.getCurrentStudent().getFaculty();
 	}
 
-	public ArrayList<Camp> getMyCamps() {
-		return this.getCurrentStudent().getMyCamps();
+	public Student getStudentByID(String studentID) {
+		for (User user: this.getCentralManager().getMasterUsers()) {
+			if (user.getUserID().equals(studentID)) {
+				return (Student) user;
+			}
+		}
+		return null;
 	}
 
-	public void registerForCamp(String campName) {
-		// Find the camp
-		for (Camp camp : this.centralManager.getMasterCamps()) {
-			if (camp.getCampName().equals(campName)) {
-				// Add the student to the camp's attendees
-				camp.getAttendees().add(this.getCurrentStudent());
-				// Add the camp to the student's camps
-				this.getCurrentStudent().getMyCamps().add(camp);
-				break;
-			}
+	public boolean doesClash(Camp camp1, Camp camp2) {
+		Integer start1, start2, end1, end2;
+		ArrayList<Integer> dates1 = camp1.getDates();
+		ArrayList<Integer> dates2 = camp2.getDates();
+		start1 = dates1.get(0);
+		end1 = dates1.get(1);
+		start2 = dates2.get(0);
+		end2 = dates2.get(1);
+		if (start1 < start2) {
+			return end1 > start2;
+		} else {  // start 1 > start 2
+			return end2 > start1;
 		}
 	}
 
-	public void withdrawFromCamp(String campName) {
+	public int registerForCamp(String campID) {
 		// Find the camp
-		for (Camp camp : this.centralManager.getMasterCamps()) {
-			if (camp.getCampName().equals(campName)) {
-				// Remove the student from the camp's attendees
-				camp.getAttendees().remove(this.getCurrentStudent());
-				// Remove the camp from the student's camps
-				this.getCurrentStudent().getMyCamps().remove(camp);
-				// Add student to camp's blacklist
-				camp.addToBlacklist(this.getCurrentStudent());
-				break;
+		Camp newCamp = this.getCampController().getCampByID(campID);
+		// Check if deadlines overlap
+		for (Camp camp: this.getAttendedCamps()) {
+			if (this.doesClash(camp, newCamp)) {
+				return 0; // clash
 			}
 		}
+		if (newCamp.getNumberAttendees() >= newCamp.getTotalSlots()) {
+			return -1; // full
+		}
+		// Get the current date
+		LocalDate currentDate = LocalDate.now();
+
+		// Define the desired date format
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+		// Format the current date using the formatter
+		String formattedDate = currentDate.format(formatter);
+
+		// Cast date to integer
+		int date = Integer.parseInt(formattedDate);
+
+		if (newCamp.getRegistrationDeadline() < date) {
+			return -2; // deadline over
+		}
+		newCamp.addAttendee(this.getCurrentStudent().getUserID());
+		return 1;
+	}
+
+	public int withdrawFromCamp(String campID) {
+		// Find the camp
+		// Remove the student from the camp's attendees
+		return this.getCampController().removeAttendee(this.getCurrentStudent(), campID);
+	}
+
+	public ArrayList<Camp> getAttendedCamps() {
+		return this.getCampController().getAttendedCamps(this.getCurrentStudent().getUserID());
 	}
 
 	public ArrayList<Enquiry> getMyEnquiries() {
-		return this.getCurrentStudent().getMyEnquiries();
+		return this.getEnquiryController().findEnquiriesBySender(this.getCurrentStudent().getUserID());
 	}
-
-	// private EnquiryController enquiryController = new EnquiryController();
-
-	// public void addEnquiry(Student student, String enquiryText) {
-	// 	enquiryController.addEnquiry(student, enquiryText);
-	// }
-	
-	// public void deleteEnquiry(Student student, Enquiry enquiry) {
-	//         enquiryController.deleteEnquiry(student, enquiry);
-	// }
-
-	
-
 }

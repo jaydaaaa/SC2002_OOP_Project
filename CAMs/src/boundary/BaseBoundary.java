@@ -4,6 +4,8 @@ import utils.Base;
 import utils.BaseInterface;
 import utils.Input;
 
+import java.util.Date;
+
 public class BaseBoundary extends Base implements BaseInterface {
     CentralManager centralManager;
     Input input;
@@ -21,6 +23,10 @@ public class BaseBoundary extends Base implements BaseInterface {
 
     public Integer getInt(String prompt) {
         return this.input.getInt(prompt);
+    }
+
+    public Integer getDate(String prompt) {
+        return this.input.getDate(prompt);
     }
 
     public Double getDouble(String prompt) {

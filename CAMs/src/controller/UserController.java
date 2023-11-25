@@ -11,11 +11,9 @@ import java.util.Objects;
 // student and staff controller and boundary can extend from my user boundary
 
 public class UserController extends BaseController {
-    ArrayList<User> users;
     User currentUser;
     public UserController(CentralManager centralManager) {
         super(centralManager);
-        this.users = this.centralManager.getMasterUsers();
     }
 
     public void setCurrentUser(String userID) {
@@ -23,7 +21,7 @@ public class UserController extends BaseController {
     }
 
     public User getUserByID(String userID) {
-        for (User _user: this.users) {
+        for (User _user: this.centralManager.getMasterUsers()) {
             if (Objects.equals(_user.getUserID(), userID)){
                 return _user;
             }
@@ -32,11 +30,10 @@ public class UserController extends BaseController {
     }
 
     public String login(String userID, String pwd){
-        for(User user: this.users){
+        for(User user: this.centralManager.getMasterUsers()){
             if (Objects.equals(userID, user.getUserID()) && Objects.equals(pwd, user.getPassword())){
                 return user.getType();
             }
-
         }
         return "InvalidUser";
     }

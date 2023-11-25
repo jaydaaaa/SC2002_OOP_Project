@@ -15,7 +15,6 @@ public class CentralManager {
     // Master Arrays
     private ArrayList<User> MasterUsers;
     private ArrayList<Camp> MasterCamps;
-    private ArrayList<CampCM> MasterCampCMs; //might not need this 
     private ArrayList<Suggestion> MasterSuggestions;
     private ArrayList<Enquiry> MasterEnquiries;
 
@@ -55,7 +54,6 @@ public class CentralManager {
         // Master Arrays
         this.MasterUsers = new ArrayList<User>();
         this.MasterCamps = new ArrayList<Camp>();
-        // this.MasterCampCM = new ArrayList<CampCM>();
         this.MasterSuggestions = new ArrayList<Suggestion>();
         this.MasterEnquiries = new ArrayList<Enquiry>();
 
@@ -104,6 +102,8 @@ public class CentralManager {
     public void ingestUsers() {
         String fpath = this.currentWorkingDirectory + "data/Users.txt";
         this.MasterUsers = Reader.readUsers(fpath);
+        System.out.print("users:");
+        System.out.print(this.MasterUsers);
     }
 
     public void ingestCamps() {
@@ -144,7 +144,7 @@ public class CentralManager {
 
     public void writeEnquiries() {
         String fpath = this.currentWorkingDirectory + "data/Enquiries.txt";
-        Writer.writeCamps(fpath, this.MasterCamps);
+        Writer.writeEnquiry(fpath, this.MasterEnquiries);
     }
 
     public void writeSuggestions() {
@@ -163,10 +163,6 @@ public class CentralManager {
     // Get Master Arrays
     public ArrayList<Camp> getMasterCamps() {
         return this.MasterCamps;
-    }
-
-    public ArrayList<CampCM> getMasterCampCMs() {
-        return this.MasterCampCMs;
     }
 
     public ArrayList<User> getMasterUsers() {

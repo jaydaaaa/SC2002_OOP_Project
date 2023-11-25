@@ -22,8 +22,8 @@ public class CampCMBoundary extends StudentBoundary{
             );
             this.displayMenuChoices();
             choice = this.getInt("Enter your choice:");
-            if (choice < 1 | choice > 16) {
-                System.out.println("Enter choice between 1-16 values only");
+            if (choice < 1 | choice > 17) {
+                System.out.println("Enter choice between 1-17 values only");
                 continue;
             }
             switch (choice) {
@@ -32,17 +32,18 @@ public class CampCMBoundary extends StudentBoundary{
                 case 3 -> this.viewMyCamps();
                 case 4 -> this.registerCamp();
                 case 5 -> this.submitEnquiry();
-                case 6 -> this.deleteEnquiry();
-                case 7 -> this.viewEnquiries();
-				case 8 -> this.withdrawCamp();
-                case 9 -> this.submitSuggestions();
-                case 10 -> this.viewCampEnquiries();
-                case 11 -> this.replyEnquiries();
-                case 12 -> this.viewMySuggestions();
-                case 13 -> this.editMySuggestions();
-                case 14 -> this.deleteMySuggestions();
-                case 15 -> this.generateAttendeeList();
-                case 16 -> System.out.println("System is exiting...");
+                case 6 -> this.editEnquiry();
+                case 7 -> this.deleteEnquiry();
+                case 8 -> this.viewMyEnquiries();
+				case 9 -> this.withdrawCamp();
+                case 10 -> this.submitSuggestions();
+                case 11 -> this.viewCampEnquiries();
+                case 12 -> this.replyEnquiries();
+                case 13 -> this.viewMySuggestions();
+                case 14 -> this.editMySuggestions();
+                case 15 -> this.deleteMySuggestions();
+                case 16 -> this.generateAttendeeList();
+                case 17 -> System.out.println("System is exiting...");
             }
         }
     }
@@ -65,7 +66,7 @@ public class CampCMBoundary extends StudentBoundary{
     }
 
 	public void submitSuggestions() {
-        
+
     }
 
 	public void viewCampEnquiries() {
@@ -73,23 +74,23 @@ public class CampCMBoundary extends StudentBoundary{
     }
 
 	public void replyEnquiries() {
-        
+
     }
 
 	public void viewMySuggestions() {
-        
+
     }
 
 	public void editMySuggestions() {
-        
+
     }
 
 	public void deleteMySuggestions() {
-        
+
     }
 
 	public void generateAttendeeList() {
-        
+
     }
 
 }

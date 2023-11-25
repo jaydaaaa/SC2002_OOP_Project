@@ -1,27 +1,37 @@
 package entity;
+
+import java.util.UUID;
+
 public class Enquiry {
-    private String campName;
+    private String campID;
     private String enquiryText;
     private String enquiryBy;
     private String replyText;
     private String replyBy;
     private boolean status;
+    private String enquiryID;
 
-    public Enquiry(String enquiryText, String campName,String enquiryBy,String replyText, String replyBy, boolean status) {
+    public Enquiry(String enquiryText, String campID,String enquiryBy,String replyText, String replyBy,
+                   boolean status, String enquiryID) {
         this.enquiryText = enquiryText;
-        this.campName = campName;
+        this.campID = campID;
         this.enquiryBy = enquiryBy;
         this.replyText = replyText;
         this.replyBy = replyBy;
         this.status = status;
+        if (enquiryID.equals("")) {
+            this.enquiryID =  UUID.randomUUID().toString();
+        } else {
+            this.enquiryID = enquiryID;
+        }
     }
 
     public String getEnquiryText() {
         return enquiryText;
     }
-    
-    public String getCampName() { return campName; }
-    
+
+    public String getCampID() { return this.campID; }
+
 
     public String getEnquiryBy() {
         return enquiryBy;
@@ -35,15 +45,19 @@ public class Enquiry {
         return replyBy;
     }
 
+    public String getEnquiryID() {
+        return this.enquiryID;
+    }
+
     public boolean getStatus() {
         return status;
     }
     public void setEnquiryText(String enquiryText) {
         this.enquiryText = enquiryText;
     }
-    
-    public void setCampName(String campName) {
-        this.campName = campName;
+
+    public void setCampID(String campID) {
+        this.campID = campID;
     }
     public void setEnquiryBy(String enquiryBy) {
         this.enquiryBy = enquiryBy;

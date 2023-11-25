@@ -47,7 +47,7 @@ public class StudentController extends UserController{
 		}
 	}
 
-	public int registerForCamp(String campID) {
+	public int registerForCamp(String campID, boolean choiceCampComm) {
 		// Find the camp
 		Camp newCamp = this.getCampController().getCampByID(campID);
 		// Check if deadlines overlap
@@ -70,11 +70,33 @@ public class StudentController extends UserController{
 
 		// Cast date to integer
 		int date = Integer.parseInt(formattedDate);
+		System.out.println("currentDate: " + date);
 
 		if (newCamp.getRegistrationDeadline() < date) {
 			return -2; // deadline over
 		}
-		newCamp.addAttendee(this.getCurrentStudent().getUserID());
+		String userID;
+		Student currentStudent = this.getCurrentStudent();
+		if (choiceCampComm) {
+			if (newCamp.getCampCommSlots() <= newCamp.getNumCurrentCampComm()) {
+				return -3; // no empty campcomm slots
+			} else {
+				CampCM campCM = new CampCM(currentStudent.getName(), currentStudent.getUserID(), currentStudent.getEmail(),
+						currentStudent.getPassword(), currentStudent.getFaculty(), "CampCM", 0, campID);
+				userID = campCM.getUserID();
+
+				// Remove old Student object, add in new CampCM object
+				this.getCentralManager().getMasterUsers().remove(currentStudent);
+				this.getCentralManager().getMasterUsers().add(campCM);
+
+				// Add CampComm to attendee list and CampCM list of camp
+				newCamp.addAttendee(userID);
+				newCamp.addCommitteeMember(userID);
+			}
+		} else {
+			userID = currentStudent.getUserID();
+		}
+		newCamp.addAttendee(userID);
 		return 1;
 	}
 
@@ -90,5 +112,18 @@ public class StudentController extends UserController{
 
 	public ArrayList<Enquiry> getMyEnquiries() {
 		return this.getEnquiryController().findEnquiriesBySender(this.getCurrentStudent().getUserID());
+	}
+
+	public ArrayList<Student> getAttendeesFromCamps(ArrayList<Camp> camps) {
+		ArrayList<Student> attendees = new ArrayList<>();
+		for (Camp camp: camps) {
+			for (String userID: camp.getAttendees()) {
+				Student attendee = this.getStudentByID(userID);
+				if (!attendees.contains(attendee)) {
+					attendees.add(attendee);
+				}
+			}
+		}
+		return attendees;
 	}
 }

@@ -37,10 +37,14 @@ public class EnquiryBoundary extends BaseBoundary {
 
     public void printEnquiries(ArrayList<Enquiry> enquiries) {
         this.printEnquiryFormat();
-        int counter = 0;
-        for (Enquiry enquiry: enquiries) {
-            counter += 1;
-            this.printEnquiryLine(counter, enquiry);
+        if (enquiries.size() == 0) {
+            System.out.println("--------------------- No Enquiries ---------------------");
+        } else {
+            int counter = 0;
+            for (Enquiry enquiry: enquiries) {
+                counter += 1;
+                this.printEnquiryLine(counter, enquiry);
+            }
         }
     }
 
@@ -54,7 +58,6 @@ public class EnquiryBoundary extends BaseBoundary {
             ArrayList<Enquiry> enquiries = this.getEnquiryController().getEnquiryByCamp(camp.getCampID());
             this.printEnquiries(enquiries);
         }
-
     }
 
 

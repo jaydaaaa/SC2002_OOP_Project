@@ -11,10 +11,6 @@ public class CampBoundary extends BaseBoundary {
     }
 
     public void viewCamps(String studentID) {
-        // need to check visibility of camp
-        // need to check camps that are not full
-        // need to check blacklist of student
-        // need to check faculty
         ArrayList<Camp> camps = this.getCampController().getAvailCamps(studentID);
         this.printCampList(camps);
     }
@@ -31,13 +27,21 @@ public class CampBoundary extends BaseBoundary {
         dates.add(startDate);
         dates.add(endDate);
 
-        Integer registrationDeadline = this.getInt("Enter Registration Deadline of camp:");
+        int registrationDeadline = this.getDate("Enter Registration Deadline of camp:");
         String userGroup = this.getLine("Enter user group of camp:");
         String location = this.getLine("Enter location of camp:");
         String description = this.getLine("Enter description of camp:");
         int totalSlots = this.getInt("Enter total slots of camp:");
 
-        int campCommSlots = this.getInt("Enter camp committee slots:");
+        int campCommSlots;
+        while (true) {
+            campCommSlots = this.getInt("Enter camp committee slots:");
+            if (campCommSlots < 0 || campCommSlots > 10) {
+                System.out.println("Invalid input, camp comm slots must be between 0 and 10.");
+            } else {
+                break;
+            }
+        }
         int _visibility = this.getInt("Enter visibility of camp (1 for visible, 0 for hidden):");
         boolean visibility = _visibility == 1;
 
@@ -55,7 +59,7 @@ public class CampBoundary extends BaseBoundary {
     }
 
     public void printCampFormat() {
-        System.out.println("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail]");
+        System.out.println("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail] / [Total Slots]");
     }
 
     public void printCampLine(int idx, Camp camp) {
@@ -74,7 +78,8 @@ public class CampBoundary extends BaseBoundary {
         System.out.print(" | ");
         System.out.print(camp.getFaculty());
         System.out.print(" | ");
-        System.out.print(camp.getTotalSlots());
+        System.out.print(camp.getTotalSlots() - camp.getNumberAttendees());
+        System.out.print("/" + camp.getTotalSlots());
         System.out.println();
     }
 
@@ -83,26 +88,49 @@ public class CampBoundary extends BaseBoundary {
             // for each option, run edit fn
                 // eg. have a prompt for edit campName --> calls campController.editCamp() :| all other variables will be retained so you will have to get those vars and save it locally first before passing it back into the edit fn in camp controller
         while(true){
-            int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Cancel Edit\n");
+            int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Registration Deadline\n 5. Cancel Edit\n");
             switch(choice){
                 case 1:
-                    String newDescription = getLine("Enter new description:");
-                    getCampController().editCamp(camp, camp.getLocation(), newDescription);
+                    String newDescription = this.getLine("Enter new description:");
+                    this.getCampController().editCamp(camp, camp.getLocation(), newDescription, camp.getRegistrationDeadline());
                     System.out.println("Description updated.");
                     break;
                 case 2:
-                    String newLocation = getLine("Enter new location:");
-                    getCampController().editCamp(camp, newLocation, camp.getDescription());
+                    String newLocation = this.getLine("Enter new location:");
+                    this.getCampController().editCamp(camp, newLocation, camp.getDescription(), camp.getRegistrationDeadline());
                     System.out.println("Location updated.");
                     break;
                 case 3:
-                    getCampController().toggleVisibility(camp);
+                    this.getCampController().toggleVisibility(camp);
                     break;
                 case 4:
+                    int newDate = this.getDate("Enter new registration deadline");
+                    this.getCampController().editCamp(camp, camp.getLocation(), camp.getDescription(), newDate);
+                    break;
+                case 5:
                     System.out.println("Leaving edit screen...");
                     return;
                 default:
-                    System.out.println("Invalid choice. Please enter 1, 2, 3 or 4.");
+                    System.out.println("Invalid choice. Please enter 1, 2, 3, 4 or 5.");
+            }
+        }
+    }
+
+    public void deleteCamps(String staffID) {
+        while (true) {
+            ArrayList<Camp> myCamps = this.getCampController().getCampsByStaffID(staffID);
+            this.printCampList(myCamps);
+
+            int index = this.getInt("Please enter the camp index for the camp you would like to delete, or enter -1 to exit.");
+            if (index == -1) {
+                return;
+            }
+            Camp chosenCamp = myCamps.get(index - 1);
+            int success = this.getCampController().deleteCamp(chosenCamp.getCampID());
+            if (success == 0) {
+                System.out.println("Unable to delete camp as there are participants who have signed up already.");
+            } else {  // success == 1
+                System.out.println("Camp deletion is successful");
             }
         }
 

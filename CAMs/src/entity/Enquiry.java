@@ -62,8 +62,10 @@ public class Enquiry {
     public void setEnquiryBy(String enquiryBy) {
         this.enquiryBy = enquiryBy;
     }
-    public void setReplyText(String replyText) {
+    public void setReplyText(String replyText, String replyBy) {
         this.replyText = replyText;
+        this.replyBy = replyBy;
+        this.status = true;
     }
     public void setReplyBy(String replyBy) {
         this.replyBy = replyBy;

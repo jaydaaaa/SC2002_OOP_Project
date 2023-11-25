@@ -46,7 +46,8 @@ public class Reader {
                         users.add(staff);
                     }
                     case "CampCM" -> {
-                        CampCM campCM = new CampCM(name, userID, email, password, faculty, userType, points);
+                        String campID = lst[6];
+                        CampCM campCM = new CampCM(name, userID, email, password, faculty, userType, points, campID);
                         users.add(campCM);
                     }
                 }
@@ -102,7 +103,7 @@ public class Reader {
                 String[] lst = line.split("_");
 
                 // Name
-                String campName = lst [0];
+                String campName = lst[0];
 
                 // Dates
                 String[] _dates = lst[1].split("\\|");
@@ -136,20 +137,49 @@ public class Reader {
                 boolean visibility = Boolean.parseBoolean(lst[9]);
 
                 // Attendees
+                ArrayList<String> attendees = new ArrayList<>();
                 String[] _attendees = lst[10].split("\\|");
-                ArrayList<String> attendees = new ArrayList<>(Arrays.asList(_attendees));
+                for (String a: _attendees) {
+                    if (!a.equals("")) {
+                        attendees.add(a);
+                    }
+                }
 
                 // CampComms
-                String[] _campCMs = lst[10].split("\\|");
-                ArrayList<String> campCMs = new ArrayList<>(Arrays.asList(_campCMs));
+                ArrayList<String> campCMs = new ArrayList<>();
+                String[] _campCMs = lst[11].split("\\|");
+                for (String c: _campCMs) {
+                    if (!c.equals("")) {
+                        campCMs.add(c);
+                    }
+                }
+
+                // Enquiries
+                ArrayList<String> enquiries = new ArrayList<>();
+                String[] _enquiries = lst[12].split("\\|");
+                for (String e: _enquiries) {
+                    if (!e.equals("")) {
+                        enquiries.add(e);
+                    }
+                }
 
                 // Suggestions
-                String[] _suggestions = lst[10].split("\\|");
-                ArrayList<String> suggestions = new ArrayList<>(Arrays.asList(_suggestions));
+                ArrayList<String> suggestions = new ArrayList<>();
+                String[] _suggestions = lst[13].split("\\|");
+                for (String s: _suggestions) {
+                    if (!s.equals("")) {
+                        suggestions.add(s);
+                    }
+                }
 
                 // Blacklist
+                ArrayList<String> blacklist = new ArrayList<>();
                 String[] _blacklist = lst[14].split("\\|");
-                ArrayList<String> blacklist = new ArrayList<>(Arrays.asList(_blacklist));
+                for (String b: _blacklist) {
+                    if (!b.equals("")) {
+                        blacklist.add(b);
+                    }
+                }
 
                 // Camp ID
                 String campID = lst[15];
@@ -181,17 +211,18 @@ public static ArrayList<Suggestion> readSuggestions(String fpath) {
 
         while (line != null) {
             String[] lst = line.split("_");
-            String campName = lst[0];
-            String suggestionText = lst [1];
-            String suggestedBy = lst[2];
-            boolean status = Boolean.parseBoolean(lst[3]);
-            String suggestionID = lst[4];
-            Suggestion suggestion = new Suggestion(campName, suggestionText, suggestedBy, status, suggestionID);
+            String campID = lst[0];
+            String variableToChange = lst[1];
+            String suggestionText = lst[2];
+            String suggestedBy = lst[3];
+            int status = Integer.parseInt(lst[4]);
+            String suggestionID = lst[5];
+            Suggestion suggestion = new Suggestion(campID, variableToChange, suggestionText,
+                    suggestedBy, status, suggestionID);
             suggestions.add(suggestion);
             // read next line
             line = reader.readLine();
         }
-
         reader.close();
     } catch (IOException e) {
         e.printStackTrace();

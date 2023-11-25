@@ -4,30 +4,32 @@ import java.util.UUID;
 
 public class Suggestion {
 
-    private String campName;
+    private String campID;
+    private String variableToChange;
     private String suggestionText;
     private String suggestedBy;
-    private boolean status;
+    private int status;
     private String suggestionID;
 
-    public Suggestion(String campName, String suggestionText, String suggestedBy, boolean status, String suggestionID) {
-        this.campName = campName;
+    public Suggestion(String campID, String variableToChange, String suggestionText, String suggestedBy, int status, String suggestionID) {
+        this.campID = campID;
         this.suggestionText = suggestionText;
         this.suggestedBy = suggestedBy;
-        this.status = false;
+        this.status = status;
         if (suggestionID.equals("")) {
             this.suggestionID =  UUID.randomUUID().toString();
         } else {
             this.suggestionID = suggestionID;
         }
+        this.variableToChange = variableToChange;
     }
 
     public String getSuggestionID() {
         return this.suggestionID;
     }
 
-    public String getCampName() {
-        return campName;
+    public String getCampID() {
+        return this.campID;
     }
 
     public String getSuggestionText() {
@@ -38,16 +40,23 @@ public class Suggestion {
         return suggestedBy;
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
+    public String getVariableToChange() {
+        return this.variableToChange;
+    }
+
     // Setter methods
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
     public void setSuggestionText(String newSuggestionText){
         this.suggestionText=newSuggestionText;
+    }
+    public void setVariableToChange(String newVariable) {
+        this.variableToChange = newVariable;
     }
 }

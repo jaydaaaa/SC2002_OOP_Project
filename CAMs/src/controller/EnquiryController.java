@@ -41,9 +41,8 @@ public class EnquiryController extends BaseController{
         }
     }
 
-    public void replyEnquiry(Student student, Enquiry enquiry, String replyText) {
-        // Check if the student's enquiries contain the given enquiry
-        // TODO
+    public void replyEnquiry(Enquiry enquiry, String replyText, String replyBy) {
+        enquiry.setReplyText(replyText, replyBy);
     }
 
     public Enquiry findEnquiryByID(String enquiryID) {
@@ -84,6 +83,23 @@ public class EnquiryController extends BaseController{
             }
         }
         return enquiries;
+    }
+
+    public ArrayList<Enquiry> findEnquiriesByStaff(String staffID, boolean onlyNonReplied) {
+        ArrayList<Camp> myCamps = this.getCampController().getCampsByStaffID(staffID);
+        ArrayList<Enquiry> interestedEnquiries = new ArrayList<>();
+        for (Camp camp: myCamps) {
+            for (Enquiry enquiry: this.getEnquiryController().getEnquiryByCamp(camp.getCampID())) {
+                if (onlyNonReplied) {
+                    if (!enquiry.getStatus()) {
+                        interestedEnquiries.add(enquiry);
+                    }
+                } else {
+                    interestedEnquiries.add(enquiry);
+                }
+            }
+        }
+        return interestedEnquiries;
     }
 
 }

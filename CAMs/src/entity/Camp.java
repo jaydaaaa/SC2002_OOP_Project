@@ -101,6 +101,9 @@ public class Camp {
     public ArrayList<String> getCommitteeMembers() {
         return this.committeeMembers;
     }
+    public Integer getNumCurrentCampComm() {
+        return this.committeeMembers.size();
+    }
 
     public ArrayList<String> getEnquiries() {
         return this.enquiries;

@@ -11,10 +11,19 @@ public class Writer {
         System.out.println("Saving changes to user file...");
         try {
             FileWriter writer = new FileWriter(fpath);
-            int points = 0;
+            int points;
+            String campID;
             for (User user: masterUsers) {
+                if (user.getType().equals("CampCM")) {
+                    CampCM campCM = (CampCM) user;
+                    points = campCM.getPoints();
+                    campID = campCM.getCampID();
+                } else {
+                    points = 0;
+                    campID = "";
+                }
                 String toWrite = user.getName() + '_' + user.getEmail() +'_' + user.getFaculty() + '_' +
-                        user.getPassword() + '_' + user.getType() + '_' + points + '\n';
+                        user.getPassword() + '_' + user.getType() + '_' + points + '_' + campID + '\n';
                 writer.write(toWrite);
             }
             writer.close();
@@ -44,7 +53,7 @@ public class Writer {
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Suggestion suggestion: masterSuggestions) {
-                String toWrite = suggestion.getCampName() + '_' + suggestion.getSuggestionText() + '_' + suggestion.getSuggestedBy() + '_' + suggestion.getStatus() + '_' + suggestion.getSuggestionID() + '\n';
+                String toWrite = suggestion.getCampID() + '_' + suggestion.getVariableToChange() + '_' + suggestion.getSuggestionText() + '_' + suggestion.getSuggestedBy() + '_' + suggestion.getStatus() + '_' + suggestion.getSuggestionID() + '\n';
                 writer.write(toWrite);
             }
             writer.close();

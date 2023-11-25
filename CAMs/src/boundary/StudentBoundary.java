@@ -13,6 +13,7 @@ public class StudentBoundary extends UserBoundary{
     public StudentBoundary(CentralManager centralManager){
         super(centralManager);
     }
+    boolean needToRelogin = false;
 
     public void displayMenuChoices() {
 
@@ -33,6 +34,12 @@ public class StudentBoundary extends UserBoundary{
     public void studentOperations() {
         int choice = 0;
         while (choice != 10) {
+            if (this.needToRelogin) {
+                System.out.println("As your status has been changed from Student to Camp Committee member, " +
+                        "please relogin to access Camp Committee functions.");
+                this.needToRelogin = false;
+                return;
+            }
             System.out.print(
                 """
                 ========================= Welcome to Student App =========================
@@ -52,7 +59,7 @@ public class StudentBoundary extends UserBoundary{
                 case 1 -> this.changePassword();
                 case 2 -> this.viewCamps();
                 case 3 -> this.viewMyCamps();
-                case 4 -> this.registerCamp();
+                case 4 -> this.registerCamp(false);
                 case 5 -> this.submitEnquiry();
                 case 6 -> this.editEnquiry();
                 case 7 -> this.deleteEnquiry();
@@ -87,7 +94,7 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
-    public void registerCamp() {
+    public void registerCamp(boolean isCampComm) {
         // print all available camps
         while (true) {
             this.viewCamps();
@@ -95,14 +102,34 @@ public class StudentBoundary extends UserBoundary{
             ArrayList<Camp> camps = this.getCampController().getAvailCamps(currentStudent.getUserID());
             // register for a camp
             int index = this.getInt("Enter the index of the camp you want to register for, or -1 to exit:");
-            // TODO: Implement choice to register either as CampComm or Student
+
             if (index == -1) {
                 return;
             }
+
+            boolean choiceCampComm;
+            if (!isCampComm) {
+                choiceCampComm = this.input.getBoolean("Register as a CampComm?");
+            } else {
+                choiceCampComm = false;
+            }
+
             Camp chosenCamp = camps.get(index - 1);
-            int success = this.getStudentController().registerForCamp(chosenCamp.getCampID());
+            int success = this.getStudentController().registerForCamp(chosenCamp.getCampID(), choiceCampComm);
             if (success == 1) {
-                System.out.println("Camp successfully registered");
+                if (choiceCampComm) {
+                    this.needToRelogin = true;
+                }
+                System.out.println("Camp successfully registered!");
+            } else if (success == -1) {
+                System.out.println("Camp is full, unable to register.");
+            } else if (success == -2) {
+                System.out.println("Deadline is over, unable to register.");
+            } else if (success == -3) {
+                System.out.println("No empty camp committee slots, unable to register.");
+            }
+            else { // success == 0
+                System.out.println("Camp period clashes with one of your registered camps, unable to register.");
             }
         }
     }
@@ -194,7 +221,9 @@ public class StudentBoundary extends UserBoundary{
             if (enquiries.size() > 0) {
                 this.getEnquiryBoundary().printEnquiries(enquiries);
                 int index = this.getInt("Enter the index of the enquiry you want to delete, -1 to exit:");
-
+                if (index == -1) {
+                    return;
+                }
                 // Remove enquiry
                 Enquiry chosenEnquiry = enquiries.get(index - 1);
                 int success = this.getEnquiryController().deleteEnquiry(currentStudent.getUserID(),

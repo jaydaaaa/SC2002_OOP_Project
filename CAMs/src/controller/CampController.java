@@ -12,11 +12,13 @@ public class CampController extends BaseController{
     }
     // Added method to get Camps based on faculty for student
     public ArrayList<Camp> getAvailCamps(String studentID) {
-        System.out.println("debug studentID:" + studentID);
         Student student = this.getStudentController().getStudentByID(studentID);
         ArrayList<Camp> facultyCamps = new ArrayList<>();
         for (Camp camp : this.getAllCamps()) {
-            if ((camp.getFaculty().equals(student.getFaculty()) || camp.getFaculty().equals("ALL")) && camp.getVisibility() && !camp.getBlacklist().contains(studentID) && !camp.getAttendees().contains(student)) {
+            if ((camp.getFaculty().equals(student.getFaculty()) || camp.getFaculty().equals("ALL")) &&
+                    camp.getVisibility() &&  // is visible
+                    !camp.getBlacklist().contains(studentID) && // is not in blacklist
+                    !camp.getAttendees().contains(studentID)) {  // is not an attendee
                 facultyCamps.add(camp);
             }
         }
@@ -85,19 +87,6 @@ public class CampController extends BaseController{
         }
     }
 
-    public int addCampCM(Student student, Camp camp) {
-        // TODO: check if student is already part of CAMP_COMM_MEM_LIST
-        // TODO: check if CC member limit reached
-        // TODO: Set campComm flag in Student to campID
-
-        CampCM campCM = new CampCM(student.getName(), student.getUserID(), student.getEmail(), student.getPassword(),
-                student.getFaculty(), student.getType(), 0);
-
-        //update CAMP_COMM_MEM_LIST
-        camp.getCommitteeMembers().add(campCM.getUserID());
-        return 1;
-    }
-
     public void toggleVisibility(Camp camp) {
         if(camp.getVisibility()){
             camp.setVisibility(false);
@@ -108,16 +97,21 @@ public class CampController extends BaseController{
         }
     }
 
-    public void deleteCamp(String campID) {
+    public int deleteCamp(String campID) {
         Camp camp = this.getCampController().getCampByID(campID);
-        this.getCentralManager().getMasterCamps().remove(camp);
+        if (camp.getNumberAttendees() > 0) {
+            return 0;
+        } else {
+            this.getCentralManager().getMasterCamps().remove(camp);
+            return 1;
+        }
     }
 
-    public void editCamp(Camp camp, String newLocation, String newDescription) { //EDITTED
-        // TODO
+    public void editCamp(Camp camp, String newLocation, String newDescription, int registrationDeadline) { //EDITTED
         // params of this method will correspond to all editable attribs of this camp (meaning all attribs except for the campID bcos that is system generated and blackList)
         camp.setDescription(newDescription);
         camp.setLocation(newLocation);
+        camp.setRegistrationDeadline(registrationDeadline);
     }
 
     public void createCamp(String campName, ArrayList<Integer> dates, int registrationDeadline, String userGroup,

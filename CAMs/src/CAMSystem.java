@@ -7,6 +7,13 @@ public class CAMSystem {
     }
 
     public void run() {
-        this.centralManager.getUserBoundary().login();
+        while (true) {
+            boolean login = this.centralManager.getInput().getBoolean("Do you want to login?");
+            if (login) {
+                this.centralManager.getUserBoundary().login();
+            } else {
+                break;
+            }
+        }
     }
 }

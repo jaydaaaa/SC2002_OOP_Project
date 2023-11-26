@@ -1,4 +1,8 @@
 package boundary;
+import entity.CentralManager;
+import entity.Camp;
+
+import java.util.ArrayList;
 
 /**
  * The CampBoundary class represents a camp in the system.
@@ -8,11 +12,6 @@ package boundary;
  * @author Group 2
  * @since 2023-11-26
  */
-
-import entity.CentralManager;
-import entity.Camp;
-
-import java.util.ArrayList;
 
 public class CampBoundary extends BaseBoundary {
      /**

@@ -1,4 +1,8 @@
 package boundary;
+import entity.*;
+import utils.GenerateReports.GenerateAttendeeReport;
+
+import java.util.ArrayList;
 
 /**
  * The StaffBoundary class represents a staff in the system.
@@ -9,13 +13,6 @@ package boundary;
  * @author Group 2
  * @since 2023-11-26
  */
-
-import entity.*;
-import utils.GenerateReports.GenerateAttendeeReport;
-
-import java.util.ArrayList;
-
-
 public class StaffBoundary extends UserBoundary {
      /**
      * Constructor for StaffBoundary.

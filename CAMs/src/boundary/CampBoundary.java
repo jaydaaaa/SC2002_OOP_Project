@@ -1,20 +1,43 @@
 package boundary;
 
+/**
+ * The CampBoundary class represents a camp in the system.
+ * A camp can have many students.
+ * This class provides methods for handling camp operations such as viewing camps, creating a camp, 
+ * editing a camp, deleting a camp, and printing camp details.
+ * @author Group 2
+ * @since 2023-11-26
+ */
+
 import entity.CentralManager;
 import entity.Camp;
 
 import java.util.ArrayList;
 
 public class CampBoundary extends BaseBoundary {
+     /**
+    * Constructor for CampBoundary.
+    * @param centralManager The central manager controlling the system.
+    */
     public CampBoundary(CentralManager centralManager) {
         super(centralManager);
     }
 
+    /**
+     * Displays the camps that the student is eligible for.
+     * @param studentID The ID of the student.
+     */
     public void viewCamps(String studentID) {
         ArrayList<Camp> camps = this.getCampController().getAvailCamps(studentID);
         this.printCampList(camps, "");
     }
 
+    /**
+     * This method allows the staff to create a camp.
+     * It first prompts the staff to enter various details about the camp, such as name, dates, registration deadline, user group, location, description, total slots, and camp committee slots.
+     * It also prompts the staff to choose the visibility of the camp.
+     * The camp is then created and added to the system.
+     */
     public void createCamp() {
         String campName = this.getLine("Enter name of camp:");
         ArrayList<Integer> dates = new ArrayList<>();
@@ -58,6 +81,12 @@ public class CampBoundary extends BaseBoundary {
                 totalSlots, this.getStaffController().getCurrentStaff().getUserID(), campCommSlots, visibility);
     }
 
+    /**
+     * This method prints a list of camps.
+     * It first prints the format for displaying camps.
+     * Then, it prints each camp in the list.
+     * @param camps The list of camps to print.
+     */
     public void printCampList(ArrayList<Camp> camps, String userID) {
         this.printCampFormat(userID);
         int counter = 0;
@@ -67,6 +96,9 @@ public class CampBoundary extends BaseBoundary {
         }
     }
 
+    /**
+     * This method prints the format for displaying camps.
+     */
     public void printCampFormat(String role) {
         System.out.print("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail] / [Total Slots]");
         if (!role.equals("")) {
@@ -76,6 +108,13 @@ public class CampBoundary extends BaseBoundary {
 
     }
 
+    /**
+     * This method prints a single camp line.
+     * It retrieves the camp name, description, location, dates, faculty, and slots from the camp.
+     * Then, it formats and prints this information.
+     * @param idx The index of the camp.
+     * @param camp The camp to print.
+     */
     public void printCampLine(int idx, Camp camp, String userID) {
         System.out.print(idx);
         System.out.print(". ");
@@ -108,6 +147,13 @@ public class CampBoundary extends BaseBoundary {
         System.out.println();
     }
 
+    /**
+     * This method allows the staff to edit a camp.
+     * It first prompts the staff to choose the detail of the camp they want to edit (description, location, visibility, or registration deadline).
+     * Depending on the staff's choice, it prompts the staff to enter the new detail and updates the camp.
+     * If the staff chooses to cancel the edit, it prints a message and returns.
+     * @param camp The camp to edit.
+     */
     public void editCamp(Camp camp) {
         while(true){
             int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Registration Deadline\n 5. Cancel Edit\n");
@@ -138,6 +184,15 @@ public class CampBoundary extends BaseBoundary {
         }
     }
 
+    /**
+     * This method allows the staff to delete a camp.
+     * It first displays the camps that the staff is associated with.
+     * Then, it prompts the staff to enter the index of the camp they want to delete.
+     * If the staff enters -1, the method returns and no camp is deleted.
+     * If the staff enters a valid index, the chosen camp is deleted, and a confirmation message is printed.
+     * If the camp cannot be deleted because there are participants who have signed up already, an error message is printed.
+     * @param staffID The ID of the staff.
+     */
     public void deleteCamps(String staffID) {
         while (true) {
             ArrayList<Camp> myCamps = this.getCampController().getCampsByStaffID(staffID);

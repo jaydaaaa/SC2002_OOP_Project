@@ -22,6 +22,19 @@ public class UserBoundary extends BaseBoundary{
             userType = this.getUserController().login(userID, password);
         }
 
+        if (password.equals("password")) {
+            while (true) {
+                String newPassword = this.getLine("You currently have the default password, please enter a new password:");
+                if (newPassword.equals("password")) {
+                    System.out.print("Invalid input, ");
+                } else {
+                    this.getUserController().setPassword(userID, newPassword);
+                    System.out.println("Password successfully changed!");
+                    break;
+                }
+            }
+        }
+
         if (Objects.equals(userType, "Student")){
             System.out.println("Directing to student screen...");
             this.getStudentController().setCurrentUser(userID);

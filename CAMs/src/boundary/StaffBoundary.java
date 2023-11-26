@@ -26,7 +26,7 @@ public class StaffBoundary extends UserBoundary {
 						9.  View Suggestions to My Camps
 						10. Approve/Reject Suggestions
 						11. Generate Attendee Report for a Camp
-						12. Generate performance Report for commitee members
+						12. Generate Performance Report for Committee Members
 						13. Exit application
 						========================================================================
 																"""

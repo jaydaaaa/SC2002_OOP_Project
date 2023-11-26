@@ -90,7 +90,7 @@ public class StudentBoundary extends UserBoundary{
         if (myCamps.size() == 0) {
             System.out.println("------------------------- No camp registered -------------------------");
         } else {
-            this.getCampBoundary().printCampList(myCamps);
+            this.getCampBoundary().printCampList(myCamps, this.getStudentController().getCurrentStudent().getUserID());
         }
     }
 
@@ -144,7 +144,7 @@ public class StudentBoundary extends UserBoundary{
                System.out.println("------------------------- No camp registered -------------------------");
                return;
            }
-           this.getCampBoundary().printCampList(myCamps);
+           this.getCampBoundary().printCampList(myCamps, this.getStudentController().getCurrentStudent().getUserID());
 
            // get choice
            int index = this.getInt("Enter the index of the camp you want to withdraw from, enter -1 to exit:");
@@ -200,7 +200,7 @@ public class StudentBoundary extends UserBoundary{
         // Submit an enquiry for a camp
         while (true) {
             ArrayList<Camp> myCamps = this.getStudentController().getAttendedCamps();
-            this.getCampBoundary().printCampList(myCamps);
+            this.getCampBoundary().printCampList(myCamps, this.getStudentController().getCurrentStudent().getUserID());
             int index = this.getInt("Enter the index of the camp you are enquiring for, enter -1 to exit:");
             if (index == -1) {
                 return;

@@ -12,7 +12,7 @@ public class CampBoundary extends BaseBoundary {
 
     public void viewCamps(String studentID) {
         ArrayList<Camp> camps = this.getCampController().getAvailCamps(studentID);
-        this.printCampList(camps);
+        this.printCampList(camps, "");
     }
 
     public void createCamp() {
@@ -58,20 +58,25 @@ public class CampBoundary extends BaseBoundary {
                 totalSlots, this.getStaffController().getCurrentStaff().getUserID(), campCommSlots, visibility);
     }
 
-    public void printCampList(ArrayList<Camp> camps) {
-        this.printCampFormat();
+    public void printCampList(ArrayList<Camp> camps, String userID) {
+        this.printCampFormat(userID);
         int counter = 0;
         for (Camp camp: camps) {
             counter += 1;
-            this.printCampLine(counter, camp);
+            this.printCampLine(counter, camp, userID);
         }
     }
 
-    public void printCampFormat() {
-        System.out.println("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail] / [Total Slots]");
+    public void printCampFormat(String role) {
+        System.out.print("[CampIndex]. [Camp Name] | [Description] | [Location] | [Start to End Dates] | [Faculty] | [Slots Avail] / [Total Slots]");
+        if (!role.equals("")) {
+            System.out.print(" | [Role]");
+        }
+        System.out.println();
+
     }
 
-    public void printCampLine(int idx, Camp camp) {
+    public void printCampLine(int idx, Camp camp, String userID) {
         System.out.print(idx);
         System.out.print(". ");
         System.out.print(camp.getCampName());
@@ -89,10 +94,21 @@ public class CampBoundary extends BaseBoundary {
         System.out.print(" | ");
         System.out.print(camp.getTotalSlots() - camp.getNumberAttendees());
         System.out.print("/" + camp.getTotalSlots());
+        if (!userID.equals("")) {
+            String role;
+            if (camp.getCommitteeMembers().contains(userID)) {
+                role = "CampCommitteeMember";
+            } else if (camp.getAttendees().contains(userID)) {
+                role = "Student";
+            } else {
+                role = "-";
+            }
+            System.out.print(" | " + role);
+        }
         System.out.println();
     }
 
-    public void editCamp(Camp camp) { 
+    public void editCamp(Camp camp) {
         while(true){
             int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Registration Deadline\n 5. Cancel Edit\n");
             switch(choice){
@@ -125,7 +141,7 @@ public class CampBoundary extends BaseBoundary {
     public void deleteCamps(String staffID) {
         while (true) {
             ArrayList<Camp> myCamps = this.getCampController().getCampsByStaffID(staffID);
-            this.printCampList(myCamps);
+            this.printCampList(myCamps, "Staff In-Charge");
 
             int index = this.getInt("Please enter the camp index for the camp you would like to delete, or enter -1 to exit.");
             if (index == -1) {

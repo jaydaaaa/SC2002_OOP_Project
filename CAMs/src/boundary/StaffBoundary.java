@@ -76,25 +76,25 @@ public class StaffBoundary extends UserBoundary {
     public void viewAllCamps(){
         // View All Camps
         System.out.println("Printing all camps: ");
-        this.getCampBoundary().printCampFormat();
+        this.getCampBoundary().printCampFormat("");
         ArrayList<Camp> camps = this.getCampController().getAllCamps();
         int counter = 0;
         for (Camp camp: camps) {
             counter++;
-            this.getCampBoundary().printCampLine(counter, camp);
+            this.getCampBoundary().printCampLine(counter, camp, "");
         }
     }
 
     public void viewMyCamps(){
         // View my camps
         System.out.println("Printing my camps: ");
-        this.getCampBoundary().printCampFormat();
+        this.getCampBoundary().printCampFormat("");
         String StaffId = this.getStaffController().getCurrentStaff().getUserID();
         ArrayList<Camp> camps = this.getCampController().getCampsByStaffID(StaffId);
         int counter = 0;
         for (Camp camp: camps) {
             counter++;
-            this.getCampBoundary().printCampLine(counter, camp);
+            this.getCampBoundary().printCampLine(counter, camp, "");
         }
     }
 

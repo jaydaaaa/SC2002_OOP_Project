@@ -69,8 +69,8 @@ public class SuggestionBoundary extends BaseBoundary {
         if (suggestions.size() == 0) {
             System.out.println("------------------ No Suggestions ------------------");
         } else {
-            counter += 1;
             for (Suggestion suggestion: suggestions) {
+                 counter += 1;
                 this.printSuggestionLine(suggestion, counter);
             }
         }

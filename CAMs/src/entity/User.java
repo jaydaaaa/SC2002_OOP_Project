@@ -4,7 +4,7 @@ package entity;
  * The User class represents a user in the system.
  * A user can access the CAMs system
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class User {
 

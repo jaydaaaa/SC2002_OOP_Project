@@ -6,7 +6,7 @@ import java.util.UUID;
  * The Suggestion class represents a suggestion by a class committee member.
  * This suggestion is specific to each camp.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Suggestion {
 

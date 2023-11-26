@@ -7,7 +7,7 @@ import java.util.UUID;
  * It contains information such as enquiry text, camp ID, enquired by, reply text,
  * replied by, status, and enquiry ID.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Enquiry {
 

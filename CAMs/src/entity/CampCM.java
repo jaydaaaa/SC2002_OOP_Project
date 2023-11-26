@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The CampCM class represents a student who is a committee member for a camp in the system.
  * It extends the Student class.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class CampCM extends Student {
 

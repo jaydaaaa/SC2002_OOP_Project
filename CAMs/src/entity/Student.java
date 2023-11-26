@@ -4,7 +4,7 @@ package entity;
  * The Student class represents a student user in the system.
  * It is a subclass of the User class and inherits its properties and methods.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Student extends User {
 

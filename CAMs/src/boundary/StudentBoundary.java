@@ -33,6 +33,9 @@ public class StudentBoundary extends UserBoundary{
     }
     boolean needToRelogin = false;
 
+   /**
+     * Displays the menu choices for the student.
+     */
     public void displayMenuChoices() {
 
         System.out.println(
@@ -49,6 +52,14 @@ public class StudentBoundary extends UserBoundary{
         );
     }
 
+    /**
+     * This method handles the operations for the student.
+     * It displays a menu of choices and prompts the student to enter their choice.
+     * Depending on the student's choice, it calls the appropriate method to perform the chosen operation.
+     * If the student's status has been changed from Student to Camp Committee member, it prompts the student to relogin.
+     * If the student enters a choice that is not within the valid range (1-10), it prints an error message and prompts the student to enter their choice again.
+     * If the student chooses to exit the application, it prints a message indicating that the program has exited.
+     */
     public void studentOperations() {
         int choice = 0;
         while (choice != 10) {
@@ -88,6 +99,12 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+    /**
+     * This method allows the student to change their password.
+     * It first prompts the student to enter a new password.
+     * Then, it calls the `setPassword()` method of `StudentController` to update the student's password.
+     * Finally, it prints a confirmation message to inform the student that their password has been successfully reset.
+     */
     public void changePassword() {
         //Change password
         String newPassword = this.getLine("Please enter a new password:");
@@ -95,12 +112,24 @@ public class StudentBoundary extends UserBoundary{
         System.out.println("Your password has been successfully reset.");
     }
 
+   /**
+     * This method displays the available camps for the student.
+     * It first retrieves the student's ID.
+     * Then, it calls the `viewCamps()` method of `CampBoundary` to display the camps available to the student.
+     */
     public void viewCamps() {
         // View available camps
         String studentID = this.getStudentController().getCurrentStudent().getUserID();
         this.getCampBoundary().viewCamps(studentID);
     }
 
+   /**
+     * This method displays the camps that the student is registered for.
+     * It first retrieves a list of the student's registered camps.
+     * Then, it prints a header.
+     * If the student is not registered for any camps, it prints a message indicating this.
+     * Otherwise, it prints each camp in the list.
+     */
     public void viewMyCamps(){
         //View own camps
         ArrayList<Camp> myCamps = this.getStudentController().getAttendedCamps();
@@ -112,6 +141,17 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+   /**
+     * This method allows the student to register for a camp.
+     * It first prints a list of the available camps.
+     * Then, it prompts the student to enter the index of the camp they want to register for.
+     * If the student enters -1, the method returns and no registration is made.
+     * If the student enters a valid index, the method prompts the student to choose whether they want to register as a CampComm.
+     * The student is then registered for the chosen camp, and a confirmation message is printed.
+     * If the camp is full, the deadline has passed, there are no empty CampComm slots, or the camp period clashes with one of the student's registered camps, an error message is printed and the registration is not made.
+     * If the student chooses to register as a CampComm, they are logged out and must log back in to access CampComm functions.
+     * @param isCampComm A boolean indicating whether the student is registering as a CampComm.
+     */
     public void registerCamp(boolean isCampComm) {
         // print all available camps
         while (true) {
@@ -153,6 +193,17 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+   /**
+     * This method allows the student to withdraw from a camp.
+     * It first prints a list of the camps that the student is registered for.
+     * Then, it prompts the student to enter the index of the camp they want to withdraw from.
+     * If the student enters -1, the method returns and no withdrawal is made.
+     * If the student enters a valid index, the method attempts to withdraw the student from the chosen camp.
+     * If the student is the MainComm for the camp, an error message is printed and the withdrawal is not made.
+     * If the withdrawal is successful, a confirmation message is printed.
+     * If the student is not a participant of the camp, an error message is printed and the withdrawal is not made.
+     * If the student is not registered for any camps, a message is printed and the method returns.
+     */
     public void withdrawCamp(){
        while (true) {
            System.out.println("..........................My registered camps..........................");
@@ -183,6 +234,17 @@ public class StudentBoundary extends UserBoundary{
        }
     }
 
+   /**
+     * This method allows the student to edit an enquiry.
+     * It first prints a list of the student's enquiries.
+     * Then, it prompts the student to enter the index of the enquiry they want to edit.
+     * If the student enters -1, the method returns and no enquiry is edited.
+     * If the student enters a valid index, the method prompts the student to enter their new enquiry text.
+     * The enquiry is then updated, and a confirmation message is printed.
+     * If the student was not the sender of the enquiry, or if the enquiry has already been answered,
+     * an error message is printed and the enquiry is not edited.
+     * If the student has not submitted any enquiries, a message is printed and the method returns.
+     */
     public void editEnquiry() {
         //Delete an enquiry for a camp
         while (true) {
@@ -214,6 +276,14 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+   /**
+     * This method allows the student to submit an enquiry for a camp.
+     * It first prints a list of the camps that the student is attending.
+     * Then, it prompts the student to enter the index of the camp they want to enquire about.
+     * If the student enters -1, the method returns and no enquiry is submitted.
+     * If the student enters a valid index, the method prompts the student to enter their enquiry.
+     * The enquiry is then submitted, and a confirmation message is printed.
+     */
     public void submitEnquiry(){
         // Submit an enquiry for a camp
         while (true) {
@@ -231,6 +301,17 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+    /**
+     * This method allows the student to delete an enquiry for a camp.
+     * It first prints a list of the student's enquiries.
+     * Then, it prompts the student to enter the index of the enquiry they want to delete.
+     * If the student enters -1, the method returns and no enquiry is deleted.
+     * If the student enters a valid index, the method attempts to delete the enquiry.
+     * If the student was not the sender of the enquiry, or if the enquiry has already been answered,
+     * an error message is printed and the enquiry is not deleted.
+     * If the deletion is successful, a confirmation message is printed.
+     * If the student has not submitted any enquiries, a message is printed and the method returns.
+     */
     public void deleteEnquiry(){
         //Delete an enquiry for a camp
         while (true) {
@@ -261,6 +342,13 @@ public class StudentBoundary extends UserBoundary{
         }
     }
 
+   /**
+     * This method allows the student to view their enquiries.
+     * It first prints a header, then retrieves the student's enquiries.
+     * If there are no enquiries, it prints a message indicating this.
+     * Otherwise, it prints each enquiry.
+     * Note: Currently, this method does not support viewing replies to enquiries.
+     */
     public void viewMyEnquiries(){
         System.out.println("..............................My Enquiries..............................");
         ArrayList<Enquiry> myEnquiries = this.getStudentController().getMyEnquiries();

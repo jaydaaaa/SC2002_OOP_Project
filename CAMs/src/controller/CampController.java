@@ -5,12 +5,29 @@ import entity.*;
 
 import java.util.Objects;
 
+/**
+ * The CampController class is a controller for managing Camp entities.
+ * It extends the BaseController class and provides additional functionality specific to camp management.
+ * @author Group 2
+ * @since 2023-11-20
+ */
 public class CampController extends BaseController{
-
+	
+    /**
+     * Constructs a CampController with the specified CentralManager.
+     *
+     * @param centralManager The CentralManager instance to associate with the CampController.
+     */
     public CampController(CentralManager centralManager) {
         super(centralManager);
     }
-    // Added method to get Camps based on faculty for student
+    
+    /**
+     * Retrieves available camps based on the faculty of a student.
+     *
+     * @param studentID The student ID of the student for whom available camps are retrieved.
+     * @return An ArrayList of available camps for the specified student.
+     */
     public ArrayList<Camp> getAvailCamps(String studentID) {
         Student student = this.getStudentController().getStudentByID(studentID);
         ArrayList<Camp> facultyCamps = new ArrayList<>();
@@ -25,12 +42,21 @@ public class CampController extends BaseController{
         return facultyCamps;
     }
 
-    // Added method to get all camps for staff
+    /**
+     * Retrieves all camps managed by the system.
+     *
+     * @return An ArrayList of all camps.
+     */
     public ArrayList<Camp> getAllCamps() {
         return this.getCentralManager().getMasterCamps();
     }
 
-    // Added method to get camps according to staffId
+    /**
+     * Retrieves camps associated with a staff member based on their staff ID.
+     *
+     * @param staffID The staff ID of the staff member.
+     * @return An ArrayList of camps associated with the specified staff member.
+     */
     public ArrayList<Camp> getCampsByStaffID(String staffID) {
         ArrayList<Camp> camps = new ArrayList<>();
         for (Camp camp : this.getAllCamps()) {
@@ -41,6 +67,12 @@ public class CampController extends BaseController{
         return camps;
     }
 
+    /**
+     * Retrieves a camp by its camp ID.
+     *
+     * @param campID The ID of the camp to retrieve.
+     * @return The Camp object with the specified camp ID, or null if not found.
+     */
     public Camp getCampByID(String campID) {
         for (Camp camp: this.getAllCamps()) {
             if (camp.getCampID().equals(campID)) {
@@ -50,6 +82,12 @@ public class CampController extends BaseController{
         return null;
     }
 
+    /**
+     * Retrieves camps that a student is participating in based on their student ID.
+     *
+     * @param studentID The student ID of the student for whom camps they are participating in is retrieved.
+     * @return An ArrayList of camps the specified student is participating in.
+     */
     public ArrayList<Camp> getAttendedCamps(String studentID) {
         ArrayList<Camp> attendedCamps = new ArrayList<>();
         for (Camp camp: this.getAllCamps()) {
@@ -61,7 +99,12 @@ public class CampController extends BaseController{
         return attendedCamps;
     }
 
-    // Find object Camp from the masterCamp list taking in string as parameter
+    /**
+     * Finds a camp by its camp name.
+     *
+     * @param campName The name of the camp to find.
+     * @return The Camp object with the specified camp name, or null if not found.
+     */
     public Camp findCamp(String campName) {
         for (Camp camp : this.getAllCamps()) {
             if(Objects.equals(camp.getCampName(),campName)) {
@@ -71,6 +114,13 @@ public class CampController extends BaseController{
         return null;
     }
 
+    /**
+     * Removes an attendee from a camp.
+     *
+     * @param student  The student to be removed as an attendee.
+     * @param campID   The ID of the camp from which the student will be removed.
+     * @return 1 if removal is successful, 0 if the student is a committee member, -1 if the student is not an attendee.
+     */
     public int removeAttendee(Student student, String campID) {
         Camp camp = this.getCampByID(campID);
         if (camp.getAttendees().contains(student.getUserID())){
@@ -87,6 +137,11 @@ public class CampController extends BaseController{
         }
     }
 
+    /**
+     * Toggles the visibility of a camp.
+     *
+     * @param camp The camp for which visibility will be toggled.
+     */
     public void toggleVisibility(Camp camp) {
         if(camp.getVisibility()){
             camp.setVisibility(false);
@@ -97,6 +152,12 @@ public class CampController extends BaseController{
         }
     }
 
+    /**
+     * Deletes a camp using the specified camp ID.
+     *
+     * @param campID The ID of the camp to be deleted.
+     * @return 1 if deletion is successful, 0 if camp cannot be deleted as there are attendees in the camp.
+     */
     public int deleteCamp(String campID) {
         Camp camp = this.getCampController().getCampByID(campID);
         if (camp.getNumberAttendees() > 0) {
@@ -107,13 +168,34 @@ public class CampController extends BaseController{
         }
     }
 
-    public void editCamp(Camp camp, String newLocation, String newDescription, int registrationDeadline) { //EDITTED
-        // params of this method will correspond to all editable attribs of this camp (meaning all attribs except for the campID bcos that is system generated and blackList)
+    /**
+     * Edits the attributes of a camp.
+     *
+     * @param camp              The camp to be edited.
+     * @param newLocation       The new location of the camp.
+     * @param newDescription    The new description of the camp.
+     * @param registrationDeadline The new registration deadline of the camp.
+     */
+    public void editCamp(Camp camp, String newLocation, String newDescription, int registrationDeadline) {
         camp.setDescription(newDescription);
         camp.setLocation(newLocation);
         camp.setRegistrationDeadline(registrationDeadline);
     }
 
+    /**
+     * Creates a new camp with the specified attributes.
+     *
+     * @param campName        The name of the new camp.
+     * @param dates           The dates of the new camp.
+     * @param registrationDeadline The registration deadline of the new camp.
+     * @param userGroup       The user group of the new camp.
+     * @param location        The location of the new camp.
+     * @param description     The description of the new camp.
+     * @param totalSlots      The total slots available in the new camp.
+     * @param staffIC         The staff in charge of the new camp.
+     * @param campCommSlots   The number of camp committee slots in the new camp.
+     * @param visibility      The visibility status of the new camp.
+     */
     public void createCamp(String campName, ArrayList<Integer> dates, int registrationDeadline, String userGroup,
                            String location, String description, Integer totalSlots, String staffIC, Integer campCommSlots,
                            boolean visibility) {

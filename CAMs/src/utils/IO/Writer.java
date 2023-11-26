@@ -6,7 +6,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The Writer class is responsible for writing data to files.
+ * It provides static methods to write different types of data like Users, Enquiries, Camps, and Suggestions.
+ * 
+ * @author Group 2
+ * @since 2023-11-20
+ */
 public class Writer {
+    /**
+     * Writes user data to a file.
+     * @param fpath The path to the file.
+     * @param masterUsers The list of users to be written to the file.
+     */
     public static void writeUsers(String fpath, ArrayList<User> masterUsers) {
         System.out.println("Saving changes to user file...");
         try {
@@ -33,6 +45,11 @@ public class Writer {
         }
     }
 
+    /**
+     * Writes enquiry data to a file.
+     * @param fpath The path to the file.
+     * @param masterRequests The list of enquiries to be written to the file.
+     */
     public static void writeEnquiry(String fpath, ArrayList<Enquiry> masterRequests) {
         System.out.println("Saving changes to requests file...");
         try {
@@ -47,7 +64,12 @@ public class Writer {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Writes suggestion data to a file.
+     * @param fpath The path to the file.
+     * @param masterSuggestions The list of suggestions to be written to the file.
+     */
     public static void writeSuggestions(String fpath, ArrayList<Suggestion> masterSuggestions) {
         System.out.println("Saving changes to suggestions file...");
         try {
@@ -63,6 +85,11 @@ public class Writer {
         }
     }
 
+    /**
+     * Writes camp data to a file.
+     * @param fpath The path to the file.
+     * @param masterCamps The list of camps to be written to the file.
+     */
     public static void writeCamps(String fpath, ArrayList<Camp> masterCamps) {
         System.out.println("Saving changes to camps file...");
         try {

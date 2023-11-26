@@ -42,7 +42,16 @@ public class CampBoundary extends BaseBoundary {
                 break;
             }
         }
-        int _visibility = this.getInt("Enter visibility of camp (1 for visible, 0 for hidden):");
+
+        int _visibility;
+        while(true){
+             _visibility = this.getInt("Enter visibility of camp (1 for visible, 0 for hidden):");
+            if (_visibility != 0 && _visibility != 1 ) {
+                    System.out.println("Invalid input, visibility of camp must be either 1 or 0");
+            } else {
+                break;
+            }
+        }
         boolean visibility = _visibility == 1;
 
         this.getCampController().createCamp(campName, dates, registrationDeadline, userGroup, location, description,

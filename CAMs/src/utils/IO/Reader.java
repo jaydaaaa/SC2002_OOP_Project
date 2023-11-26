@@ -71,6 +71,12 @@ public class Reader {
             String line = reader.readLine();
 
             while (line != null) {
+
+                if (line.trim().isEmpty()) {
+                    line = reader.readLine();
+                    continue;
+                }
+
                 String[] lst = line.split("_");
                 String campID = lst[0];
                 String enquiryText = lst[1];
@@ -100,6 +106,12 @@ public class Reader {
             String line = reader.readLine();
 
             while (line != null) {
+
+                if (line.trim().isEmpty()) {
+                    line = reader.readLine();
+                    continue;
+                }
+
                 String[] lst = line.split("_");
 
                 // Name
@@ -210,6 +222,12 @@ public static ArrayList<Suggestion> readSuggestions(String fpath) {
         String line = reader.readLine();
 
         while (line != null) {
+
+            if (line.trim().isEmpty()) {
+                line = reader.readLine();
+                continue;
+            }
+            
             String[] lst = line.split("_");
             String campID = lst[0];
             String variableToChange = lst[1];

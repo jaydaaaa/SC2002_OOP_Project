@@ -26,7 +26,7 @@ public class StudentBoundary extends UserBoundary{
 						5.  Submit an enquiry for a camp
 						6.  Edit an enquiry for a camp
 						7.  Delete an enquiry for a camp
-						8.  View enquiries and replies
+						8.  View my enquiries and replies
 						9.  Withdraw from a camp"""
         );
     }

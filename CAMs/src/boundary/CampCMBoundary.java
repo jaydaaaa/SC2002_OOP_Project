@@ -1,5 +1,11 @@
 package boundary;
 
+import entity.*;
+import utils.GenerateReports.GenerateAttendeeReport;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  * The CampCMBoundary class represents a camp committee member in the system.
  * A camp committee member can be associated with many camps.
@@ -8,13 +14,6 @@ package boundary;
  * @author Group 2
  * @since 2023-11-26
  */
-
-import entity.*;
-import utils.GenerateReports.GenerateAttendeeReport;
-
-import java.util.ArrayList;
-import java.util.Objects;
-
 public class CampCMBoundary extends StudentBoundary{
     /**
      * Constructor for CampCMBoundary.

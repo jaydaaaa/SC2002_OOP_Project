@@ -10,13 +10,27 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 
-
+/**
+ * The Reader class is responsible for reading data from files.
+ * It provides static methods to read different types of data like Users, Enquiries, Camps, and Suggestions.
+ * 
+ * @author Group 2
+ * @since 2023-11-20
+ */
 public class Reader {
     BufferedReader reader;
+    /**
+     * Default constructor for the Reader class.
+     */
     public Reader() {
 
     }
 
+    /**
+     * Reads user data from a file.
+     * @param fpath The path to the file.
+     * @return A list of users.
+     */
     public static ArrayList<User> readUsers(String fpath) {
         System.out.println("Ingesting Users...");
         ArrayList<User> users = new ArrayList<>();
@@ -63,6 +77,11 @@ public class Reader {
         return users;
     }
 
+    /**
+     * Reads enquiry data from a file.
+     * @param fpath The path to the file.
+     * @return A list of enquiries.
+     */
     public static ArrayList<Enquiry> readEnquiries(String fpath) {
         System.out.println("Ingesting Enquiries...");
         ArrayList<Enquiry> enquiries = new ArrayList<>();
@@ -98,6 +117,11 @@ public class Reader {
         return enquiries;
     }
 
+    /**
+     * Reads camp data from a file.
+     * @param fpath The path to the file.
+     * @return A list of camps.
+     */
     public static ArrayList<Camp> readCamps(String fpath) {
         System.out.println("Ingesting Camps...");
         ArrayList<Camp> camps = new ArrayList<>();
@@ -214,7 +238,13 @@ public class Reader {
         }
         return camps;
     }
-public static ArrayList<Suggestion> readSuggestions(String fpath) {
+
+    /**
+     * Reads suggestion data from a file.
+     * @param fpath The path to the file.
+     * @return A list of suggestions.
+     */
+    public static ArrayList<Suggestion> readSuggestions(String fpath) {
     System.out.println("Ingesting Suggestions...");
     ArrayList<Suggestion> suggestions = new ArrayList<>();
     try {

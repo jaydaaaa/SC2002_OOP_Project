@@ -1,13 +1,4 @@
 package boundary;
-
-/**
- * The SuggestionBoundary class represents a suggestion in the system.
- * A suggestion can be made by a student, staff, or camp committee member.
- * This class provides methods for handling suggestion operations such as adding and editing suggestions.
- * @author Group 2
- * @since 2023-11-26
- */
-
 import entity.Camp;
 import entity.CampCM;
 import entity.CentralManager;
@@ -16,6 +7,13 @@ import entity.Suggestion;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The SuggestionBoundary class represents a suggestion in the system.
+ * A suggestion can be made by a student, staff, or camp committee member.
+ * This class provides methods for handling suggestion operations such as adding and editing suggestions.
+ * @author Group 2
+ * @since 2023-11-26
+ */
 public class SuggestionBoundary extends BaseBoundary {
     /**
      * Constructor for SuggestionBoundary.

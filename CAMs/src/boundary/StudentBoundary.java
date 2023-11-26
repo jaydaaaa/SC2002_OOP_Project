@@ -1,4 +1,13 @@
 package boundary;
+
+/**
+ * The StudentBoundary class represents a student in the system.
+ * A student can be enrolled in many courses.
+ * This class provides methods for handling student operations such as viewing camps, registering for a camp, 
+ * submitting an enquiry, editing an enquiry, deleting an enquiry, and changing password.
+ * @author Group 2
+ * @since 2023-11-26
+ */
 import entity.Camp;
 import entity.CentralManager;
 import entity.Enquiry;
@@ -9,7 +18,16 @@ import java.util.ArrayList;
 import controller.CampController;
 import controller.UserController;
 
+/**
+ * This class represents the boundary for a Student in the system.
+ * It extends the UserBoundary class and provides methods for student operations.
+ */
 public class StudentBoundary extends UserBoundary{
+
+    /**
+    * Constructor for StudentBoundary.
+    * @param centralManager The central manager controlling the system.
+    */
     public StudentBoundary(CentralManager centralManager){
         super(centralManager);
     }

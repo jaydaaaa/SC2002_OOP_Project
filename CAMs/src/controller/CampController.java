@@ -11,7 +11,6 @@ import java.util.Objects;
  * @author Group 2
  * @since 2023-11-20
  */
-
 public class CampController extends BaseController{
 	/**
      * Constructs a CampController with the specified CentralManager.

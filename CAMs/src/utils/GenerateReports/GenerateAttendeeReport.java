@@ -9,11 +9,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The GenerateAttendeeReport class is responsible for generating a report of attendees for a camp.
+ * It provides functionality to filter attendees based on various criteria like name, role, location, and camp name.
+ * It also provides an option to generate a performance report which includes user points.
+ * 
+ * @author Group 2
+ * @since 2023-11-20
+ */
 public class GenerateAttendeeReport {
     ArrayList<String> finalAttendees;
     ArrayList<Student> attendees;
     ArrayList<Camp> camps;
     boolean isPerfReport;
+
+    /**
+     * Constructs a GenerateAttendeeReport with the specified attendees, camps, filters, and performance report option.
+     *
+     * @param attendees The list of attendees to be included in the report.
+     * @param camps The list of camps to be included in the report.
+     * @param nameFilter The filter for attendee names.
+     * @param roleFilter The filter for attendee roles.
+     * @param locationFilter The filter for camp locations.
+     * @param campNameFilter The filter for camp names.
+     * @param isPerfReport The option to include performance report which includes user points.
+     */
     public GenerateAttendeeReport(ArrayList<Student> attendees, ArrayList<Camp> camps, String nameFilter,
                                   String roleFilter, String locationFilter, String campNameFilter, boolean isPerfReport) {
         this.attendees = attendees;
@@ -93,6 +113,12 @@ public class GenerateAttendeeReport {
         this.isPerfReport = isPerfReport;
     }
 
+    /**
+     * Finds the common elements in a list of lists.
+     * 
+     * @param lists The list of lists to find common elements in.
+     * @return A list of common elements.
+     */
     private ArrayList<String> findCommonElements(ArrayList<ArrayList<String>> lists) {
         if (lists == null || lists.isEmpty()) {
             return new ArrayList<>();
@@ -108,7 +134,12 @@ public class GenerateAttendeeReport {
 
         return commonElements;
     }
-
+    /**
+     * Retrieves a User object by its ID.
+     * 
+     * @param userID The ID of the user to retrieve.
+     * @return The User object with the given ID, or null if no such user exists.
+     */
     private User getUserByID(String userID) {
         for (User attendee: this.attendees) {
             if (attendee.getUserID().equals(userID)) {
@@ -118,6 +149,13 @@ public class GenerateAttendeeReport {
         return null;
     }
 
+    /**
+     * Generates a report of attendees for a camp and writes it to a file.
+     * The report includes details like camp name, location, start and end dates, registration deadline, user name, and user role.
+     * If the performance report option is enabled, the report also includes user points.
+     * 
+     * @param fpath The path to the file where the report will be written.
+     */
     public void generateReport(String fpath) {
         try {
             FileWriter writer = new FileWriter(fpath);

@@ -23,11 +23,11 @@ public class StaffBoundary extends UserBoundary {
 						6.  Delete Camp
 						7.  View Enquires to My Camps
 						8.  Reply Enquires to My Camps
-						9.	View Suggestions to My Camps
+						9.  View Suggestions to My Camps
 						10. Approve/Reject Suggestions
 						11. Generate Attendee Report for a Camp
 						12. Generate performance Report for commitee members
-						13.  Exit application
+						13. Exit application
 						========================================================================
 																"""
         );

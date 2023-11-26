@@ -15,7 +15,7 @@ public class CampController extends BaseController{
         Student student = this.getStudentController().getStudentByID(studentID);
         ArrayList<Camp> facultyCamps = new ArrayList<>();
         for (Camp camp : this.getAllCamps()) {
-            if ((camp.getFaculty().equals(student.getFaculty()) || camp.getFaculty().equals("ALL")) &&
+            if ((camp.getFaculty().equals(student.getFaculty()) || camp.getFaculty().equals("NTU")) &&
                     camp.getVisibility() &&  // is visible
                     !camp.getBlacklist().contains(studentID) && // is not in blacklist
                     !camp.getAttendees().contains(studentID)) {  // is not an attendee

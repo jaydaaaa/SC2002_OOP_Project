@@ -56,12 +56,12 @@ public class SuggestionBoundary extends BaseBoundary {
             }
 
         }
-        String suggestionText = this.getLine("Please enter proposed changes to camp" + variable_to_change);
+        String suggestionText = this.getLine("Please enter proposed changes to camp " + variable_to_change);
         this.getSuggestionController().addSuggestion(campCM, variable_to_change, suggestionText, camp);
     }
 
     public void editSuggestion(Suggestion suggestion) {
-        String suggestionText = this.getLine("Please enter your new proposed changes.");
+        String suggestionText = this.getLine("Please enter your new proposed changes: ");
         int success = this.getSuggestionController().editSuggestion(suggestion, suggestionText);
         if (success == 0) {
             System.out.println("Unable to edit suggestion as it was already processed.");

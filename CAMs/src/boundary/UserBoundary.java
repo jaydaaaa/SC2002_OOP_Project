@@ -17,8 +17,8 @@ public class UserBoundary extends BaseBoundary{
         String userType = this.getUserController().login(userID, password);
         while (Objects.equals(userType, "InvalidUser")) {
             System.out.println("UserID or Password was invalid. Please try again.");
-            userID = this.getLine("Input UserID");
-            password = this.getLine("Input Password");
+            userID = this.getLine("Input UserID: ");
+            password = this.getLine("Input Password: ");
             userType = this.getUserController().login(userID, password);
         }
 
@@ -33,7 +33,7 @@ public class UserBoundary extends BaseBoundary{
             this.getStaffBoundary().staffOperations();
         }
         else if (Objects.equals(userType, "CampCM")) {
-            System.out.println("Directing to camp committee member screen...");
+            System.out.println("Directing to Camp Committee Member screen...");
             this.getCampCMController().setCurrentUser(userID);
             this.getCampCMBoundary().campCMOperations();
         }

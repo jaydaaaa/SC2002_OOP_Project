@@ -18,14 +18,14 @@ public class Reader {
     }
 
     public static ArrayList<User> readUsers(String fpath) {
-        System.out.println("Ingesting users...");
+        System.out.println("Ingesting Users...");
         ArrayList<User> users = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fpath));
             String line = reader.readLine();
 
             while (line != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 String[] lst = line.split("_");
                 String name = lst[0];
                 String email = lst[1];
@@ -64,7 +64,7 @@ public class Reader {
     }
 
     public static ArrayList<Enquiry> readEnquiries(String fpath) {
-        System.out.println("Ingesting requests...");
+        System.out.println("Ingesting Enquiries...");
         ArrayList<Enquiry> enquiries = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fpath));

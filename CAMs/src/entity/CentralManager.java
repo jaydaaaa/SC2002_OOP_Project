@@ -102,8 +102,8 @@ public class CentralManager {
     public void ingestUsers() {
         String fpath = this.currentWorkingDirectory + "data/Users.txt";
         this.MasterUsers = Reader.readUsers(fpath);
-        System.out.print("users:");
-        System.out.print(this.MasterUsers);
+        //System.out.print("users:");
+        //System.out.print(this.MasterUsers);
     }
 
     public void ingestCamps() {

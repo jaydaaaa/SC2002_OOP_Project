@@ -38,7 +38,7 @@ public class StudentBoundary extends UserBoundary{
                 System.out.println("As your status has been changed from Student to Camp Committee member, " +
                         "please relogin to access Camp Committee functions.");
                 this.needToRelogin = false;
-                return;
+                break;
             }
             System.out.print(
                 """
@@ -117,10 +117,11 @@ public class StudentBoundary extends UserBoundary{
             Camp chosenCamp = camps.get(index - 1);
             int success = this.getStudentController().registerForCamp(chosenCamp.getCampID(), choiceCampComm);
             if (success == 1) {
-                if (choiceCampComm) {
-                    this.needToRelogin = true;
-                }
                 System.out.println("Camp successfully registered!");
+		if (choiceCampComm) {
+                    this.needToRelogin = true;
+		    break;
+                }
             } else if (success == -1) {
                 System.out.println("Camp is full, unable to register.");
             } else if (success == -2) {

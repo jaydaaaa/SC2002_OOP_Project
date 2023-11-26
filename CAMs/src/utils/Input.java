@@ -103,7 +103,7 @@ public class Input {
         int year;
         while (true) {
             year = this.getInt("Please enter year in YYYY format");
-            if (year < 1000) {
+            if (year < 1000 || year>9999) {
                 System.out.println("Invalid date. Please ensure year entered is in YYYY format.");
             } else {
                 break;

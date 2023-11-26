@@ -1,4 +1,9 @@
 package boundary;
+import entity.Camp;
+import entity.CentralManager;
+import entity.Enquiry;
+
+import java.util.ArrayList;
 
 /**
  * The EnquiryBoundary class represents an enquiry in the system.
@@ -7,13 +12,6 @@ package boundary;
  * @author Group 2
  * @since 2023-11-26
  */
-
-import entity.Camp;
-import entity.CentralManager;
-import entity.Enquiry;
-
-import java.util.ArrayList;
-
 public class EnquiryBoundary extends BaseBoundary {
     /**
      * Constructor for EnquiryBoundary.

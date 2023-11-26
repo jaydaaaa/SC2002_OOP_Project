@@ -1,4 +1,4 @@
-Madhukumar_HUKUMAR@NTU.EDU.SG_SCSE__Staff_0_
+Madhukumar_HUKUMAR@NTU.EDU.SG_SCSE_password_Staff_0_
 Alexei_OURIN@ntu.edu.sg_ADM_password_Staff_0_
 Chattopadhyay_UPAM@NTU.EDU.SG_EEE_password_Staff_0_
 Datta_ANWIT@NTU.EDU.SG_SCSE_password_Staff_0_
@@ -13,4 +13,4 @@ Dong_DON84@e.ntu.edu.sg_ADM_password_Student_0_
 Ernest_ELI34@e.ntu.edu.sg_EEE_password_Student_0_
 Liu_SL22@e.ntu.edu.sg_NBS_password_Student_0_
 Rawal_AKY013@e.ntu.edu.sg_SSS_password_Student_0_
-Lee_LE51@e.ntu.edu.sg_SCSE_password_CampCM_0_d799db24-b4b2-43d2-8567-56946b26ac08
+Lee_LE51@e.ntu.edu.sg_SCSE_password_Student_0_

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * It also provides an option to generate a performance report which includes user points.
  * 
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class GenerateAttendeeReport {
     ArrayList<String> finalAttendees;

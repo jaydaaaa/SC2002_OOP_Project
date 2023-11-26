@@ -15,7 +15,7 @@ import java.util.Objects;
  * It provides static methods to read different types of data like Users, Enquiries, Camps, and Suggestions.
  * 
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Reader {
     BufferedReader reader;

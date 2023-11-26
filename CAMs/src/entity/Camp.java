@@ -9,7 +9,7 @@ import java.util.UUID;
  * Students can register for camps.
  * Staffs can create,edit and delete camps.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Camp {
 

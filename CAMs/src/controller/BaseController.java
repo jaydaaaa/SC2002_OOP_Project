@@ -10,7 +10,7 @@ import utils.BaseInterface;
  * This class holds a reference to a CentralManager, providing common functionality for interacting with the central management system.
  * 
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class BaseController extends Base implements BaseInterface {
 

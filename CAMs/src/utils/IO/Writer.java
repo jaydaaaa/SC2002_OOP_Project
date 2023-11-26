@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * It provides static methods to write different types of data like Users, Enquiries, Camps, and Suggestions.
  * 
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class Writer {
     /**

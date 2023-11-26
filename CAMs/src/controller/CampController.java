@@ -9,7 +9,7 @@ import java.util.Objects;
  * The CampController class is a controller for managing Camp entities.
  * It extends the BaseController class and provides additional functionality specific to camp management.
  * @author Group 2
- * @since 2023-11-20
+ * @since 2023-11-26
  */
 public class CampController extends BaseController{
 	

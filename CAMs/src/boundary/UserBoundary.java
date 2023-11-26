@@ -9,6 +9,7 @@ import java.util.Date;
  * The BaseBoundary class serves as a base class for other boundary classes in the system.
  * It extends the Base class and implements the BaseInterface. This class provides common
  * methods for input retrieval and access to various boundaries within the system.
+ * Access to different displays.
  * @author Group 2
  * @since 2023-11-26
  */

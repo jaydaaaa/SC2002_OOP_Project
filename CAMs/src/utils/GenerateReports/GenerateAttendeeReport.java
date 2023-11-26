@@ -136,18 +136,29 @@ public class GenerateAttendeeReport {
                         User user = this.getUserByID(userID);
                         assert user != null;
                         String userName = user.getName();
-                        String userRole = user.getType();
-                        String toWrite;
+                        String userRole;
+
+                        if (camp.getCommitteeMembers().contains(user.getUserID())) {
+                            userRole = "CampCommittee";
+                        } else {
+                            userRole = "Student";
+                        }
+
+                        String toWrite = "";
                         ArrayList<Integer> dates = camp.getDates();
                         if (isPerfReport) {
-                            CampCM campCM = (CampCM) user;
-                            int points = campCM.getPoints();
-                            toWrite = campName + "," + campLocation + "," + dates.get(0) + "," + dates.get(1) + "," + camp.getRegistrationDeadline() + "," + userName + "," + userRole + ","
-                                    + points + "\n";
+                            if (userRole.equals("CampCommittee")) {
+                                CampCM campCM = (CampCM) user;
+                                int points = campCM.getPoints();
+                                toWrite = campName + "," + campLocation + "," + dates.get(0) + "," + dates.get(1) + "," + camp.getRegistrationDeadline() + "," + userName + "," + userRole + ","
+                                        + points + "\n";
+                            }
                         } else {
                             toWrite = campName + "," + campLocation + "," + dates.get(0) + "," + dates.get(1) + "," + camp.getRegistrationDeadline() + "," + userName + "," + userRole + "\n";
                         }
-                        writer.write(toWrite);
+                        if (!toWrite.equals("")) {
+                            writer.write(toWrite);
+                        }
                     }
                 }
             }

@@ -68,4 +68,8 @@ public class UserController extends BaseController {
         }
         return "InvalidUser";
     }
+
+    public void setPassword(String userID, String newPassword) {
+        this.getUserByID(userID).setPassword(newPassword);
+    }
 }

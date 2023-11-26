@@ -66,10 +66,10 @@ public class CampBoundary extends BaseBoundary {
         System.out.print(idx);
         System.out.print(". ");
         System.out.print(camp.getCampName());
-        System.out.print(" | ");//new
-        System.out.print(camp.getDescription());//new
-        System.out.print(" | ");//new
-        System.out.print(camp.getLocation());//new
+        System.out.print(" | ");
+        System.out.print(camp.getDescription());
+        System.out.print(" | ");
+        System.out.print(camp.getLocation());
         System.out.print(" | ");
         ArrayList<Integer> dates = camp.getDates();
         System.out.print(dates.get(0));
@@ -83,10 +83,7 @@ public class CampBoundary extends BaseBoundary {
         System.out.println();
     }
 
-    public void editCamp(Camp camp) { //EDITTED
-        // Options list of what edit
-            // for each option, run edit fn
-                // eg. have a prompt for edit campName --> calls campController.editCamp() :| all other variables will be retained so you will have to get those vars and save it locally first before passing it back into the edit fn in camp controller
+    public void editCamp(Camp camp) { 
         while(true){
             int choice = getInt("Which detail of the camp would you like to edit?\n 1. Description\n 2. Location\n 3. Visibility\n 4. Registration Deadline\n 5. Cancel Edit\n");
             switch(choice){

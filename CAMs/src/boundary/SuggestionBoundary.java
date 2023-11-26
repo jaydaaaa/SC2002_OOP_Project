@@ -18,8 +18,19 @@ public class SuggestionBoundary extends BaseBoundary {
     public void printSuggestionLine(Suggestion suggestion, int index) {
         String campName = this.getCampController().getCampByID(suggestion.getCampID()).getCampName();
         String userName = this.getUserController().getUserByID(suggestion.getSuggestedBy()).getName();
+        String status = "test";
+        if (suggestion.getStatus()==0){
+           status="Pending";
+        }
+        else if(suggestion.getStatus()==1){
+            status="Approved";
+        }
+        else{
+            status="Rejected";
+        }
+
         String toPrint = index + ". " + campName + " | " + userName + " | " + suggestion.getVariableToChange() + " | "
-                + suggestion.getSuggestionText() + " | " + suggestion.getStatus();
+                + suggestion.getSuggestionText() + " | " + status;
         System.out.println(toPrint);
     }
 

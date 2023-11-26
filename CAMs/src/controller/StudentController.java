@@ -95,8 +95,9 @@ public class StudentController extends UserController{
 			}
 		} else {
 			userID = currentStudent.getUserID();
+			newCamp.addAttendee(userID);
 		}
-		newCamp.addAttendee(userID);
+		
 		return 1;
 	}
 

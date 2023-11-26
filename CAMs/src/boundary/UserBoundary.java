@@ -1,15 +1,32 @@
-// NOT COMPLETED
 package boundary;
 import entity.CentralManager;
 import java.util.Objects;
 
-// input getting and data display in boundary eg print to console
+/**
+ * The UserBoundary class represents a user in the system.
+ * A user can be a student, staff, or camp committee member.
+ * This class provides methods for handling user operations such as login.
+ * @author Group 2
+ * @since 2023-11-26
+ */
 
+ /**
+ * This class represents the boundary for a User in the system.
+ * It extends the BaseBoundary class and provides methods for user operations.
+ */
 public class UserBoundary extends BaseBoundary{
+
     public UserBoundary(CentralManager centralManager) {
         super(centralManager);
     }
 
+    /**
+    * This method handles the login operation for the user.
+    * It prompts the user to enter their UserID and Password.
+    * If the UserID or Password is invalid, it prints an error message and prompts the user to enter their credentials again.
+    * Once the user is authenticated, it directs the user to the appropriate screen based on their user type (Student, Staff, or CampCM).
+    * Note: This method does not perform data manipulation. It checks for a valid user and password in the controller.
+    */
     public void login(){
         // invalid user is just not registered user in the system
         String userID = this.getLine("Input UserID: ");

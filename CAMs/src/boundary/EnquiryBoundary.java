@@ -28,7 +28,7 @@ public class EnquiryBoundary extends BaseBoundary {
         if (enquiry.getReplyBy().equals("")) {
             repliedBy = "-";
         } else {
-            repliedBy = this.getStudentController().getStudentByID(enquiry.getReplyBy()).getName();
+            repliedBy = this.getUserController().getUserByID(enquiry.getReplyBy()).getName();
         }
         String toPrint = index + " | " + campName + " | " + enquiry.getEnquiryText() + " | " + enquiryUserName +
                 " | " + replyStatus + " | " + repliedBy;

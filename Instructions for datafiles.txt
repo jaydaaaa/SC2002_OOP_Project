@@ -1,0 +1,6 @@
+Instructions for datafiles use: 
+Demo Ready datafiles.zip:
+- Camps.txt (Includes pre registered camps for easier testing purposes)
+
+Hard Reset datafiles.zip: 
+- Camps.txt, Enquiries.txt and Suggestions.txt are empty (for entries to be added) 

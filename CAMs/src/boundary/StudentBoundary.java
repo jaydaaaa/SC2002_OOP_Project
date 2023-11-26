@@ -3,9 +3,7 @@ import entity.Camp;
 import entity.CentralManager;
 import entity.Enquiry;
 import entity.Student;
-
 import java.util.ArrayList;
-
 import controller.CampController;
 import controller.UserController;
 
@@ -18,10 +16,6 @@ import controller.UserController;
  * @since 2023-11-26
  */
 
-/**
- * This class represents the boundary for a Student in the system.
- * It extends the UserBoundary class and provides methods for student operations.
- */
 public class StudentBoundary extends UserBoundary{
 
     /**
